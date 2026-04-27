@@ -34,19 +34,9 @@ const config: Config = {
       fontFamily: {
         montserrat: ["var(--font-montserrat)"],
       },
-      keyframes: {
-        hide: {
-          "0%": { top: "0" },
-          "100%": { top: "-107px" },
-        },
-        show: {
-          "0%": { top: "-107px" },
-          "100%": { top: "0" },
-        },
-      },
-      animation: {
-        hide: "hide .3s ease-in-out forwards",
-        show: "show .3s ease-in-out forwards",
+      fontSize: {
+        "13": ["13px", "15px"],
+        "15": ["15px", "15px"],
       },
     },
   },

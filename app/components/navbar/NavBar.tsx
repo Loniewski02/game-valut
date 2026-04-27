@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { BiLogIn } from "react-icons/bi";
+import { GiBeastEye } from "react-icons/gi";
 
 import { ROUTES } from "../../routes";
 
 import Wrapper from "../layout/Wrapper";
 import BurgerBtn from "../ui/BurgerBtn";
+import Logo from "../ui/Logo";
 
 const NavBar = () => {
   const [isMobileMenuShown, setIsMobileMenuShown] = useState(false);
@@ -45,9 +47,7 @@ const NavBar = () => {
   return (
     <nav className="sectionX bg-card py-8 md:py-10">
       <Wrapper className="flex flex-row items-center justify-between">
-        <Link href="/" aria-label="home-page" className="text-lg font-bold">
-          Nazwa Strony
-        </Link>
+        <Logo ico="text-4xl" font="text-xl" />
         <BurgerBtn isShown={isMobileMenuShown} onClick={showMobileMenuHandler} />
         <div
           className={`fixed inset-0 z-40 transition-transform duration-300 ease-in-out md:hidden ${
@@ -56,25 +56,22 @@ const NavBar = () => {
         >
           <div className="absolute bottom-0 left-0 top-0 z-40 flex w-[75%] flex-col rounded-r-[40px] bg-card px-6 pb-12">
             <div className="relative grid min-h-[103px] items-center py-8 md:py-10">
-              <Link href="/" aria-label="home-page" className="text-lg font-bold" onClick={hideMobileMenuHandler}>
-                Nazwa Strony
-              </Link>
+              <Logo ico="text-4xl" font="text-xl" />
               <div className="absolute bottom-0 h-[2px] w-full rounded-sm bg-border" />
             </div>
 
-            <div className="flex h-full flex-col gap-2 pt-8">
+            <div className="flex h-full flex-col gap-4 pt-8">
               {ROUTES.map((route) => {
                 const Icon = route.icon;
-
                 return (
                   <Link
                     key={route.id}
                     href={route.url}
                     aria-label={route.name}
                     onClick={hideMobileMenuHandler}
-                    className="flex items-center gap-4 py-2 font-bold text-text"
+                    className="flex items-center gap-4 py-2 text-lg font-bold text-text"
                   >
-                    <Icon className="text-xl" />
+                    <Icon className="text-2xl" />
                     {route.name}
                   </Link>
                 );
@@ -83,14 +80,24 @@ const NavBar = () => {
             <div className="relative pt-6">
               <div className="absolute top-0 h-[2px] w-full rounded-sm bg-border" />
               <Link
-                href="/"
-                aria-label="/"
+                href="/auth"
+                aria-label="log-in"
                 onClick={hideMobileMenuHandler}
-                className="flex items-center gap-4 py-2 font-bold text-text"
+                className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-text"
               >
-                <BiLogIn className="text-xl" />
+                <BiLogIn className="text-2xl" />
                 Zaloguj się
               </Link>
+              <p className="text-base text-textSec">
+                Nie masz konta?{" "}
+                <Link
+                  href="/auth"
+                  aria-label="register"
+                  className="text-base text-primary transition-colors duration-150 hover:text-primaryHover"
+                >
+                  Zarejestruj się
+                </Link>
+              </p>
             </div>
           </div>
           <div
