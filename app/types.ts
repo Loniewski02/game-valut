@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 
-type Route = {
+export type Route = {
   id: string;
   name: string;
   url: string;

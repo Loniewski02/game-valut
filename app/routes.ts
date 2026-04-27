@@ -1,3 +1,5 @@
+import { Route } from "./types";
+
 import { IoIosPodium } from "react-icons/io";
 import { FaRegChartBar } from "react-icons/fa";
 import { IoLogoGameControllerB } from "react-icons/io";
