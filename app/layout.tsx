@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontMontserrat.variable} min-h-[100dvh] font-montserrat`}>
+      <body className={`${fontMontserrat.variable} min-h-dvh w-full font-montserrat`}>
         <NavBar />
         {children}
       </body>

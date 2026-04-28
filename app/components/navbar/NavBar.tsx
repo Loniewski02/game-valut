@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { BiLogIn } from "react-icons/bi";
-import { GiBeastEye } from "react-icons/gi";
 
 import { ROUTES } from "../../routes";
 
@@ -89,7 +88,7 @@ const NavBar = () => {
                 Sign in
               </Link>
               <p className="text-13 text-textSec">
-                Don't have an account?{" "}
+                {"Don't have an account? "}
                 <Link
                   href="/auth?mode=register"
                   aria-label="register"

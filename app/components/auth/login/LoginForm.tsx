@@ -13,15 +13,15 @@ const LoginForm = () => {
         <FormBox key={input.id} input={input} />
       ))}
       <Link href={"/auth?mode=reset"} className="self-end text-13 text-primary underline">
-        Forgot your password?
+        {"Forgot your password?"}
       </Link>
       <div>
         <Submit>Login</Submit>
       </div>
       <p className="text-center text-13 text-textSec">
-        Don't have an account?{" "}
+        {"Don't have an account? "}
         <Link href={"/auth?mode=register"} className="text-primary underline">
-          Sign up.
+          {"Sign up."}
         </Link>
       </p>
     </form>
