@@ -3,7 +3,7 @@ import ResetForm from "./ResetForm";
 
 const Reset = () => {
   return (
-    <AuthSection txtBig="Zresetuj swoje hasło">
+    <AuthSection txtBig="Reset your password">
       <ResetForm />
     </AuthSection>
   );

@@ -3,7 +3,7 @@ import RegisterForm from "./RegisterForm";
 
 const Register = () => {
   return (
-    <AuthSection txtBig="Utwórz konto" txt="Dołącz do społeczności graczy">
+    <AuthSection txtBig="Create an account!" txt="Join the gaming community.">
       <RegisterForm />
     </AuthSection>
   );

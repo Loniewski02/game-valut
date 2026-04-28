@@ -5,16 +5,16 @@ export const REGISTER_INPUTS = [
   {
     id: "name",
     name: "username",
-    placeholder: "Nazwa użytkownika",
+    placeholder: "Enter your username",
     type: "text",
-    label: "Nazwa użytkownika",
+    label: "Username",
   },
   {
     id: "email",
     name: "email",
-    placeholder: "e.g. alex@test.com",
+    placeholder: "Enter your email",
     type: "email",
-    label: "Emails Address",
+    label: "Email",
   },
   {
     id: "password",
@@ -36,7 +36,7 @@ export const LOGIN_INPUTS = [
   {
     id: "email",
     name: "email",
-    placeholder: "Email lub nazwa użytkownika",
+    placeholder: "Enter your email",
     type: "email",
     label: "Email Address",
     validity: (val: string) => emailReg.test(val),
@@ -44,7 +44,7 @@ export const LOGIN_INPUTS = [
   {
     id: "password",
     name: "password",
-    placeholder: "Hasło",
+    placeholder: "Enter your password",
     type: "password",
     label: "Password",
     validity: (val: string) => val.trim().length > 8,
@@ -54,7 +54,7 @@ export const LOGIN_INPUTS = [
 export const RESET_INPUT = {
   id: "email",
   name: "email",
-  placeholder: "Email",
+  placeholder: "Enter your email",
   type: "email",
   label: "Email Address",
   validity: (val: string) => emailReg.test(val),

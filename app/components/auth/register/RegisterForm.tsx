@@ -11,12 +11,12 @@ const RegisterForm = () => {
       {REGISTER_INPUTS.map((input) => (
         <FormBox key={input.id} input={input} />
       ))}
-      <p className="text-13  text-textSec">Hasło musi składać się z conajmniej 8 znaków.</p>
-      <Submit>Utwórz konto</Submit>
-      <p className="text-13 text-center text-textSec">
-        Masz już konto?{" "}
+      <p className="text-13  text-textSec">The password must be at least 8 characters long.</p>
+      <Submit>Create account</Submit>
+      <p className="text-center text-13 text-textSec">
+        Do you already have an account?{" "}
         <Link href={"/auth?mode=login"} className="text-primary underline">
-          Zaloguj się
+          Sign in
         </Link>
       </p>
     </form>

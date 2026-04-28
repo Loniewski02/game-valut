@@ -12,16 +12,16 @@ const LoginForm = () => {
       {LOGIN_INPUTS.map((input) => (
         <FormBox key={input.id} input={input} />
       ))}
-      <Link href={"/auth?mode=reset"} className="text-13 self-end text-primary underline">
-        Nie pamiętasz hasła?
+      <Link href={"/auth?mode=reset"} className="self-end text-13 text-primary underline">
+        Forgot your password?
       </Link>
       <div>
         <Submit>Login</Submit>
       </div>
-      <p className="text-13 text-center text-textSec">
-        Nie masz konta?{" "}
+      <p className="text-center text-13 text-textSec">
+        Don't have an account?{" "}
         <Link href={"/auth?mode=register"} className="text-primary underline">
-          Zarejestruj się.
+          Sign up.
         </Link>
       </p>
     </form>

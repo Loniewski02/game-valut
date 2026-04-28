@@ -9,10 +9,10 @@ const ResetForm = () => {
     <form action="" className="flex flex-col gap-6">
       <FormBox input={RESET_INPUT} />
       <Submit>Reset</Submit>
-      <p className="text-15 text-textSec">
-        Masz już konto?{" "}
+      <p className="text-13 text-textSec">
+        Do you already have an account?{" "}
         <Link href={"/auth?mode=login"} className="text-primary underline">
-          Zaloguj się
+          Sign in
         </Link>
       </p>
     </form>

@@ -86,16 +86,17 @@ const NavBar = () => {
                 className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-text"
               >
                 <BiLogIn className="text-2xl" />
-                Zaloguj się
+                Sign in
               </Link>
-              <p className="text-base text-textSec">
-                Nie masz konta?{" "}
+              <p className="text-13 text-textSec">
+                Don't have an account?{" "}
                 <Link
-                  href="/auth"
+                  href="/auth?mode=register"
                   aria-label="register"
-                  className="text-base text-primary transition-colors duration-150 hover:text-primaryHover"
+                  className="text-primary transition-colors duration-150 hover:text-primaryHover"
+                  onClick={hideMobileMenuHandler}
                 >
-                  Zarejestruj się
+                  Sign up
                 </Link>
               </p>
             </div>

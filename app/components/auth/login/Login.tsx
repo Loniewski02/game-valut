@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
-    <AuthSection txtBig="Witaj z powrotem!" txt="Zaloguj się, aby kontynuować.">
+    <AuthSection txtBig="Welcome back!" txt="Please log in to continue.">
       <LoginForm />
     </AuthSection>
   );
