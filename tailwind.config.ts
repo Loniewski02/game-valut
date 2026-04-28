@@ -35,8 +35,8 @@ const config: Config = {
         montserrat: ["var(--font-montserrat)"],
       },
       fontSize: {
-        "13": ["13px", "15px"],
-        "15": ["15px", "15px"],
+        "13": ["13px", "auto"],
+        "15": ["15px", "auto"],
       },
     },
   },

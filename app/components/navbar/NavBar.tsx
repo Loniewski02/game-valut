@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
 import { BiLogIn } from "react-icons/bi";
-
-import { ROUTES } from "../../routes";
 
 import Wrapper from "../layout/Wrapper";
 import BurgerBtn from "../ui/BurgerBtn";
 import Logo from "../ui/Logo";
+
+import { ROUTES } from "@/app/utils/constant";
 
 const NavBar = () => {
   const [isMobileMenuShown, setIsMobileMenuShown] = useState(false);

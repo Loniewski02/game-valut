@@ -1,15 +1,11 @@
+import { Input } from "@/app/types";
+
 const FormBox = ({
   input,
   className,
   defaultVal,
 }: {
-  input: {
-    type: React.HTMLInputTypeAttribute;
-    id: string;
-    label: string;
-    name: string;
-    placeholder: string;
-  };
+  input: Input;
   defaultVal?: any;
   className?: string;
 }) => {

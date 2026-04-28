@@ -1,5 +1,3 @@
-"use client";
-
 const Submit = ({ children }: { children: React.ReactNode }) => {
   return (
     <button

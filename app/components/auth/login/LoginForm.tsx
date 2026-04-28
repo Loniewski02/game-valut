@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 
-import { LOGIN_INPUTS } from "@/app/utils/constant";
-
 import FormBox from "../FormBox";
 import Submit from "../Submit";
+
+import { LOGIN_INPUTS } from "@/app/utils/constant";
+
 
 const LoginForm = () => {
   return (

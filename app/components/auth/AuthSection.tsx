@@ -1,6 +1,6 @@
 import { GiBeastEye } from "react-icons/gi";
+
 import Wrapper from "../layout/Wrapper";
-import Logo from "../ui/Logo";
 
 const AuthSection = ({ children, txtBig, txt }: { children: React.ReactNode; txtBig?: string; txt?: string }) => {
   return (
