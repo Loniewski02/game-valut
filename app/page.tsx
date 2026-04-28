@@ -51,7 +51,7 @@ export default function Home() {
             <div className="h-28 min-w-28 rounded-lg bg-red" />
             <div className="flex flex-col gap-2 text-text">
               <p className="text-justify text-13">
-                "Amazing story, unforgettable characters and the best RPG experience."
+                {`"Amazing story, unforgettable characters and the best RPG experience."`}
               </p>
               <p className="flex items-center justify-between text-15 font-bold text-primary">
                 The Wither 3{" "}
