@@ -10,18 +10,22 @@
 
 @layer utilities {
   .sectionX {
-    @apply px-6 md:px-10;
+    @apply px-6 md:px-8;
   }
 
   .sectionY {
-    @apply py-15 md:py-18 lg:py-25;
+    @apply py-6 md:py-10 lg:py-14;
   }
 
   .headerY {
     @apply pb-16 pt-4;
   }
 
-  .section-inner {
-    @apply p-6 md:px-14 lg:px-20;
+  .section-inner-x {
+    @apply px-6 md:px-10 lg:px-14;
+  }
+
+  .section-inner-y {
+    @apply py-6 md:py-10 lg:py-14;
   }
 }

@@ -5,7 +5,7 @@ const Submit = ({ children }: { children: React.ReactNode }) => {
     <button
       type="submit"
       aria-label="submit-form"
-      className="text-15 block w-full rounded-md bg-primary px-6 py-3 font-medium text-textDark transition hover:bg-primaryHover active:scale-95"
+      className="block w-full rounded-md border border-transparent bg-primary px-6 py-3 text-15 font-medium text-textDark transition hover:bg-primaryHover active:scale-95"
     >
       {children}
     </button>

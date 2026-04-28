@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#4f7cff",
-        primaryHover: "#638eff",
+        primary: "#4F88FF",
+        primaryHover: "#1B2558",
         info: "#06b6d4",
         green: "#22c55e",
         orange: "#f59e0b",
@@ -28,8 +28,8 @@ const config: Config = {
         cardInnerDark: "#1f2630",
         borderDark: "#303a45",
         cardHoverDark: "#2a313C",
-        textDark: "#e6eaf0",
-        textSecDark: "#707985",
+        textDark: "#FAFEFF",
+        textSecDark: "#FAFBFF",
       },
       fontFamily: {
         montserrat: ["var(--font-montserrat)"],

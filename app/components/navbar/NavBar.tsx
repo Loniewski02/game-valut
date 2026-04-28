@@ -46,7 +46,7 @@ const NavBar = () => {
   return (
     <nav className="sectionX bg-card py-8 md:py-10">
       <Wrapper className="flex flex-row items-center justify-between">
-        <Logo ico="text-4xl" font="text-xl" />
+        <Logo ico="text-4xl" font="text-xl" onClick={hideMobileMenuHandler} />
         <BurgerBtn isShown={isMobileMenuShown} onClick={showMobileMenuHandler} />
         <div
           className={`fixed inset-0 z-40 transition-transform duration-300 ease-in-out md:hidden ${
@@ -55,7 +55,7 @@ const NavBar = () => {
         >
           <div className="absolute bottom-0 left-0 top-0 z-40 flex w-[75%] flex-col rounded-r-[40px] bg-card px-6 pb-12">
             <div className="relative grid min-h-[103px] items-center py-8 md:py-10">
-              <Logo ico="text-4xl" font="text-xl" />
+              <Logo ico="text-4xl" font="text-xl" onClick={hideMobileMenuHandler} />
               <div className="absolute bottom-0 h-[2px] w-full rounded-sm bg-border" />
             </div>
 
