@@ -67,7 +67,7 @@ const NavBar = () => {
                     href={route.url}
                     aria-label={route.name}
                     onClick={hideMobileMenuHandler}
-                    className="flex items-center gap-4 py-2 text-lg font-bold text-text"
+                    className="flex items-center gap-4 py-2 text-lg font-bold text-text transition hover:text-primary active:text-primary"
                   >
                     <Icon className="text-2xl" />
                     {route.name}
@@ -81,7 +81,7 @@ const NavBar = () => {
                 href="/auth"
                 aria-label="log-in"
                 onClick={hideMobileMenuHandler}
-                className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-text"
+                className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-text transition hover:text-primary"
               >
                 <BiLogIn className="text-2xl" />
                 Sign in

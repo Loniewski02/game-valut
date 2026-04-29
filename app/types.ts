@@ -16,3 +16,5 @@ export type Input = {
 };
 
 export type Game = { id: string; title: string; img: string; rating: number };
+
+export type Feature = { id: string; title: string; desc: string; icon: IconType };

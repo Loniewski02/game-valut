@@ -14,20 +14,18 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="px-6 md:px-8">
-        <Features />
-        <Wrapper className="max-w-lg lg:flex lg:max-w-7xl lg:items-start lg:gap-4 lg:py-8">
-          <CardSection title="top games this week">
-            {sortedGames.map((game, index) => (
-              <CardSectionGame key={game.id} game={game} index={index} />
-            ))}
-            <LinkTxt href="/statistics" txt="View full ranking" />
-          </CardSection>
-          <CardSection title="latest review">
-            <CardSectionReview />
-          </CardSection>
-        </Wrapper>
-      </main>
+      <Features />
+      <Wrapper className="max-w-lg lg:flex lg:max-w-7xl lg:items-start lg:gap-4 lg:py-8">
+        <CardSection title="top games this week">
+          {sortedGames.map((game, index) => (
+            <CardSectionGame key={game.id} game={game} index={index} />
+          ))}
+          <LinkTxt href="/statistics" txt="View full ranking" />
+        </CardSection>
+        <CardSection title="latest review">
+          <CardSectionReview />
+        </CardSection>
+      </Wrapper>
     </>
   );
 }

@@ -6,7 +6,7 @@ type Props = {
   ico: string;
   font: string;
   link?: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Logo: React.FC<Props> = ({ ico, font, link, onClick }) => {
@@ -15,7 +15,7 @@ const Logo: React.FC<Props> = ({ ico, font, link, onClick }) => {
       href="/"
       aria-label="home-page"
       onClick={onClick}
-      className={`${link ? link : ""} flex items-center gap-4 font-bold`}
+      className={`${link ? link : ""} flex items-center gap-4 font-bold text-text transition hover:text-primary`}
     >
       <GiBeastEye className={ico} />
       <span className={`${font}`}>GameBeast</span>

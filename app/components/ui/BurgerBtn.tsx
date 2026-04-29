@@ -9,11 +9,7 @@ const barClasses = "block w-full h-[3px] bg-bgcDark rounded-sm absolute left-0";
 
 const BurgerBtn: React.FC<Props> = ({ onClick, isShown }) => {
   return (
-    <button
-      aria-label="menu-button"
-      onClick={onClick}
-      className="z-50 p-2 md:hidden"
-    >
+    <button aria-label="menu-button" onClick={onClick} className="z-50 p-2 md:hidden">
       <span className="relative block h-[23px] w-6 ">
         <motion.span
           animate={{

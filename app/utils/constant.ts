@@ -1,9 +1,11 @@
+import { AiFillStar } from "react-icons/ai";
+import { IoMdAddCircle } from "react-icons/io";
 import { IoIosPodium } from "react-icons/io";
 import { FaRegChartBar } from "react-icons/fa";
 import { IoLogoGameControllerB } from "react-icons/io";
 import { CgHomeAlt } from "react-icons/cg";
 
-import { Route } from "../types";
+import { Feature, Route } from "../types";
 
 export const emailReg =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -82,8 +84,23 @@ export const ROUTES: Route[] = [
   { id: "route5", name: "Statistics", url: "/statistics", icon: FaRegChartBar },
 ];
 
-export const FEATURES = [
-  { id: "feature1", title: "Add Games", desc: "", img: "" },
-  { id: "feature2", title: "", desc: "", img: "" },
-  { id: "feature3", title: "", desc: "", img: "" }
+export const FEATURES: Feature[] = [
+  {
+    id: "feature1",
+    title: "Add Games",
+    desc: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
+    icon: IoMdAddCircle,
+  },
+  {
+    id: "feature2",
+    title: "Rate Games",
+    desc: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
+    icon: AiFillStar,
+  },
+  {
+    id: "feature3",
+    title: "Build Lists",
+    desc: "Lorem ipsum, dolor sit amet consectetur adipisicing.",
+    icon: IoIosPodium,
+  },
 ];
