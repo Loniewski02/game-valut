@@ -4,7 +4,7 @@ import Wrapper from "../layout/Wrapper";
 
 const AuthSection = ({ children, txtBig, txt }: { children: React.ReactNode; txtBig?: string; txt?: string }) => {
   return (
-    <section className="px-6 py-20">
+    <section className="py-20">
       <Wrapper className="max-w-[476px] rounded-2xl bg-card p-6 shadow-sm md:p-10">
         <div className="mb-10 flex items-center justify-center gap-4 font-bold">
           <GiBeastEye className="text-6xl" />
