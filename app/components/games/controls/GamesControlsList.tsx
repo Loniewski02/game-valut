@@ -52,7 +52,7 @@ const GamesControlsList: React.FC<Props> = ({ name, className, items, onFilter, 
                   <BiCheck className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-primary" />
                 )}
               </span>
-              {item}
+              <span className="w-24 text-left">{item}</span>
             </button>
           );
         })}
