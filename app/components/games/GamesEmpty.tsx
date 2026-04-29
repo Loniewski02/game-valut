@@ -2,7 +2,7 @@ import { BsController } from "react-icons/bs";
 
 import Section from "../layout/Section";
 import Wrapper from "../layout/Wrapper";
-import AddGameButton from "./AddGameButton";
+import AddGameButton from "./controls/AddGameButton";
 
 const GamesEmpty = () => {
   return (

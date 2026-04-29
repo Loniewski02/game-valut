@@ -16,10 +16,10 @@ const Header = () => {
             }
           </p>
           <div className="mt-10 flex flex-col gap-4 md:flex-row">
-            <LinkBtn href="/auth?mode=register" label="sa" isFull>
+            <LinkBtn href="/auth?mode=register" label="get-started" isFull>
               Get started
             </LinkBtn>
-            <LinkBtn href="/games" label="sa" isFull={false}>
+            <LinkBtn href="/games" label="browse-games" isFull={false}>
               Browse Games
             </LinkBtn>
           </div>

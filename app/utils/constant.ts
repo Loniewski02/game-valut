@@ -104,3 +104,18 @@ export const FEATURES: Feature[] = [
     icon: IoIosPodium,
   },
 ];
+
+export const GAME_GENRES = [
+  "Action",
+  "Adventure",
+  "RPG",
+  "Shooter",
+  "Strategy",
+  "Simulation",
+  "Sports",
+  "Racing",
+  "Horror",
+  "Souls-like",
+];
+
+export const GAME_PLATFORMS = ["PC", "PlayStation", "Xbox", "Nintendo", "Mobile"];
