@@ -12,7 +12,7 @@ const ResetForm = () => {
       <p className="text-13 text-textSec">
         {"Do you already have an account?"}
         <Link href={"/auth?mode=login"} className="text-primary underline">
-          {"Sign in"}
+          {" Sign in"}
         </Link>
       </p>
     </form>
