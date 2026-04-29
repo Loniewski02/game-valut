@@ -14,7 +14,7 @@ const Features = () => {
         </h2>
         <div className="flex flex-col items-center gap-4 lg:flex-row">
           {features.map((feature) => (
-            <FeatureCard data={feature} />
+            <FeatureCard key={feature.id} data={feature} />
           ))}
         </div>
       </Wrapper>
