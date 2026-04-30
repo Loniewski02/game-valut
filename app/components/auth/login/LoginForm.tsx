@@ -5,7 +5,7 @@ import FormBox from "../FormBox";
 import Submit from "../Submit";
 
 import { LOGIN_INPUTS } from "@/app/utils/constant";
-
+import TextLink from "../../ui/TextLink";
 
 const LoginForm = () => {
   return (
@@ -13,18 +13,16 @@ const LoginForm = () => {
       {LOGIN_INPUTS.map((input) => (
         <FormBox key={input.id} input={input} />
       ))}
-      <Link href={"/auth?mode=reset"} className="self-end text-13 text-primary underline">
+      <Link
+        href={"/auth?mode=reset"}
+        className="self-end text-13 text-Primary underline transition hover:text-PrimaryHover"
+      >
         {"Forgot your password?"}
       </Link>
-      <div>
-        <Submit>Login</Submit>
-      </div>
-      <p className="text-center text-13 text-textSec">
-        {"Don't have an account? "}
-        <Link href={"/auth?mode=register"} className="text-primary underline">
-          {"Sign up."}
-        </Link>
-      </p>
+      <Submit>Login</Submit>
+      <TextLink href="/auth?mode=register" text="Don't have an account?">
+        Sign up.
+      </TextLink>
     </form>
   );
 };

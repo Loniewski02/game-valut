@@ -15,7 +15,7 @@ const Logo: React.FC<Props> = ({ ico, font, link, onClick }) => {
       href="/"
       aria-label="home-page"
       onClick={onClick}
-      className={`${link ? link : ""} flex items-center gap-4 font-bold text-text`}
+      className={`${link ? link : ""} flex items-center gap-4 font-bold text-DarkGrayishBlue`}
     >
       <GiBeastEye className={ico} />
       <span className={`${font}`}>GameBeast</span>

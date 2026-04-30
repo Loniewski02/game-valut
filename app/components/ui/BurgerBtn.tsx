@@ -5,7 +5,7 @@ type Props = {
   isShown: boolean;
 };
 
-const barClasses = "block w-full h-[3px] bg-bgcDark rounded-sm absolute left-0";
+const barClasses = "block w-full h-[3px] bg-DarkGrayishBlue rounded-sm absolute left-0";
 
 const BurgerBtn: React.FC<Props> = ({ onClick, isShown }) => {
   return (

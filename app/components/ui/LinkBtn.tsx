@@ -15,7 +15,7 @@ const LinkBtn = ({
     <Link
       href={href}
       aria-label={label}
-      className={`${isFull ? "border-transparent bg-primary hover:bg-primaryHover" : "border-border bg-transparent hover:bg-[#0d11179f]"} block w-44 rounded-md border px-6 py-3 text-center text-15 font-medium text-textDark transition  hover:font-bold active:scale-95`}
+      className={`${isFull ? "hover:bg-primaryHover border-transparent bg-Primary" : "border-Gray bg-transparent hover:bg-[#0d11179f]"} block w-44 rounded-md border px-6 py-3 text-center text-15 font-medium text-White transition  hover:font-bold active:scale-95`}
     >
       {children}
     </Link>

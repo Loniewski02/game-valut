@@ -30,13 +30,13 @@ const GamesControlsList: React.FC<Props> = ({ name, className, items, onFilter, 
       <button
         onClick={listHandler}
         value={name}
-        className={`${className ? className : " "} relative z-20 w-full rounded-xl border border-border bg-card px-4 py-3 text-left text-15 text-textSec first-letter:uppercase hover:text-text`}
+        className={`${className ? className : " "} relative z-20 w-full rounded-xl border border-Gray bg-White px-4 py-3 text-left text-15 text-GrayishBlue first-letter:uppercase hover:text-DarkGrayishBlue`}
       >
         {name}
-        <MdKeyboardArrowDown className="absolute  right-2 top-1/2 -translate-y-1/2 text-xl" />
+        <MdKeyboardArrowDown className="absolute right-2 top-1/2 -translate-y-1/2 text-xl" />
       </button>
       <div
-        className={`${isOpened ? "visible" : "invisible"} absolute -bottom-3 right-0 flex translate-y-full flex-col rounded-xl border border-border bg-card p-4`}
+        className={`${isOpened ? "visible" : "invisible"} opacity-1 absolute -bottom-3 right-0 z-30 flex translate-y-full flex-col rounded-xl border border-Gray bg-White p-4`}
       >
         {items.map((item) => {
           const isSelected = selected.includes(item);
@@ -45,11 +45,13 @@ const GamesControlsList: React.FC<Props> = ({ name, className, items, onFilter, 
               key={item}
               value={item}
               onClick={platformHandler}
-              className={`${isSelected ? "font-bold text-primary" : "text-text"} flex items-center gap-4 py-1 text-15 transition hover:text-primary`}
+              className={`${isSelected ? "font-bold text-Primary" : "text-DarkGrayishBlue"} flex items-center gap-4 py-1 text-15 transition hover:text-Primary`}
             >
-              <span className={`${isSelected ? "border-primary" : "border-text"} relative h-4 w-4 rounded-sm border `}>
+              <span
+                className={`${isSelected ? "border-Primary" : "border-DarkGrayishBlue"} relative h-4 w-4 rounded-sm border`}
+              >
                 {isSelected && (
-                  <BiCheck className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-primary" />
+                  <BiCheck className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-Primary" />
                 )}
               </span>
               <span className="w-24 text-left">{item}</span>

@@ -8,6 +8,7 @@ import BurgerBtn from "../ui/BurgerBtn";
 import Logo from "../ui/Logo";
 
 import { ROUTES } from "@/app/utils/constant";
+import TextLink from "../ui/TextLink";
 
 const NavBar = () => {
   const [isMobileMenuShown, setIsMobileMenuShown] = useState(false);
@@ -43,7 +44,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="sectionX bg-card py-8 md:py-10">
+    <nav className="sectionX bg-White py-8 md:py-10">
       <Wrapper className="flex flex-row items-center justify-between">
         <Logo ico="text-4xl" font="text-xl" onClick={hideMobileMenuHandler} />
         <BurgerBtn isShown={isMobileMenuShown} onClick={showMobileMenuHandler} />
@@ -52,10 +53,10 @@ const NavBar = () => {
             isMobileMenuShown ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="absolute bottom-0 left-0 top-0 z-40 flex w-[75%] flex-col rounded-r-[40px] bg-card px-6 pb-12">
+          <div className="absolute bottom-0 left-0 top-0 z-40 flex w-[75%] flex-col rounded-r-[40px] bg-White px-6 pb-12">
             <div className="relative grid min-h-[103px] items-center py-8 md:py-10">
               <Logo ico="text-4xl" font="text-xl" onClick={hideMobileMenuHandler} />
-              <div className="absolute bottom-0 h-[2px] w-full rounded-sm bg-border" />
+              <div className="absolute bottom-0 h-[2px] w-full rounded-sm bg-Gray" />
             </div>
 
             <div className="flex h-full flex-col gap-4 pt-8">
@@ -67,7 +68,7 @@ const NavBar = () => {
                     href={route.url}
                     aria-label={route.name}
                     onClick={hideMobileMenuHandler}
-                    className="flex items-center gap-4 py-2 text-lg font-bold text-text transition hover:text-primary active:text-primary"
+                    className="flex items-center gap-4 py-2 text-lg font-bold text-DarkGrayishBlue transition hover:text-Primary active:text-Primary"
                   >
                     <Icon className="text-2xl" />
                     {route.name}
@@ -76,27 +77,19 @@ const NavBar = () => {
               })}
             </div>
             <div className="relative pt-6">
-              <div className="absolute top-0 h-[2px] w-full rounded-sm bg-border" />
+              <div className="absolute top-0 h-[2px] w-full rounded-sm bg-Gray" />
               <Link
                 href="/auth"
                 aria-label="log-in"
                 onClick={hideMobileMenuHandler}
-                className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-text transition hover:text-primary"
+                className="mb-4 flex items-center gap-4 pt-2 text-lg font-bold text-DarkGrayishBlue transition hover:text-Primary"
               >
                 <BiLogIn className="text-2xl" />
                 Sign in
               </Link>
-              <p className="text-13 text-textSec">
-                {"Don't have an account? "}
-                <Link
-                  href="/auth?mode=register"
-                  aria-label="register"
-                  className="text-primary transition-colors duration-150 hover:text-primaryHover"
-                  onClick={hideMobileMenuHandler}
-                >
-                  Sign up
-                </Link>
-              </p>
+              <TextLink href="/auth?mode=register" text="Don't have an account?">
+                Sign up.
+              </TextLink>
             </div>
           </div>
           <div

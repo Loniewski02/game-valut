@@ -15,6 +15,14 @@ export type Input = {
   placeholder: string;
 };
 
-export type Game = { id: string; title: string; img: string; rating: number };
+export type Game = {
+  id: string;
+  slug: string;
+  title: string;
+  platforms: string[];
+  genres: string[];
+  rating: number;
+  image: string;
+};
 
 export type Feature = { id: string; title: string; desc: string; icon: IconType };
