@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import Wrapper from "../layout/Wrapper";
-import BurgerBtn from "../ui/BurgerBtn";
-import Logo from "../ui/Logo";
+import Wrapper from "../Wrapper";
+import BurgerBtn from "../../ui/BurgerBtn";
+import Logo from "../../ui/Logo";
 import NavItems from "./NavItems";
 
 const NavBar = () => {

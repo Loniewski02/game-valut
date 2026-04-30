@@ -1,6 +1,3 @@
-"use client";
-import { useState } from "react";
-
 import Wrapper from "../../layout/Wrapper";
 import Section from "../../layout/Section";
 import AddGameButton from "./AddGameButton";
@@ -9,17 +6,24 @@ import GamesControlsList from "./GamesControlsList";
 import { GAME_GENRES, GAME_PLATFORMS } from "@/app/utils/constant";
 
 type Props = {
-  onFilteredPlatforms: (platform: string) => void;
-  onFilteredGenre: (genre: string) => void;
-  selectedPlatoforms: string[];
-  selectedGenre: string[];
+  onSelectedPlatform: (platform: string | null) => void;
+  onSelectedGenre: (genre: string | null) => void;
+  onFilteredName: (name: string) => void;
+  selectedPlatoform: string | null;
+  selectedGenre: string | null;
+  filteredName: string;
 };
 
-const GamesControls = ({ onFilteredPlatforms, onFilteredGenre, selectedPlatoforms, selectedGenre }: Props) => {
-  const [opened, setOpened] = useState<string | null>(null);
-
-  const listHandler = (name: string | null) => {
-    setOpened(name);
+const GamesControls = ({
+  onSelectedPlatform,
+  onSelectedGenre,
+  selectedPlatoform,
+  selectedGenre,
+  onFilteredName,
+  filteredName,
+}: Props) => {
+  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onFilteredName(event.target.value);
   };
 
   return (
@@ -39,26 +43,19 @@ const GamesControls = ({ onFilteredPlatforms, onFilteredGenre, selectedPlatoform
               id="search-game"
               type="text"
               name="search-game"
+              value={filteredName}
               className="z-20 w-full rounded-xl border border-Gray bg-White py-3 pl-5 pr-4 text-15 placeholder:text-GrayishBlue"
               placeholder="Search games..."
+              onChange={nameHandler}
             />
           </div>
           <GamesControlsList
-            onFilter={onFilteredPlatforms}
-            selected={selectedPlatoforms}
-            onOpen={listHandler}
-            opened={opened}
+            onSelect={onSelectedPlatform}
+            selected={selectedPlatoform}
             items={GAME_PLATFORMS}
             name="Platform"
           />
-          <GamesControlsList
-            onFilter={onFilteredGenre}
-            onOpen={listHandler}
-            opened={opened}
-            selected={selectedGenre}
-            items={GAME_GENRES}
-            name="Genre"
-          />
+          <GamesControlsList onSelect={onSelectedGenre} selected={selectedGenre} items={GAME_GENRES} name="Genre" />
         </div>
       </Wrapper>
     </Section>

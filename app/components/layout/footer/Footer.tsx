@@ -2,9 +2,10 @@ import { AiFillInstagram } from "react-icons/ai";
 import { AiFillFacebook } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
+import Wrapper from "../Wrapper";
+import Logo from "../../ui/Logo";
 
-import Wrapper from "../layout/Wrapper";
-import Logo from "../ui/Logo";
+
 
 const Footer = () => {
   return (

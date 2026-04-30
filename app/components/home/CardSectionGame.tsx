@@ -11,7 +11,7 @@ const CardSectionGame = ({ game, index }: Props) => {
         <span className="block h-8 w-12 rounded-md bg-black" />
         <span>{game.title}</span>
       </div>
-      <RatingBadge rating={9.9} />
+      <RatingBadge rating={game.rating} />
     </div>
   );
 };

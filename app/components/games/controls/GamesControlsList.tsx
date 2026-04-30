@@ -1,63 +1,61 @@
-import { BiCheck } from "react-icons/bi";
+import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 type Props = {
   name: string;
   className?: string;
-  items: string[];
-  selected: string[];
-  opened: string | null;
-  onFilter: (platform: string) => void;
-  onOpen: (name: string | null) => void;
+  items: string[] | null | undefined;
+  selected: string | null;
+  onSelect: (platform: string | null) => void;
 };
 
-const GamesControlsList = ({ name, className, items, onFilter, selected, onOpen, opened }: Props) => {
-  const listHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onOpen(event.currentTarget.value);
-    if (opened === event.currentTarget.value) {
-      onOpen(null);
-    }
-  };
+const GamesControlsList = ({ name, className, items, onSelect, selected }: Props) => {
+  const [isOpened, setIsOpened] = useState(false);
 
   const platformHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onFilter(event.currentTarget.value);
+    onSelect(event.currentTarget.value);
+    if (selected === event.currentTarget.value) {
+      onSelect(null);
+    }
+    setIsOpened(false);
   };
 
-  const isOpened = opened?.toLocaleLowerCase() === name.toLocaleLowerCase();
+  const closeListHandler = () => {
+    setIsOpened((prevState) => !prevState);
+  };
 
   return (
     <div className="relative">
       <button
-        onClick={listHandler}
+        onClick={closeListHandler}
         value={name}
-        className={`${className ? className : " "} relative z-20 w-full rounded-xl border border-Gray bg-White px-4 py-3 text-left text-15 text-GrayishBlue first-letter:uppercase hover:text-DarkGrayishBlue`}
+        className={`${className ? className : " "} ${!selected ? "text-GrayishBlue hover:text-DarkGrayishBlue" : "font-bold text-Primary"} relative z-20 w-full rounded-xl border border-Gray bg-White px-4 py-3 text-left text-15 first-letter:uppercase `}
       >
-        {name}
-        <MdKeyboardArrowDown className="absolute right-2 top-1/2 -translate-y-1/2 text-xl" />
+        {!selected ? name : selected}
+        <MdKeyboardArrowDown className="absolute right-2 top-1/2 -translate-y-1/2 text-xl text-DarkGrayishBlue" />
       </button>
       <div
-        className={`${isOpened ? "visible" : "invisible"} opacity-1 absolute -bottom-3 right-0 z-30 flex translate-y-full flex-col rounded-xl border border-Gray bg-White p-4`}
+        className={`${isOpened ? "visible" : "invisible"} opacity-1 absolute -bottom-3 left-1/3 right-0 z-30 flex translate-y-full flex-col rounded-xl border border-Gray bg-White p-4`}
       >
-        {items.map((item) => {
-          const isSelected = selected.includes(item);
-          return (
-            <button
-              key={item}
-              value={item}
-              onClick={platformHandler}
-              className={`${isSelected && "font-bold text-Primary"} flex items-center gap-4 py-1 text-15 transition hover:text-Primary`}
-            >
-              <span
-                className={`${isSelected ? "border-Primary" : "border-DarkGrayishBlue"} relative h-4 w-4 rounded-sm border`}
+        <button
+          onClick={platformHandler}
+          className={`text-semibold mb-2 border-b border-Gray py-1 text-left text-15 uppercase text-red-300 transition hover:text-red-600`}
+        >
+          clear
+        </button>
+        {items &&
+          items.map((item) => {
+            return (
+              <button
+                key={item}
+                value={item}
+                onClick={platformHandler}
+                className={`${selected === item && "font-bold text-Primary"} py-1 text-left text-15 transition hover:text-Primary`}
               >
-                {isSelected && (
-                  <BiCheck className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-Primary" />
-                )}
-              </span>
-              <span className="w-24 text-left">{item}</span>
-            </button>
-          );
-        })}
+                {item}
+              </button>
+            );
+          })}
       </div>
     </div>
   );
