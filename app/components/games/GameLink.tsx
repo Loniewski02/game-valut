@@ -10,7 +10,9 @@ const PLATFORM_SHORTCUTS: Record<string, string> = {
   Nintendo: "ns",
 };
 
-const GameLink: React.FC<{ data: Game }> = ({ data }) => {
+type Props = { data: Game };
+
+const GameLink = ({ data }: Props) => {
   return (
     <Link
       href={`/games/${data.slug}`}
@@ -20,7 +22,7 @@ const GameLink: React.FC<{ data: Game }> = ({ data }) => {
       <img src={data.image} alt={data.title} className="absolute bottom-0 left-0 right-0 top-0 z-0 object-cover" />
       <h3 className="z-10 text-15 font-bold leading-4 text-White sm:text-base sm:leading-4">{data.title}</h3>
       <div className="z-10 flex items-center justify-between gap-2">
-        <RatingBadge textStyle="text-White" rating={9.9} reversed />
+        <RatingBadge rating={9.9} reversed light />
         <div className="flex justify-end gap-1 ">
           {data.platforms.map((item) => (
             <span key={item} className="rounded-md bg-Gray/20 px-2 py-1 text-13 uppercase tracking-tighter text-White">

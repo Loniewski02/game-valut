@@ -16,7 +16,7 @@ const config: Config = {
         Gray: "#e1e4eb",
         LightGray: "#f7f8fa",
         Primary: "#4F88FF",
-        PrimaryHover: "#1B2558",
+        PrimaryHover: "#3242A1",
         Yellow: "#F5B800",
       },
       fontFamily: {

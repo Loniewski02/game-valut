@@ -15,12 +15,7 @@ type Props = {
   selectedGenre: string[];
 };
 
-const GamesControls: React.FC<Props> = ({
-  onFilteredPlatforms,
-  onFilteredGenre,
-  selectedPlatoforms,
-  selectedGenre,
-}) => {
+const GamesControls = ({ onFilteredPlatforms, onFilteredGenre, selectedPlatoforms, selectedGenre }: Props) => {
   const [opened, setOpened] = useState<string | null>(null);
 
   const listHandler = (name: string | null) => {
@@ -31,9 +26,7 @@ const GamesControls: React.FC<Props> = ({
     <Section>
       <Wrapper className="flex flex-col gap-8">
         <div className="grid gap-3 sm:grid-cols-3 sm:gap-y-0">
-          <h2 className="text-2xl font-bold text-DarkGrayishBlue sm:order-1 sm:col-span-2 sm:text-3xl">
-            Games Library
-          </h2>
+          <h2 className="text-2xl font-semibold sm:order-1 sm:col-span-2 sm:text-3xl">Games Library</h2>
           <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
           <AddGameButton classList="w-full sm:order-2 sm:w-max sm:place-self-end" />
         </div>

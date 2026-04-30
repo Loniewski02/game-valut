@@ -78,10 +78,10 @@ export const TOP_GAMES = [
 ];
 
 export const ROUTES: Route[] = [
-  { id: "route1", name: "Home", url: "/", icon: CgHomeAlt },
-  { id: "route2", name: "Games", url: "games", icon: IoLogoGameControllerB },
-  { id: "route4", name: "Rankings", url: "/rankings", icon: IoIosPodium },
-  { id: "route5", name: "Statistics", url: "/statistics", icon: FaRegChartBar },
+  { id: "route1", name: "home", url: "/", icon: CgHomeAlt },
+  { id: "route2", name: "games", url: "/games", icon: IoLogoGameControllerB },
+  { id: "route4", name: "rankings", url: "/rankings", icon: IoIosPodium },
+  { id: "route5", name: "statistics", url: "/statistics", icon: FaRegChartBar },
 ];
 
 export const FEATURES: Feature[] = [

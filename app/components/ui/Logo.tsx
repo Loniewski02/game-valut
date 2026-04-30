@@ -3,22 +3,20 @@ import Link from "next/link";
 import { GiBeastEye } from "react-icons/gi";
 
 type Props = {
-  ico: string;
-  font: string;
-  link?: string;
+  linkStyle?: string;
   onClick?: () => void;
 };
 
-const Logo: React.FC<Props> = ({ ico, font, link, onClick }) => {
+const Logo = ({ linkStyle, onClick }: Props) => {
   return (
     <Link
       href="/"
       aria-label="home-page"
       onClick={onClick}
-      className={`${link ? link : ""} flex items-center gap-4 font-bold text-DarkGrayishBlue`}
+      className={`${linkStyle ? linkStyle : ""} flex items-center gap-4 font-semibold text-DarkGrayishBlue`}
     >
-      <GiBeastEye className={ico} />
-      <span className={`${font}`}>GameBeast</span>
+      <GiBeastEye className="text-4xl" />
+      <span className="text-xl">GameBeast</span>
     </Link>
   );
 };

@@ -1,21 +1,17 @@
 import Link from "next/link";
 
-const LinkBtn = ({
-  label,
-  children,
-  href,
-  isFull,
-}: {
-  label: string;
-  isFull: boolean;
+type Props = {
+  transparent?: boolean;
+  className?: string;
   children: React.ReactNode;
   href: string;
-}) => {
+};
+
+const LinkBtn = ({ children, href, transparent, className }: Props) => {
   return (
     <Link
       href={href}
-      aria-label={label}
-      className={`${isFull ? "hover:bg-primaryHover border-transparent bg-Primary" : "border-Gray bg-transparent hover:bg-[#0d11179f]"} block w-44 rounded-md border px-6 py-3 text-center text-15 font-medium text-White transition  hover:font-bold active:scale-95`}
+      className={`${transparent ? "border-Gray bg-transparent hover:bg-Gray/20" : "border-transparent bg-Primary hover:bg-PrimaryHover"} ${className && className} min-w-max rounded-xl border px-6 py-3 text-center text-15 font-medium text-White transition active:scale-95`}
     >
       {children}
     </Link>

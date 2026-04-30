@@ -7,7 +7,7 @@ import Footer from "./components/footer/Footer";
 
 const fontMontserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600"],
   display: "block",
   variable: "--font-montserrat",
 });

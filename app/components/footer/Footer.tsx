@@ -6,12 +6,11 @@ import { AiFillLinkedin } from "react-icons/ai";
 import Wrapper from "../layout/Wrapper";
 import Logo from "../ui/Logo";
 
-
 const Footer = () => {
   return (
     <footer className="bg-White px-6 py-8 md:px-8 md:py-10">
       <Wrapper className="flex justify-between">
-        <Logo ico="text-4xl" font="text-xl" />
+        <Logo />
         <div className="flex gap-2 text-3xl text-DarkGrayishBlue">
           <a
             href="https://pl.linkedin.com/in/loniewski02"

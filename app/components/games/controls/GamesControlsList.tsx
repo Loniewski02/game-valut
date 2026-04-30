@@ -11,7 +11,7 @@ type Props = {
   onOpen: (name: string | null) => void;
 };
 
-const GamesControlsList: React.FC<Props> = ({ name, className, items, onFilter, selected, onOpen, opened }) => {
+const GamesControlsList = ({ name, className, items, onFilter, selected, onOpen, opened }: Props) => {
   const listHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     onOpen(event.currentTarget.value);
     if (opened === event.currentTarget.value) {
@@ -45,7 +45,7 @@ const GamesControlsList: React.FC<Props> = ({ name, className, items, onFilter, 
               key={item}
               value={item}
               onClick={platformHandler}
-              className={`${isSelected ? "font-bold text-Primary" : "text-DarkGrayishBlue"} flex items-center gap-4 py-1 text-15 transition hover:text-Primary`}
+              className={`${isSelected && "font-bold text-Primary"} flex items-center gap-4 py-1 text-15 transition hover:text-Primary`}
             >
               <span
                 className={`${isSelected ? "border-Primary" : "border-DarkGrayishBlue"} relative h-4 w-4 rounded-sm border`}

@@ -1,6 +1,8 @@
 import { Input } from "@/app/types";
 
-const FormBox = ({ input, className, defaultVal }: { input: Input; defaultVal?: any; className?: string }) => {
+type Props = { input: Input; defaultVal?: any; className?: string };
+
+const FormBox = ({ input, className, defaultVal }: Props) => {
   return (
     <div className={`${className && className} relative flex flex-col gap-2`}>
       <label htmlFor={input.id} className="invisible absolute z-10 text-13 text-GrayishBlue">

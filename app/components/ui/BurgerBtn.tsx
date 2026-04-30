@@ -7,7 +7,7 @@ type Props = {
 
 const barClasses = "block w-full h-[3px] bg-DarkGrayishBlue rounded-sm absolute left-0";
 
-const BurgerBtn: React.FC<Props> = ({ onClick, isShown }) => {
+const BurgerBtn = ({ onClick, isShown }: Props) => {
   return (
     <button aria-label="menu-button" onClick={onClick} className="z-50 p-2 md:hidden">
       <span className="relative block h-[23px] w-6 ">

@@ -1,14 +1,16 @@
 import { Feature } from "@/app/types";
 
-const FeatureCard: React.FC<{ data: Feature }> = ({ data }) => {
+type Props = { data: Feature };
+
+const FeatureCard = ({ data }: Props) => {
   const Icon = data.icon;
   return (
     <div className="flex max-w-lg items-center gap-6 rounded-2xl bg-White px-6 py-4">
-      <div className="rounded-2xl bg-LightGray p-4">
-        <Icon className="text-5xl text-DarkGrayishBlue" />
+      <div className="rounded-2xl bg-LightGray p-5">
+        <Icon className="text-4xl" />
       </div>
       <div>
-        <h3 className="mb-1 text-lg font-bold text-DarkGrayishBlue md:text-xl">{data.title}</h3>
+        <h3 className="mb-1 text-lg font-semibold md:text-xl">{data.title}</h3>
         <p className="text-15 leading-4">{data.desc}</p>
       </div>
     </div>
