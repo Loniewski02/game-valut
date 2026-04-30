@@ -1,8 +1,7 @@
+import { TopGames } from "@/app/types";
 import RatingBadge from "../layout/RatingBadge";
 
-import { Game } from "@/app/types";
-
-const CardSectionGame: React.FC<{ game: Game; index: number }> = ({ game, index }) => {
+const CardSectionGame: React.FC<{ game: TopGames; index: number }> = ({ game, index }) => {
   return (
     <div className="mb-2 flex justify-between border-b pb-2 text-15 font-bold text-DarkGrayishBlue">
       <div className="flex items-center gap-3">

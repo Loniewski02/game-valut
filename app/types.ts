@@ -15,6 +15,13 @@ export type Input = {
   placeholder: string;
 };
 
+export type TopGames = {
+  id: string;
+  img: string;
+  title: string;
+  rating: number;
+};
+
 export type Game = {
   id: string;
   slug: string;
