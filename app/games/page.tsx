@@ -35,7 +35,7 @@ const Games = () => {
       <Section>
         <Wrapper className="grid place-items-center gap-2 sm:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {GAMES.map((game) => (
-            <GameLink data={game} />
+            <GameLink key={game.id} data={game} />
           ))}
         </Wrapper>
       </Section>
