@@ -30,6 +30,7 @@ const NavBar = () => {
 
     return () => {
       document.body.style.overflow = "";
+      document.body.style.position = "";
     };
   }, [isShown]);
 

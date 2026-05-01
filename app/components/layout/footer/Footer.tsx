@@ -9,9 +9,9 @@ import Wrapper from "../Wrapper";
 const Footer = () => {
   return (
     <footer className="bg-White px-6 py-8 md:px-8">
-      <Wrapper className="flex justify-between">
+      <Wrapper className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-0">
         <Logo />
-        <div className="flex gap-2 text-3xl text-DarkGrayishBlue">
+        <div className="flex gap-4 text-3xl text-DarkGrayishBlue">
           <a
             href="https://pl.linkedin.com/in/loniewski02"
             target="blank"
