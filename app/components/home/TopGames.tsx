@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { BsArrowRightShort } from "react-icons/bs";
 
 import RatingBadge from "../layout/RatingBadge";

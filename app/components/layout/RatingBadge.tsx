@@ -1,12 +1,16 @@
 import { AiFillStar } from "react-icons/ai";
 
-type Props = { rating: number; light?: boolean; reversed?: boolean };
+type Props = { rating: number; light?: boolean; reversed?: boolean; iconClassName?: string; textClassName?: string };
 
-const RatingBadge = ({ rating, light, reversed }: Props) => {
+const RatingBadge = ({ rating, light, reversed, iconClassName, textClassName }: Props) => {
   return (
     <div className="flex w-max items-center gap-1">
-      <AiFillStar className={`${!reversed ? "order-2" : "order-1"} text-xl text-Yellow`} />
-      <span className={`${light ? "text-White" : "text-DarkGrayishBlue"} ${!reversed ? "order-1" : "order-2"} text-15`}>
+      <AiFillStar
+        className={`${!reversed ? "order-2" : "order-1"} ${iconClassName ? iconClassName : "text-xl"} text-Yellow`}
+      />
+      <span
+        className={`${light ? "text-LightGray" : "text-DarkGrayishBlue"} ${!reversed ? "order-1" : "order-2"} ${textClassName ? textClassName : "text-15"}`}
+      >
         {rating}
       </span>
     </div>
