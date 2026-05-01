@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontMontserrat.variable} flex min-h-dvh w-full flex-col font-montserrat`}>
         <NavBar />
-        <main id="main" className="flex-1 p-6 md:p-8">
+        <main id="main" className="flex-1 bg-LightGray p-6 md:p-8">
           {children}
         </main>
         <Footer />

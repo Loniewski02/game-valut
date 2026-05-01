@@ -7,12 +7,14 @@ import Wrapper from "../Wrapper";
 import NavItems from "./NavItems";
 
 const NavBar = () => {
-  const [isMobileMenuShown, setIsMobileMenuShown] = useState(false);
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsMobileMenuShown(false);
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        setIsShown(false);
       }
     };
 
@@ -22,20 +24,29 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isShown ? "hidden" : "";
+    document.body.style.position = isShown ? "fixed" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isShown]);
+
   const toggleMobileMenuHandler = () => {
-    setIsMobileMenuShown((prevState) => !prevState);
+    setIsShown((prevState) => !prevState);
   };
 
   const hideMobileMenuHandler = () => {
-    setIsMobileMenuShown(false);
+    setIsShown(false);
   };
 
   return (
     <nav className="bg-White px-6 py-8 md:px-8">
       <Wrapper className="flex flex-row items-center justify-between">
         <Logo onClick={hideMobileMenuHandler} />
-        <BurgerBtn isShown={isMobileMenuShown} onClick={toggleMobileMenuHandler} />
-        <NavItems isShown={isMobileMenuShown} onClose={hideMobileMenuHandler} />
+        <BurgerBtn isShown={isShown} onClick={toggleMobileMenuHandler} />
+        <NavItems isShown={isShown} onClose={hideMobileMenuHandler} />
       </Wrapper>
     </nav>
   );
