@@ -69,14 +69,6 @@ export const RESET_INPUT = {
   validity: (val: string) => emailReg.test(val),
 };
 
-export const TOP_GAMES = [
-  { id: "1", img: "none", title: "Elden Ring", rating: 9.6 },
-  { id: "2", img: "none", title: "The Witcher 3: Wild Hunt", rating: 8.7 },
-  { id: "3", img: "none", title: "Baldur's Gate 3", rating: 9.4 },
-  { id: "4", img: "none", title: "Cyberpunk 2077", rating: 9.1 },
-  { id: "5", img: "none", title: "Dying Light", rating: 9.9 },
-];
-
 export const ROUTES: Route[] = [
   { id: "route1", name: "home", url: "/", icon: CgHomeAlt },
   { id: "route2", name: "games", url: "/games", icon: IoLogoGameControllerB },
@@ -105,7 +97,7 @@ export const FEATURES: Feature[] = [
   },
 ];
 
-export const GAME_GENRES: string[] = [
+export const GENRES: string[] = [
   "Action",
   "Adventure",
   "RPG",
@@ -118,7 +110,14 @@ export const GAME_GENRES: string[] = [
   "Souls-like",
 ];
 
-export const GAME_PLATFORMS: string[] = ["PC", "PlayStation", "Xbox", "Nintendo"];
+export const PLATFORMS: string[] = ["PC", "PlayStation", "Xbox", "Nintendo"];
+
+export const PLATFORM_SHORTCUTS: Record<string, string> = {
+  pc: "pc",
+  playstation: "ps",
+  xbox: "xbox",
+  nintendo: "ns",
+};
 
 export const GAMES: Game[] = [
   {
@@ -129,6 +128,9 @@ export const GAMES: Game[] = [
     genres: ["RPG", "Adventure"],
     rating: 9.9,
     image: "",
+    releaseDate: "2015-05-19",
+    description:
+      "An open-world RPG where you play as Geralt of Rivia, a monster hunter searching for his adopted daughter while war consumes the Northern Kingdoms.",
   },
   {
     id: "2",
@@ -138,6 +140,9 @@ export const GAMES: Game[] = [
     genres: ["RPG", "Action"],
     rating: 9.8,
     image: "",
+    releaseDate: "2022-02-25",
+    description:
+      "A vast fantasy action RPG set in the Lands Between, featuring challenging combat, exploration, and deep character customization.",
   },
   {
     id: "3",
@@ -147,6 +152,9 @@ export const GAMES: Game[] = [
     genres: ["RPG", "Shooter"],
     rating: 9.2,
     image: "",
+    releaseDate: "2020-12-10",
+    description:
+      "A futuristic open-world RPG set in Night City where you fight, hack, and survive in a world driven by power and cybernetic upgrades.",
   },
   {
     id: "4",
@@ -156,6 +164,9 @@ export const GAMES: Game[] = [
     genres: ["Action", "Adventure"],
     rating: 9.7,
     image: "",
+    releaseDate: "2018-10-26",
+    description:
+      "A cinematic western adventure following Arthur Morgan and the Van der Linde gang during the final years of the Wild West.",
   },
   {
     id: "5",
@@ -165,6 +176,9 @@ export const GAMES: Game[] = [
     genres: ["RPG", "Strategy"],
     rating: 9.8,
     image: "",
+    releaseDate: "2023-08-03",
+    description:
+      "A party-based RPG inspired by Dungeons & Dragons with turn-based combat, branching stories, and meaningful choices.",
   },
   {
     id: "6",
@@ -174,6 +188,9 @@ export const GAMES: Game[] = [
     genres: ["Action", "Adventure"],
     rating: 9.6,
     image: "",
+    releaseDate: "2022-11-09",
+    description:
+      "Kratos and Atreus face the coming of Ragnarök in a mythological action adventure filled with emotional storytelling and brutal combat.",
   },
   {
     id: "7",
@@ -183,6 +200,9 @@ export const GAMES: Game[] = [
     genres: ["Action", "Shooter"],
     rating: 9.4,
     image: "",
+    releaseDate: "2013-09-17",
+    description:
+      "An open-world crime sandbox following three criminals in Los Santos with action-packed missions and endless side activities.",
   },
   {
     id: "8",
@@ -192,6 +212,9 @@ export const GAMES: Game[] = [
     genres: ["Action", "Platformer"],
     rating: 9.3,
     image: "",
+    releaseDate: "2017-02-24",
+    description:
+      "A beautifully crafted metroidvania set in a ruined underground kingdom full of secrets, bosses, and precise combat.",
   },
   {
     id: "9",
@@ -201,6 +224,9 @@ export const GAMES: Game[] = [
     genres: ["Horror", "Action"],
     rating: 8.9,
     image: "",
+    releaseDate: "2015-01-27",
+    description:
+      "A zombie survival action game focused on parkour movement, crafting weapons, and surviving dangerous nights.",
   },
   {
     id: "10",
@@ -210,6 +236,9 @@ export const GAMES: Game[] = [
     genres: ["Simulation", "Adventure"],
     rating: 9.5,
     image: "",
+    releaseDate: "2011-11-18",
+    description:
+      "A sandbox building game where players explore, gather resources, craft tools, and create almost anything imaginable.",
   },
   {
     id: "11",
@@ -219,6 +248,9 @@ export const GAMES: Game[] = [
     genres: ["Horror", "Action"],
     rating: 9.1,
     image: "",
+    releaseDate: "2023-03-24",
+    description:
+      "A survival horror action game where Leon Kennedy rescues the president's daughter from a terrifying cult.",
   },
   {
     id: "12",
@@ -228,6 +260,8 @@ export const GAMES: Game[] = [
     genres: ["Racing", "Sports"],
     rating: 9.0,
     image: "",
+    releaseDate: "2021-11-09",
+    description: "An open-world racing game set in Mexico featuring hundreds of cars, events, and stunning landscapes.",
   },
   {
     id: "13",
@@ -237,6 +271,9 @@ export const GAMES: Game[] = [
     genres: ["Adventure", "Action"],
     rating: 9.8,
     image: "",
+    releaseDate: "2017-03-03",
+    description:
+      "A groundbreaking open-world adventure where Link explores Hyrule freely, solves puzzles, and battles powerful enemies.",
   },
   {
     id: "14",
@@ -246,5 +283,8 @@ export const GAMES: Game[] = [
     genres: ["Simulation", "RPG"],
     rating: 8.8,
     image: "",
+    releaseDate: "2016-02-26",
+    description:
+      "A relaxing farming RPG where you grow crops, build relationships, mine resources, and restore a rural community.",
   },
 ];

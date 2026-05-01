@@ -15,13 +15,6 @@ export type Input = {
   placeholder: string;
 };
 
-export type TopGames = {
-  id: string;
-  img: string;
-  title: string;
-  rating: number;
-};
-
 export type Game = {
   id: string;
   slug: string;
@@ -30,6 +23,8 @@ export type Game = {
   genres: string[];
   rating: number;
   image: string;
+  releaseDate: string;
+  description: string;
 };
 
 export type Feature = { id: string; title: string; desc: string; icon: IconType };

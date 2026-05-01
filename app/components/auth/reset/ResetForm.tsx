@@ -1,9 +1,8 @@
-import Link from "next/link";
+import TextLink from "../../ui/TextLink";
 import Submit from "../Submit";
 import FormBox from "../FormBox";
 
 import { RESET_INPUT } from "@/app/utils/constant";
-import TextLink from "../../ui/TextLink";
 
 const ResetForm = () => {
   return (

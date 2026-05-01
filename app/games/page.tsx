@@ -46,7 +46,7 @@ const Games = () => {
       />
       {filteredGames && filteredGames.length > 0 ? (
         <Section>
-          <Wrapper className="grid place-items-center gap-2 sm:grid-cols-2 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+          <Wrapper className="grid place-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {filteredGames.map((game) => (
               <GameLink key={game.id} data={game} />
             ))}

@@ -1,9 +1,10 @@
 import Wrapper from "../../layout/Wrapper";
 import Section from "../../layout/Section";
-import AddGameButton from "./AddGameButton";
+import Button from "../../ui/Button";
+import Plus from "../../layout/Plus";
 import GamesControlsList from "./GamesControlsList";
 
-import { GAME_GENRES, GAME_PLATFORMS } from "@/app/utils/constant";
+import { GENRES, PLATFORMS } from "@/app/utils/constant";
 
 type Props = {
   onSelectedPlatform: (platform: string | null) => void;
@@ -32,7 +33,10 @@ const GamesControls = ({
         <div className="grid gap-3 sm:grid-cols-3 sm:gap-y-0">
           <h2 className="text-2xl font-semibold sm:order-1 sm:col-span-2 sm:text-3xl">Games Library</h2>
           <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
-          <AddGameButton classList="w-full sm:order-2 sm:w-max sm:place-self-end" />
+          <Button className="sm:order-2 sm:w-max sm:place-self-end">
+            <Plus />
+            Add Game
+          </Button>
         </div>
         <div className="relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-5 md:grid-rows-1">
           <div className="relative col-span-2 md:col-span-3">
@@ -52,10 +56,10 @@ const GamesControls = ({
           <GamesControlsList
             onSelect={onSelectedPlatform}
             selected={selectedPlatoform}
-            items={GAME_PLATFORMS}
+            items={PLATFORMS}
             name="Platform"
           />
-          <GamesControlsList onSelect={onSelectedGenre} selected={selectedGenre} items={GAME_GENRES} name="Genre" />
+          <GamesControlsList onSelect={onSelectedGenre} selected={selectedGenre} items={GENRES} name="Genre" />
         </div>
       </Wrapper>
     </Section>

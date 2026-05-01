@@ -1,12 +1,12 @@
 import { BiLogIn } from "react-icons/bi";
 
-import NavLink from "./NavLink";
 import Logo from "../../ui/Logo";
 import TextLink from "../../ui/TextLink";
+import Button from "../../ui/Button";
+import NavLink from "./NavLink";
 
 import { ROUTES } from "@/app/utils/constant";
 import { Route } from "@/app/types";
-import LinkBtn from "../../ui/LinkBtn";
 
 type Props = {
   isShown: boolean;
@@ -29,9 +29,9 @@ const NavItems = ({ isShown, onClose }: Props) => {
           {ROUTES.map((route) => (
             <NavLink key={route.id} data={route} onClick={onClose} />
           ))}
-          <LinkBtn className="ml-6 hidden text-DarkGrayishBlue md:block" href="/auth?mode=login">
+          <Button className="ml-6 hidden md:block" href="/auth?mode=login" link>
             Log in
-          </LinkBtn>
+          </Button>
         </div>
         <div className="relative flex flex-col gap-4 pt-6 md:hidden">
           <div className="absolute top-0 h-[2px] w-full rounded-sm bg-Gray" />

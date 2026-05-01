@@ -2,7 +2,8 @@ import { BsController } from "react-icons/bs";
 
 import Section from "../layout/Section";
 import Wrapper from "../layout/Wrapper";
-import AddGameButton from "./controls/AddGameButton";
+import Plus from "../layout/Plus";
+import Button from "../ui/Button";
 
 const GamesEmpty = () => {
   return (
@@ -15,7 +16,10 @@ const GamesEmpty = () => {
         <p className="max-w-96 text-15 text-GrayishBlue">
           {`No games added yet. This library is built by the community. Be the first to add a game.`}
         </p>
-        <AddGameButton classList="mt-6" />
+        <Button className="mt-6">
+          <Plus />
+          Add Game
+        </Button>
       </Wrapper>
     </Section>
   );

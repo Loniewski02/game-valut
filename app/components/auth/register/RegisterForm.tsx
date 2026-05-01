@@ -1,11 +1,8 @@
-"use client";
-import Link from "next/link";
-
+import TextLink from "../../ui/TextLink";
 import Submit from "../Submit";
 import FormBox from "../FormBox";
 
 import { REGISTER_INPUTS } from "@/app/utils/constant";
-import TextLink from "../../ui/TextLink";
 
 const RegisterForm = () => {
   return (

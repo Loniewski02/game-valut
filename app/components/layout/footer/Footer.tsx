@@ -2,14 +2,13 @@ import { AiFillInstagram } from "react-icons/ai";
 import { AiFillFacebook } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
-import Wrapper from "../Wrapper";
+
 import Logo from "../../ui/Logo";
-
-
+import Wrapper from "../Wrapper";
 
 const Footer = () => {
   return (
-    <footer className="bg-White px-6 py-8 md:px-8 md:py-10">
+    <footer className="bg-White px-6 py-8 md:px-8">
       <Wrapper className="flex justify-between">
         <Logo />
         <div className="flex gap-2 text-3xl text-DarkGrayishBlue">
