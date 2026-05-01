@@ -16,7 +16,7 @@ const Features = () => {
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div className="flex max-w-lg items-center gap-6 rounded-2xl bg-White px-6 py-4">
+              <div key={feature.id} className="flex max-w-lg items-center gap-6 rounded-2xl bg-White px-6 py-4">
                 <div className="rounded-2xl bg-LightGray p-5">
                   <Icon className="text-4xl" />
                 </div>
