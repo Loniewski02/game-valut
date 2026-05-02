@@ -20,7 +20,7 @@ const LatestReview = ({ data }: { data: Game }) => {
             href={`/games/${data.slug}`}
             className="flex items-center justify-between text-15 font-semibold text-Primary transition hover:text-PrimaryHover"
           >
-            <span className="max-w-52">{data.title}</span>
+            <span className="mr-3">{data.title}</span>
             <RatingBadge rating={data.rating} />
           </Link>
           <p className="text-15 text-GrayishBlue">

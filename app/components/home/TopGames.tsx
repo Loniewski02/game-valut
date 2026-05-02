@@ -11,9 +11,9 @@ const TopGames = ({ games }: { games: Game[] }) => {
     <Section title="top games this week" className="lg:w-1/2">
       {games.map((game, index) => (
         <div key={game.id} className="mb-2 flex justify-between border-b pb-2 text-15 font-semibold">
-          <div className="flex items-center gap-3">
+          <div className="mr-3 flex items-center gap-3">
             <span className="mr-5 w-2">{index + 1}.</span>
-            <span className="block h-8 w-12 rounded-md bg-black" />
+            <span className="block h-8 min-w-12 rounded-md bg-black" />
             <span>{game.title}</span>
           </div>
           <RatingBadge rating={game.rating} />
