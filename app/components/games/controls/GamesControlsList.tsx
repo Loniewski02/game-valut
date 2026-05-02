@@ -36,7 +36,7 @@ const GamesControlsList = ({ name, className, items, onSelect, selected }: Props
         <MdKeyboardArrowDown className="absolute right-2 top-1/2 -translate-y-1/2 text-xl text-DarkGrayishBlue" />
       </button>
       <div
-        className={`${isOpened ? "visible" : "invisible"} opacity-1 absolute -bottom-3 left-1/3 right-0 z-30 flex translate-y-full flex-col rounded-xl border border-Gray bg-White p-4`}
+        className={`${isOpened ? "visible" : "invisible"} opacity-1 absolute -bottom-3 left-0 right-0 z-30 flex translate-y-full flex-col rounded-xl border border-Gray bg-White p-4`}
       >
         <button
           onClick={platformHandler}

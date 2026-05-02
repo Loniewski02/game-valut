@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 const HomeHeader = () => {
   return (
     <Header>
-      <Hero width={600} height={300} alt=";" src={"/assets/demoIMG.png"} main />
+      <Hero width={1000} height={500} alt=";" src={"/assets/hero.png"} main />
       <div className="relative z-30">
         <h1 className="mb-4 max-w-60 text-4xl font-semibold tracking-wide text-White md:mb-4 md:text-[40px] md:leading-[1.3] lg:max-w-max lg:text-5xl">
           Your video game hub!
