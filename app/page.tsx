@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <HomeHeader />
       <Features />
-      <Wrapper className="max-w-lg lg:flex lg:max-w-7xl lg:items-start lg:gap-4 lg:py-8">
+      <Wrapper className="lg:flex lg:items-start lg:gap-4">
         <TopGames games={topGames} />
         <LatestReview data={GAMES[0]} />
       </Wrapper>

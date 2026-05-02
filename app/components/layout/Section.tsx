@@ -1,12 +1,18 @@
-type Props = { children: React.ReactNode; className?: string; title?: string };
+import Wrapper from "./Wrapper";
 
-const Section = ({ children, className, title }: Props) => {
+type Props = { children: React.ReactNode; className?: string; title?: string; wrapperClassName?: string };
+
+const Section = ({ children, className, title, wrapperClassName }: Props) => {
   return (
-    <section className={`${className && className} py-6 md:py-8`}>
-      {title && (
-        <h2 className="mb-4 text-2xl font-semibold uppercase tracking-wide md:text-3xl lg:mb-6 lg:text-2xl">{title}</h2>
-      )}
-      {children}
+    <section className={`${className && className} py-2 md:py-4`}>
+      <Wrapper
+        className={`${wrapperClassName && wrapperClassName} h-full max-w-xl rounded-2xl bg-White p-6 lg:max-w-7xl`}
+      >
+        {title && (
+          <h2 className="mb-6 text-2xl font-semibold tracking-wide first-letter:uppercase md:mb-8 ">{title}</h2>
+        )}
+        {children}
+      </Wrapper>
     </section>
   );
 };

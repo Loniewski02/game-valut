@@ -8,7 +8,7 @@ import { Game } from "@/app/types";
 
 const TopGames = ({ games }: { games: Game[] }) => {
   return (
-    <Section title="top games this week" className="lg:w-1/2 lg:rounded-2xl lg:bg-White lg:px-8">
+    <Section title="top games this week" className="lg:w-1/2">
       {games.map((game, index) => (
         <div key={game.id} className="mb-2 flex justify-between border-b pb-2 text-15 font-semibold">
           <div className="flex items-center gap-3">

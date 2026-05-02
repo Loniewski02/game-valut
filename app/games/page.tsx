@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import GamesControls from "../components/games/controls/GamesControls";
 import GamesEmpty from "../components/games/GamesEmpty";
-import Wrapper from "../components/layout/Wrapper";
 import Section from "../components/layout/Section";
 import GameLink from "../components/games/GameLink";
 
@@ -45,12 +44,10 @@ const Games = () => {
         filteredName={gameName}
       />
       {filteredGames && filteredGames.length > 0 ? (
-        <Section>
-          <Wrapper className="grid place-items-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {filteredGames.map((game) => (
-              <GameLink key={game.id} data={game} />
-            ))}
-          </Wrapper>
+        <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filteredGames.map((game) => (
+            <GameLink key={game.id} data={game} />
+          ))}
         </Section>
       ) : (
         <GamesEmpty />

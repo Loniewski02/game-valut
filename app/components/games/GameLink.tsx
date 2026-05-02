@@ -14,7 +14,7 @@ const GameLink = ({ data }: Props) => {
     <Link
       href={`/games/${data.slug}`}
       aria-label={data.slug}
-      className="relative flex h-52 w-full max-w-96 flex-col justify-end gap-3 overflow-hidden rounded-xl p-4 transition hover:scale-95  sm:px-6 md:px-4 lg:gap-4"
+      className="relative flex h-52 w-full flex-col justify-end gap-3 overflow-hidden rounded-xl p-4 transition hover:scale-95 sm:px-6 md:px-4 lg:gap-4"
     >
       <Hero src="/assets/hero.jpg" width={300} height={50} alt={data.title} />
       <h3 className="z-10 text-15 font-bold leading-4 text-White sm:text-base sm:leading-4">{data.title}</h3>
