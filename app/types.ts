@@ -22,9 +22,14 @@ export type Game = {
   platforms: string[];
   genres: string[];
   rating: number;
-  image: string;
+  imageFull: string;
+  imageSmall: string;
   releaseDate: string;
   description: string;
+  developer: string;
+  publisher: string;
+  gameModes: string[];
+  esrb: string;
 };
 
 export type Feature = { id: string; title: string; desc: string; icon: IconType };

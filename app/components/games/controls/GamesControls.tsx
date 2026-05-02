@@ -27,7 +27,7 @@ const GamesControls = ({
   };
 
   return (
-    <Section wrapperClassName="max-w-none">
+    <Section wrapperClassName="max-w-full">
       <div className="mb-8 grid gap-3 sm:grid-cols-3 sm:gap-y-0">
         <h2 className="text-2xl font-semibold sm:order-1 sm:col-span-2 sm:text-3xl">Games Library</h2>
         <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
