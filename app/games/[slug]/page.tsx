@@ -25,7 +25,9 @@ const Game = () => {
           </Wrapper>
           <Section title="community rating">{game.rating}</Section>
           <Section title="Similar Games">nwm</Section>
-          <Section title="Reviews">nwm</Section>
+          <Section title="Reviews" id="reviews">
+            nwm
+          </Section>
         </>
       )}
       {!game && <p>not found</p>}

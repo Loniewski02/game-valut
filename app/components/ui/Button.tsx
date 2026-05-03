@@ -21,7 +21,7 @@ const Button = ({ transparent, className, children, onClick, link, href }: Props
   return (
     <button
       onClick={btnHandler}
-      className={`${transparent ? "border-Gray bg-transparent hover:bg-Gray/20" : "border-transparent bg-Primary hover:bg-PrimaryHover"} ${className && className} flex min-w-max items-center justify-center gap-2 rounded-xl border px-6 py-2 text-15 font-medium text-White transition active:scale-95`}
+      className={`${transparent ? "border-Gray bg-transparent hover:bg-Gray/20" : "border-transparent bg-Primary hover:bg-PrimaryHover"} ${className && className} flex min-w-max items-center justify-center gap-2 rounded-xl border px-6 py-3 text-15 font-medium text-White transition active:scale-95`}
     >
       {children}
     </button>

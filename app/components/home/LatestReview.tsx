@@ -29,7 +29,7 @@ const LatestReview = ({ data }: { data: Game }) => {
             <span className="text-13 ">2 hours ago</span>
           </p>
           <Link
-            href="/rankings"
+            href={`/games/${data.slug}#reviews`}
             className="mt-4 flex items-center justify-end text-13 font-semibold text-Primary transition hover:text-PrimaryHover"
           >
             read more reviews

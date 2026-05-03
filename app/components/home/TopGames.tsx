@@ -23,7 +23,7 @@ const TopGames = ({ games }: { games: Game[] }) => {
         href="/rankings"
         className="mt-4 flex items-center justify-end text-13 font-semibold text-Primary transition hover:text-PrimaryHover"
       >
-        read more reviews
+        view full ranking
         <BsArrowRightShort className="text-xl" />
       </Link>
     </Section>
