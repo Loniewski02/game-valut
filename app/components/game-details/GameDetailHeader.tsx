@@ -31,12 +31,12 @@ const GameDetailHeader = ({ data }: { data: Game }) => {
           </div>
           <div className="flex gap-1 text-LightGray">
             {data.platforms.map((item) => (
-              <Badge item={PLATFORM_SHORTCUTS[item.toLocaleLowerCase()]} uppercase dark />
+              <Badge key={item} item={PLATFORM_SHORTCUTS[item.toLocaleLowerCase()]} uppercase dark />
             ))}
           </div>
           <div className="flex gap-1 text-Primary">
             {data.genres.map((item) => (
-              <Badge item={item} dark />
+              <Badge key={item} item={item} dark />
             ))}
           </div>
           <p className="text-13 text-Gray md:mt-4">Release Date: {data.releaseDate}</p>
