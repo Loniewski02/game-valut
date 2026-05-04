@@ -37,7 +37,7 @@ const RankingItem = ({ item, index }: { item: Game; index: number }) => {
       </div>
       <div className="hidden flex-wrap place-content-start gap-1 text-Primary lg:flex">
         {item.genres.map((genre) => (
-          <Badge item={genre} />
+          <Badge key={genre} item={genre} />
         ))}
       </div>
       <RatingBadge rating={item.rating} reversed />
