@@ -9,12 +9,13 @@ import Plus from "../layout/Plus";
 import { Game } from "@/app/types";
 
 import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
+import Badge from "../layout/Badge";
 
 const GameDetailHeader = ({ data }: { data: Game }) => {
   return (
     <Header>
-      <Hero width={800} height={400} alt=";" src={data.imageFull} />
-      <div className="relative z-20 flex w-full flex-col gap-4 md:grid md:grid-cols-[auto_1fr_auto] md:items-end md:gap-6 lg:gap-10">
+      <Hero width={1200} height={600} alt=";" src={data.imageFull} />
+      <div className="relative z-20 flex h-max w-full flex-col gap-4 md:grid md:grid-cols-[auto_1fr_auto] md:items-end md:gap-6 lg:gap-10">
         <Image
           width={200}
           height={400}
@@ -28,21 +29,14 @@ const GameDetailHeader = ({ data }: { data: Game }) => {
             <RatingBadge rating={data.rating} textClassName="md:text-lg" iconClassName="md:text-2xl" light reversed />
             <p className="text-13 text-Gray">(2,341 ratings)</p>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 text-LightGray">
             {data.platforms.map((item) => (
-              <span
-                key={item}
-                className="rounded-md bg-Gray/20 px-2 py-1 text-13 uppercase tracking-tighter text-LightGray"
-              >
-                {PLATFORM_SHORTCUTS[item.toLocaleLowerCase()]}
-              </span>
+              <Badge item={PLATFORM_SHORTCUTS[item.toLocaleLowerCase()]} uppercase dark />
             ))}
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 text-Primary">
             {data.genres.map((item) => (
-              <span key={item} className="rounded-md bg-Gray/20 px-2 py-1 text-13 tracking-tighter text-Primary">
-                {item}
-              </span>
+              <Badge item={item} dark />
             ))}
           </div>
           <p className="text-13 text-Gray md:mt-4">Release Date: {data.releaseDate}</p>

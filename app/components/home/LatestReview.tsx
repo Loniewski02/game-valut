@@ -6,12 +6,22 @@ import RatingBadge from "../layout/RatingBadge";
 import Section from "../layout/Section";
 
 import { Game } from "@/app/types";
+import Image from "next/image";
 
 const LatestReview = ({ data }: { data: Game }) => {
   return (
     <Section title="latest review" className="lg:w-1/2">
       <div className="flex items-start justify-between gap-4 rounded-2xl bg-White ">
-        <div className={`h-28 min-w-28 rounded-lg bg-black lg:h-36 lg:min-w-36`} />
+        <div className="relative h-28 min-w-28 overflow-hidden rounded-lg lg:h-36 lg:min-w-36">
+          <Image
+            width={200}
+            height={200}
+            alt={data.title}
+            src={data.imageFull}
+            className="absolute left-0 top-0 h-full w-full object-cover"
+          />
+          <div className="absolute left-0 top-0 z-10 h-full w-full bg-DarkGrayishBlue/20" />
+        </div>
         <div className="flex flex-col gap-2">
           <p className="text-13 leading-normal lg:text-15">
             {`"Amazing story, unforgettable characters and the best RPG experience."`}

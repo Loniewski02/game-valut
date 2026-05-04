@@ -9,7 +9,7 @@ const RatingBadge = ({ rating, light, reversed, iconClassName, textClassName }: 
         className={`${!reversed ? "order-2" : "order-1"} ${iconClassName ? iconClassName : "text-xl"} text-Yellow`}
       />
       <span
-        className={`${light ? "text-LightGray" : "text-DarkGrayishBlue"} ${!reversed ? "order-1" : "order-2"} ${textClassName ? textClassName : "text-15"}`}
+        className={`${light ? "text-LightGray" : "text-DarkGrayishBlue"} ${!reversed ? "order-1" : "order-2"} ${textClassName ? textClassName : "text-base"}`}
       >
         {rating}
       </span>
