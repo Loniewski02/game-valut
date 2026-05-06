@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { BsArrowRightShort } from "react-icons/bs";
 
@@ -6,7 +7,6 @@ import RatingBadge from "../layout/RatingBadge";
 import Section from "../layout/Section";
 
 import { Game } from "@/app/types";
-import Image from "next/image";
 
 const LatestReview = ({ data }: { data: Game }) => {
   return (

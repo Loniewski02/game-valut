@@ -1,11 +1,10 @@
 import { AiFillStar } from "react-icons/ai";
-import { IoMdAddCircle } from "react-icons/io";
-import { IoIosPodium } from "react-icons/io";
+import { IoMdAddCircle, IoIosPodium } from "react-icons/io";
 import { FaRegChartBar } from "react-icons/fa";
-import { IoLogoGameControllerB } from "react-icons/io";
 import { CgHomeAlt } from "react-icons/cg";
 
 import { Feature, Game, Route } from "../types";
+import { BsController } from "react-icons/bs";
 
 export const emailReg =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -69,9 +68,25 @@ export const RESET_INPUT = {
   validity: (val: string) => emailReg.test(val),
 };
 
+export const GAMES_FILTER_INPUT = {
+  id: "search-game",
+  name: "search-game",
+  placeholder: "Search games...",
+  type: "text",
+  label: "Search games",
+};
+
+export const ADD_GAME_INPUT = {
+  id: "add-game-title",
+  name: "add-game-title",
+  placeholder: "Game title ...",
+  type: "text",
+  label: "game title",
+};
+
 export const ROUTES: Route[] = [
   { id: "route1", name: "home", url: "/", icon: CgHomeAlt },
-  { id: "route2", name: "games", url: "/games", icon: IoLogoGameControllerB },
+  { id: "route2", name: "games", url: "/games", icon: BsController },
   { id: "route4", name: "rankings", url: "/rankings", icon: IoIosPodium },
   { id: "route5", name: "statistics", url: "/statistics", icon: FaRegChartBar },
 ];

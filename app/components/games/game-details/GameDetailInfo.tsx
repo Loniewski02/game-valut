@@ -1,5 +1,6 @@
+import Section from "../../layout/Section";
+
 import { Game } from "@/app/types";
-import Section from "../layout/Section";
 
 const Box = ({ label, value }: { label: string; value: string | string[] }) => {
   return (

@@ -1,15 +1,14 @@
 import Image from "next/image";
 
-import Header from "../layout/header/Header";
-import Hero from "../layout/Hero";
-import RatingBadge from "../layout/RatingBadge";
-import Button from "../ui/Button";
-import Plus from "../layout/Plus";
+import Header from "../../layout/Header";
+import Hero from "../../layout/Hero";
+import RatingBadge from "../../layout/RatingBadge";
+import Badge from "../../layout/Badge";
+import Button from "../../ui/Button";
+import Plus from "../../layout/Plus";
 
 import { Game } from "@/app/types";
-
 import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
-import Badge from "../layout/Badge";
 
 const GameDetailHeader = ({ data }: { data: Game }) => {
   return (

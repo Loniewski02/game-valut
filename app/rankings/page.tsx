@@ -3,10 +3,12 @@ import { useState } from "react";
 
 import SelectButton from "../components/ui/SelectButton";
 import ControlsSection from "../components/layout/ControlsSection";
-
-import { GENRES, PLATFORMS, PERIODS, GAMES } from "../utils/constant";
 import Section from "../components/layout/Section";
 import RankingItem from "../components/rankings/RankingItem";
+
+import { GENRES, PLATFORMS, PERIODS, GAMES } from "../utils/constant";
+import EmptySection from "../components/layout/EmptySection";
+import { BsController } from "react-icons/bs";
 
 const Rankings = () => {
   const [platform, setPlatform] = useState<string | null>(null);
@@ -73,29 +75,38 @@ const Rankings = () => {
           opened={opened}
         />
       </ControlsSection>
-      <Section wrapperClassName="flex flex-col gap-4 md:gap-6">
-        <div className="relative mb-4 grid grid-cols-[34px,auto,1fr,48px] gap-x-2 pb-4 text-13 uppercase text-GrayishBlue md:grid-cols-[34px,auto,1fr,200px,48px] md:gap-x-4 lg:grid-cols-[42px,auto,1fr,180px,220px,60px] xl:grid-cols-[42px,auto,1fr,200px,300px,60px]">
-          <span className="text-center">#</span>
-          <span className="col-span-2">game</span>
-          <span className="hidden md:block">platform</span>
-          <span className="hidden lg:block">genre</span>
-          <span>rating</span>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-Gray" />
-        </div>
-        {visibleGames.map((game, index) => (
-          <RankingItem key={game.id} item={game} index={index} />
-        ))}
-        {listLenght < sortedGames.length && (
-          <button
-            className="mt-4 w-max self-center px-6 py-2 text-13 font-semibold text-Primary"
-            onClick={() => setListLenght((prev) => prev + 10)}
-          >
-            load more
-          </button>
-        )}
-      </Section>
+      {visibleGames && visibleGames.length > 0 && (
+        <Section wrapperClassName="flex flex-col gap-4 md:gap-6">
+          <div className="relative mb-4 grid grid-cols-[34px,auto,1fr,48px] gap-x-2 pb-4 text-13 uppercase text-GrayishBlue md:grid-cols-[34px,auto,1fr,200px,48px] md:gap-x-4 lg:grid-cols-[42px,auto,1fr,180px,220px,60px] xl:grid-cols-[42px,auto,1fr,200px,300px,60px]">
+            <span className="text-center">#</span>
+            <span className="col-span-2">game</span>
+            <span className="hidden md:block">platform</span>
+            <span className="hidden lg:block">genre</span>
+            <span>rating</span>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-Gray" />
+          </div>
+          {visibleGames.map((game, index) => (
+            <RankingItem key={game.id} item={game} index={index} />
+          ))}
+          {listLenght < sortedGames.length && (
+            <button
+              className="mt-4 w-max self-center px-6 py-2 text-13 font-semibold text-Primary"
+              onClick={() => setListLenght((prev) => prev + 10)}
+            >
+              load more
+            </button>
+          )}
+        </Section>
+      )}
+      {(!visibleGames || visibleGames.length === 0) && (
+        <EmptySection
+          Icon={BsController}
+          title="We couldn’t load any games right now."
+          text="Please try again later or change your filters."
+        />
+      )}
     </>
   );
 };
-
+// BsController
 export default Rankings;

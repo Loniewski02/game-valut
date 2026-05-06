@@ -1,4 +1,4 @@
-import Header from "../layout/header/Header";
+import Header from "../layout/Header";
 import Hero from "../layout/Hero";
 import Button from "../ui/Button";
 

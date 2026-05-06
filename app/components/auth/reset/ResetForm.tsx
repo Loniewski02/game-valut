@@ -1,6 +1,6 @@
 import TextLink from "../../ui/TextLink";
 import Submit from "../Submit";
-import FormBox from "../FormBox";
+import FormBox from "../../ui/FormBox";
 
 import { RESET_INPUT } from "@/app/utils/constant";
 

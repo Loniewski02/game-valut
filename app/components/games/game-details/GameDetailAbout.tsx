@@ -1,4 +1,4 @@
-import Section from "../layout/Section";
+import Section from "../../layout/Section";
 
 const GameDetailAbout = ({ description }: { description: string }) => {
   return (

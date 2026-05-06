@@ -1,5 +1,5 @@
 import TextLink from "../../ui/TextLink";
-import FormBox from "../FormBox";
+import FormBox from "../../ui/FormBox";
 import Submit from "../Submit";
 
 import { LOGIN_INPUTS } from "@/app/utils/constant";

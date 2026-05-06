@@ -30,7 +30,7 @@ const SelectButton = ({ name, className, text, items, onSelect, selected, onOpen
   };
 
   return (
-    <div className="relative ">
+    <div className="relative">
       <button
         onClick={listHandler}
         name={name}

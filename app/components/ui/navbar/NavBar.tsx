@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 import BurgerBtn from "../../ui/BurgerBtn";
 import Logo from "../../ui/Logo";
-import Wrapper from "../Wrapper";
 import NavItems from "./NavItems";
+import Wrapper from "../../layout/Wrapper";
 
 const NavBar = () => {
   const [isShown, setIsShown] = useState(false);
@@ -12,8 +12,6 @@ const NavBar = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        document.body.style.overflow = "";
-        document.body.style.position = "";
         setIsShown(false);
       }
     };

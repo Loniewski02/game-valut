@@ -1,6 +1,6 @@
 import TextLink from "../../ui/TextLink";
 import Submit from "../Submit";
-import FormBox from "../FormBox";
+import FormBox from "../../ui/FormBox";
 
 import { REGISTER_INPUTS } from "@/app/utils/constant";
 

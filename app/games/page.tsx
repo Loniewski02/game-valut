@@ -1,22 +1,26 @@
 "use client";
 import { useRef, useState } from "react";
+import { BsController } from "react-icons/bs";
 
-import GamesEmpty from "../components/games/GamesEmpty";
 import Section from "../components/layout/Section";
 import GameLink from "../components/games/GameLink";
 import SelectButton from "../components/ui/SelectButton";
 import Plus from "../components/layout/Plus";
 import Button from "../components/ui/Button";
-
-import { GAMES, GENRES, PLATFORMS } from "../utils/constant";
 import Wrapper from "../components/layout/Wrapper";
+import AddGameModal from "../components/games/AddGameModal";
+import FormBox from "../components/ui/FormBox";
+import EmptySection from "../components/layout/EmptySection";
+
+import { GAMES, GAMES_FILTER_INPUT, GENRES, PLATFORMS } from "../utils/constant";
 
 const Games = () => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const [platform, setPlatform] = useState<string | null>(null);
   const [genre, setGenre] = useState<string | null>(null);
   const [title, setTitle] = useState("");
-  const [opened, setOpened] = useState<string | null>(null);
+  const [openedSelect, setOpenedSelect] = useState<string | null>(null);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const platformHandler = (text: string | null) => {
     setPlatform(text);
@@ -30,8 +34,8 @@ const Games = () => {
     setTitle(event.currentTarget.value);
   };
 
-  const openedHandler = (name: string | null) => {
-    setOpened((prev) => (prev === name ? null : name));
+  const openedSelectHandler = (name: string | null) => {
+    setOpenedSelect((prev) => (prev === name ? null : name));
   };
 
   const filteredGames = GAMES.filter((game) => {
@@ -42,8 +46,17 @@ const Games = () => {
     return matchesPlatform && matchesGenre && matchesName;
   });
 
+  const openModalHandler = () => {
+    setIsModalOpened(true);
+  };
+
+  const closeModalHandler = () => {
+    setIsModalOpened(false);
+  };
+
   return (
     <>
+      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={closeModalHandler} />}
       <section className="py-2 md:py-4">
         <Wrapper className={`rounded-2xl bg-White p-6`}>
           <div className="mb-8 grid gap-4 sm:grid-cols-3 sm:gap-y-0 md:mb-0">
@@ -51,37 +64,21 @@ const Games = () => {
               Games Library
             </h2>
             <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
-            <Button className="sm:order-2 sm:w-max sm:place-self-end">
+            <Button className="sm:order-2 sm:w-max sm:place-self-end" onClick={openModalHandler}>
               <Plus />
               Add Game
             </Button>
           </div>
-          <div className="overflow relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-5 md:grid-rows-1">
-            <div className="relative col-span-2 md:col-span-3">
-              <label htmlFor="search-game" className="invisible absolute z-10 text-13 text-GrayishBlue">
-                Search games
-              </label>
-              <input
-                id="search-game"
-                type="text"
-                name="search-game"
-                value={title}
-                className="z-20 w-full rounded-xl border border-Gray bg-White py-3 pl-5 pr-4 text-15 placeholder:text-GrayishBlue"
-                placeholder="Search games..."
-                onClick={() => {
-                  setOpened(null);
-                }}
-                onChange={titleHandler}
-              />
-            </div>
+          <div className="overflow relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
+            <FormBox input={GAMES_FILTER_INPUT} className="col-span-2 md:col-span-1" />
             <SelectButton
               text="All platforms"
               name="platform"
               items={PLATFORMS}
               selected={platform}
               onSelect={platformHandler}
-              onOpen={openedHandler}
-              opened={opened}
+              onOpen={openedSelectHandler}
+              opened={openedSelect}
             />
             <SelectButton
               text="all genres"
@@ -89,8 +86,8 @@ const Games = () => {
               items={GENRES}
               selected={genre}
               onSelect={genreHandler}
-              onOpen={openedHandler}
-              opened={opened}
+              onOpen={openedSelectHandler}
+              opened={openedSelect}
             />
           </div>
         </Wrapper>
@@ -103,7 +100,16 @@ const Games = () => {
           <div ref={loaderRef} />
         </Section>
       ) : (
-        <GamesEmpty />
+        <EmptySection
+          title="No games yet"
+          text="No games added yet. This library is built by the community. Be the first to add a game."
+          Icon={BsController}
+        >
+          <Button className="mt-6">
+            <Plus />
+            Add Game
+          </Button>
+        </EmptySection>
       )}
     </>
   );

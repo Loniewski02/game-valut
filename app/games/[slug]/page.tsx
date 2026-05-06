@@ -3,9 +3,10 @@ import { useParams } from "next/navigation";
 
 import Section from "@/app/components/layout/Section";
 import Wrapper from "@/app/components/layout/Wrapper";
-import GameDetailHeader from "@/app/components/game-details/GameDetailHeader";
-import GameDetailAbout from "@/app/components/game-details/GameDetailAbout";
-import GameDetailInfo from "@/app/components/game-details/GameDetailInfo";
+import NotFound from "@/app/not-found";
+import GameDetailHeader from "@/app/components/games/game-details/GameDetailHeader";
+import GameDetailInfo from "@/app/components/games/game-details/GameDetailInfo";
+import GameDetailAbout from "@/app/components/games/game-details/GameDetailAbout";
 
 import { GAMES } from "@/app/utils/constant";
 
@@ -30,7 +31,7 @@ const Game = () => {
           </Section>
         </>
       )}
-      {!game && <p>not found</p>}
+      {!game && <NotFound />}
     </>
   );
 };

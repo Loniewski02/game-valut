@@ -1,4 +1,4 @@
-import Wrapper from "../Wrapper";
+import Wrapper from "./Wrapper";
 
 const Header = ({ children }: { children: React.ReactNode }) => {
   return (
