@@ -6,4 +6,8 @@
   body {
     @apply bg-White text-DarkGrayishBlue;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
 }
