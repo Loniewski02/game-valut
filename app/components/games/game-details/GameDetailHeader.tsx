@@ -20,7 +20,7 @@ const GameDetailHeader = ({ data }: { data: Game }) => {
           height={400}
           alt="game image"
           src={data.imageSmall}
-          className="h-full w-32 rounded-xl object-cover md:w-48 lg:w-56"
+          className="h-48 w-32 rounded-xl object-cover md:h-72 md:w-44 lg:h-80 lg:w-52"
         />
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-semibold text-LightGray md:mb-4 md:text-4xl">{data.title}</h1>
