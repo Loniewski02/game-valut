@@ -35,7 +35,7 @@ const Game = () => {
                 <label htmlFor="review" className="sr-only">
                   Your review
                 </label>
-                <textarea
+                <textarea 
                   id="review"
                   rows={4}
                   className="block w-full rounded-2xl border px-2 py-4 text-15"
