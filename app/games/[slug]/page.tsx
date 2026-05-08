@@ -9,8 +9,9 @@ import GameDetailInfo from "@/app/components/games/game-details/GameDetailInfo";
 import GameDetailAbout from "@/app/components/games/game-details/GameDetailAbout";
 import GameDetailSimilarGames from "@/app/components/games/game-details/GameDetailSimilarGames";
 import GameDetailRating from "@/app/components/games/game-details/GameDetailRating";
+import GameDetailReviewCard from "@/app/components/games/game-details/GameDetailReviewCard";
 
-import { GAMES } from "@/app/utils/constant";
+import { GAMES, REVIEWS } from "@/app/utils/constant";
 
 const Game = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -29,7 +30,28 @@ const Game = () => {
           <GameDetailRating rating={game.rating} />
           <GameDetailSimilarGames game={game} />
           <Section title="Reviews" id="reviews">
-            nwm
+            {/* <form action="">
+              <div>
+                <label htmlFor="review" className="sr-only">
+                  Your review
+                </label>
+                <textarea
+                  id="review"
+                  rows={4}
+                  className="block w-full rounded-2xl border px-2 py-4 text-15"
+                  placeholder="Write a review..."
+                  required
+                />
+              </div>
+              <div>
+
+              </div>
+            </form> */}
+            <div className="flex flex-col gap-16 md:p-4 lg:gap-12">
+              {REVIEWS.map((item) => (
+                <GameDetailReviewCard key={item.id} item={item} />
+              ))}
+            </div>
           </Section>
         </>
       )}

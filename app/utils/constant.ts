@@ -136,6 +136,47 @@ export const PLATFORM_SHORTCUTS: Record<string, string> = {
 
 export const PERIODS = ["Weekly", "Monthly", "Yearly"];
 
+export const REVIEWS = [
+  {
+    id: "review1",
+    username: "loniewsm",
+    postedAt: "2 days ago",
+    rating: 10,
+    review:
+      "Absolutely incredible game. The world is beutifully crafted, the story is engaging, and the gameplay is smooth and satysfaying.",
+  },
+  {
+    id: "review2",
+    username: "lunaStr",
+    postedAt: "5 days ago",
+    rating: 8,
+    review:
+      " Great experience overall. Stunning visuals and atmosphere. Some minor bugs, but notching that ruins the fun.",
+  },
+  {
+    id: "review3",
+    username: "RoronoaZoro",
+    postedAt: "1 week ago",
+    rating: 7,
+    review:
+      "Very solid game with a lot of content. The commbat feels amazing, but the inventory system could use some improvments.",
+  },
+  {
+    id: "review4",
+    username: "VoidWalker",
+    postedAt: "1 week ago",
+    rating: 6,
+    review: "Good game, but it didn't fully live up to my expectations. Story was a bit predictive.",
+  },
+  {
+    id: "review5",
+    username: "Luffy",
+    postedAt: "2 weeks ago",
+    rating: 8,
+    review: "Loved every minute of it. The exploration and side quests add so much depth to the game.",
+  },
+];
+
 export const GAMES: Game[] = [
   {
     id: "1",
