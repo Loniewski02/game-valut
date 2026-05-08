@@ -41,7 +41,7 @@ const GameDetailHeader = ({ data }: { data: Game }) => {
           <p className="text-13 text-Gray md:mt-4">Release Date: {data.releaseDate}</p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">
-          <Button className="sm:max-w-56 lg:min-w-56">
+          <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
             <Plus />
             Add Review
           </Button>

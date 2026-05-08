@@ -34,7 +34,7 @@ const SelectButton = ({ name, className, text, items, onSelect, selected, onOpen
       <button
         onClick={listHandler}
         name={name}
-        className={`${className ? className : " "} ${!selected ? "text-GrayishBlue hover:text-DarkGrayishBlue" : "font-bold text-Primary"} relative z-20 flex w-full min-w-32 items-center justify-between gap-1 rounded-xl border border-Gray bg-White py-3 pl-4 pr-1 text-left text-15`}
+        className={`${className ? className : " "} ${!selected ? "text-GrayishBlue hover:text-DarkGrayishBlue" : "font-bold text-Primary"} relative z-20 flex w-full items-center justify-between gap-1 rounded-xl border border-Gray bg-White py-3 pl-4 pr-1 text-left text-15 md:min-w-32 lg:min-w-40`}
       >
         <span className="first-letter:uppercase">{!selected ? text : selected}</span>
         <MdKeyboardArrowDown

@@ -41,7 +41,7 @@ const RankingItem = ({ item, index }: { item: Game; index: number }) => {
         ))}
       </div>
       <RatingBadge rating={item.rating} reversed />
-      <div className="absolute -bottom-2 left-0 right-0 h-[2px] bg-LightGray md:-bottom-3" />
+      <div className="absolute -bottom-2 left-0 right-0 h-[2px] bg-LightGray group-last:hidden md:-bottom-3" />
     </Link>
   );
 };

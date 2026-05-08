@@ -16,12 +16,12 @@ const NavLink = ({ data, onClick }: Props) => {
       href={data.url}
       aria-label={data.name}
       onClick={onClick}
-      className={`${isActive ? "font-bold text-Primary hover:text-PrimaryHover" : "text-DarkGrayishBlue hover:text-PrimaryHover"} group relative flex max-w-max items-center gap-4 py-2 text-lg transition md:gap-1 md:py-0 md:text-15`}
+      className={`${isActive ? "font-bold text-Primary hover:text-PrimaryHover" : "text-DarkGrayishBlue hover:text-PrimaryHover"} group relative flex items-center gap-4 py-2 text-lg transition md:gap-1 md:py-0 md:text-15`}
     >
       <Icon className="text-2xl md:hidden" />
       <span className="first-letter:uppercase">{data.name}</span>
       <span
-        className={`${isActive ? "scale-x-100 bg-Primary" : "scale-x-0"} absolute bottom-0 left-0 right-0 h-[2px] bg-DarkGrayishBlue transition  group-hover:scale-x-100 group-hover:bg-PrimaryHover`}
+        className={`${isActive ? "scale-x-100 bg-Primary" : "scale-x-0"} absolute bottom-0 left-0 right-0 hidden h-[2px] bg-DarkGrayishBlue transition group-hover:scale-x-100  group-hover:bg-PrimaryHover md:block`}
       />
     </Link>
   );

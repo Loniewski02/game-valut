@@ -26,8 +26,6 @@ const GameDetailRating = ({ rating }: { rating: number }) => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsShown(true);
-      } else {
-        setIsShown(false);
       }
     };
 
@@ -35,7 +33,7 @@ const GameDetailRating = ({ rating }: { rating: number }) => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isShown]);
 
   const isShownHandler = () => {
     setIsShown((prev) => !prev);
@@ -45,7 +43,7 @@ const GameDetailRating = ({ rating }: { rating: number }) => {
 
   return (
     <Section title="community rating">
-      <div className="items-center gap-24 md:flex">
+      <div className="items-center gap-24 md:flex md:px-8 lg:px-14">
         <div className="min-w-max">
           <div className="flex justify-between md:block">
             <RatingBadge rating={rating} textClassName="text-4xl font-semibold mr-2" iconClassName="text-3xl" />

@@ -20,7 +20,7 @@ const GameDetailSimilarGames = ({ game }: { game: Game }) => {
 
   return (
     <>
-      {similarGames && (
+      {similarGames && similarGames.length > 0 && (
         <Section title="Similar Games">
           <div className="flex gap-4 overflow-y-hidden pb-2">
             {similarGames.map((item) => (

@@ -5,7 +5,7 @@ type Props = { input: Input; defaultVal?: any; className?: string };
 const FormBox = ({ input, className, defaultVal }: Props) => {
   return (
     <div className={`${className && className} relative flex w-full flex-col gap-2`}>
-      <label htmlFor={input.id} className="invisible absolute z-10 text-13 text-GrayishBlue">
+      <label htmlFor={input.id} className="sr-only">
         {input.label}
       </label>
       <input

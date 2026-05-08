@@ -58,7 +58,7 @@ const Games = () => {
     <>
       {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={closeModalHandler} />}
       <section className="py-2 md:py-4">
-        <Wrapper className={`rounded-2xl bg-White p-6`}>
+        <Wrapper>
           <div className="mb-8 grid gap-4 sm:grid-cols-3 sm:gap-y-0 md:mb-0">
             <h2 className="text-2xl font-semibold first-letter:uppercase sm:order-1 sm:col-span-2 sm:text-3xl">
               Games Library
