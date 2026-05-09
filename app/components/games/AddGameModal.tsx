@@ -18,7 +18,7 @@ type Props = {
 const Item = () => {
   return (
     <>
-      <div className="mb-2 flex items-center justify-between last:mb-0">
+      <div className="mb-2 flex items-center justify-between py-2 last:mb-0">
         <div className="flex items-center gap-2">
           <Image className="h-12 w-12 rounded-xl object-cover" width={50} height={100} alt="2" src={img.src} />
           <h4 className="text-base font-semibold tracking-tight">The witcher 3: Wild Hunt</h4>
@@ -48,7 +48,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         className="fixed bottom-0 left-0 right-0 top-0 cursor-pointer bg-black/50 backdrop-blur-[4px]"
         onClick={onClose}
       />
-      <Wrapper className="relative z-30 max-w-lg rounded-2xl bg-White px-4 py-6 text-2xl sm:p-6 md:max-w-xl md:px-8 md:py-10">
+      <Wrapper className="relative z-30 max-w-xl rounded-2xl bg-White px-4 py-6 text-2xl sm:p-6 md:max-w-2xl md:px-8 md:py-10">
         <button
           aria-label="close"
           className="absolute right-0 top-0 p-4 text-DarkGrayishBlue hover:text-Primary"
@@ -66,7 +66,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
             <BiSearch className="text-xl text-White" />
           </Button>
         </div>
-        <div className="mt-6 max-h-[300px] overflow-y-scroll rounded-2xl bg-LightGray p-2">
+        <div className="mt-6 max-h-[300px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
           <Item />
           <Item />
           <Item />

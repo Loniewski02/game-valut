@@ -5,7 +5,7 @@ import profile from "@/public/assets/witcher-3-cover.jpg";
 
 type Props = { item: { id: string; username: string; postedAt: string; rating: number; review: string } };
 
-const GameDetailReviewCard = ({ item }: Props) => {
+const ReviewCard = ({ item }: Props) => {
   return (
     <div className="group relative grid grid-cols-[48px,1fr,auto] gap-3 md:grid-cols-[56px,1fr,auto] md:gap-6 md:gap-y-0 lg:grid-cols-[64px,164px,1fr,164px]">
       <Image
@@ -31,4 +31,4 @@ const GameDetailReviewCard = ({ item }: Props) => {
   );
 };
 
-export default GameDetailReviewCard;
+export default ReviewCard;

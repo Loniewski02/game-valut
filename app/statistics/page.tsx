@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
+
 import { BiCalendar } from "react-icons/bi";
+import { IoLogoGameControllerB } from "react-icons/io";
+import { AiFillStar } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
 
 import SelectButton from "../components/ui/SelectButton";
 import ControlsSection from "../components/layout/ControlsSection";
@@ -33,14 +37,43 @@ const Statistics = () => {
           opened={opened}
         />
       </ControlsSection>
-      <section>
-        <Wrapper>
-          <div className="grid w-full grid-rows-[auto,auto,auto] justify-center gap-6 rounded-xl bg-White p-6 text-center">
-            <div className="w-max justify-self-center rounded-full bg-Primary/20 p-4">
-              <BiCalendar className="text-5xl" />
+      <section className="py-2 md:py-4">
+        <Wrapper className="flex flex-wrap justify-center gap-2 md:gap-5 xl:flex-nowrap xl:justify-between">
+          <div className="flex w-full min-w-max items-start gap-6 rounded-xl bg-White p-6 md:max-w-80">
+            <div className="w-max justify-self-center rounded-full bg-purple-500/10 p-5">
+              <IoLogoGameControllerB className="text-4xl text-purple-500" />
             </div>
-            <h3 className="text-lg font-semibold">Total Games</h3>
-            <p className="text-4xl">12,321</p>
+            <div className="text-left">
+              <h3 className="mb-2 text-lg">Total Games</h3>
+              <p className="text-3xl font-medium md:col-start-2">12,411</p>
+            </div>
+          </div>
+          <div className="flex w-full min-w-max items-start gap-6 rounded-xl bg-White p-6 md:max-w-80">
+            <div className="w-max justify-self-center rounded-full bg-Yellow/10 p-5">
+              <AiFillStar className="text-4xl text-Yellow" />
+            </div>
+            <div className="text-left">
+              <h3 className="mb-2 text-lg">Average Rating</h3>
+              <p className="text-3xl font-medium md:col-start-2">8.31</p>
+            </div>
+          </div>
+          <div className="flex w-full min-w-max items-start gap-6 rounded-xl bg-White p-6 md:max-w-80">
+            <div className="w-max justify-self-center rounded-full bg-green-500/10 p-5">
+              <FaUsers className="text-4xl text-green-500" />
+            </div>
+            <div className="text-left">
+              <h3 className="mb-2 text-lg">Total Reviews</h3>
+              <p className="text-3xl font-medium md:col-start-2">331</p>
+            </div>
+          </div>
+          <div className="flex w-full min-w-max items-start gap-6 rounded-xl bg-White p-6 md:max-w-80">
+            <div className="w-max justify-self-center rounded-full bg-Primary/10 p-5">
+              <BiCalendar className="text-4xl text-Primary" />
+            </div>
+            <div className="text-left">
+              <h3 className="mb-2 text-lg">Years Covered</h3>
+              <p className="text-3xl font-medium md:col-start-2">2001-2024</p>
+            </div>
           </div>
         </Wrapper>
       </section>
