@@ -39,11 +39,11 @@ export async function GET() {
       rating: game.rating,
       image: game.background_image,
       genres: game.genres.map((genre: any) => genre.name),
-      platforms: [
-        ...new Set(
+      platforms: Array.from(
+        new Set(
           game.parent_platforms.map((platform: any) => normalizePlatform(platform.platform.name)).filter(Boolean),
         ),
-      ],
+      ),
     }));
 
     return NextResponse.json(mappedGames);
