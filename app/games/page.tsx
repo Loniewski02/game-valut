@@ -1,26 +1,29 @@
 "use client";
-import { useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { BsController } from "react-icons/bs";
 
 import Section from "../components/layout/Section";
 import GameLink from "../components/games/GameLink";
-import SelectButton from "../components/ui/SelectButton";
 import Plus from "../components/layout/Plus";
 import Button from "../components/ui/Button";
-import Wrapper from "../components/layout/Wrapper";
 import AddGameModal from "../components/games/AddGameModal";
-import FormBox from "../components/ui/FormBox";
 import EmptySection from "../components/layout/EmptySection";
 
-import { GAMES, GAMES_FILTER_INPUT, GENRES, PLATFORMS } from "../utils/constant";
+import GamesControls from "../components/games/GamesControls";
+
+import { GamePreview } from "../types";
+import { useGames } from "../hooks/useGames";
+import { BiSad } from "react-icons/bi";
+import ErrorSection from "../components/layout/ErrorSection";
 
 const Games = () => {
-  const loaderRef = useRef<HTMLDivElement | null>(null);
   const [platform, setPlatform] = useState<string | null>(null);
   const [genre, setGenre] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [openedSelect, setOpenedSelect] = useState<string | null>(null);
   const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const { games, isLoading, error } = useGames();
 
   const platformHandler = (text: string | null) => {
     setPlatform(text);
@@ -30,21 +33,25 @@ const Games = () => {
     setGenre(text);
   };
 
-  const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.currentTarget.value);
+  const titleHandler = (text: string) => {
+    setTitle(text);
   };
 
   const openedSelectHandler = (name: string | null) => {
     setOpenedSelect((prev) => (prev === name ? null : name));
   };
 
-  const filteredGames = GAMES.filter((game) => {
-    const matchesPlatform = !platform || game.platforms.includes(platform);
-    const matchesGenre = !genre || game.genres.includes(genre);
-    const matchesName = title.length === 0 || game.title.toLowerCase().includes(title.toLowerCase());
+  const filteredGames = useMemo(() => {
+    return games.filter((game) => {
+      const matchesPlatform = !platform || game.platforms.includes(platform);
 
-    return matchesPlatform && matchesGenre && matchesName;
-  });
+      const matchesGenre = !genre || game.genres.includes(genre);
+
+      const matchesName = title.length === 0 || game.title.toLowerCase().includes(title.toLowerCase());
+
+      return matchesPlatform && matchesGenre && matchesName;
+    });
+  }, [games, platform, genre, title]);
 
   const openModalHandler = () => {
     setIsModalOpened(true);
@@ -56,50 +63,19 @@ const Games = () => {
 
   return (
     <>
-      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={closeModalHandler} />}
-      <section className="py-2 md:py-4">
-        <Wrapper>
-          <div className="mb-8 grid gap-4 sm:grid-cols-3 sm:gap-y-0 md:mb-0">
-            <h2 className="text-2xl font-semibold first-letter:uppercase sm:order-1 sm:col-span-2 sm:text-3xl">
-              Games Library
-            </h2>
-            <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
-            <Button className="sm:order-2 sm:w-max sm:place-self-end" onClick={openModalHandler}>
-              <Plus />
-              Add Game
-            </Button>
-          </div>
-          <div className="overflow relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
-            <FormBox input={GAMES_FILTER_INPUT} className="col-span-2 md:col-span-1" />
-            <SelectButton
-              text="All platforms"
-              name="platform"
-              items={PLATFORMS}
-              selected={platform}
-              onSelect={platformHandler}
-              onOpen={openedSelectHandler}
-              opened={openedSelect}
-            />
-            <SelectButton
-              text="all genres"
-              name="genre"
-              items={GENRES}
-              selected={genre}
-              onSelect={genreHandler}
-              onOpen={openedSelectHandler}
-              opened={openedSelect}
-            />
-          </div>
-        </Wrapper>
-      </section>
-      {filteredGames && filteredGames.length > 0 ? (
-        <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredGames.map((game) => (
-            <GameLink key={game.id} data={game} className="w-full" />
-          ))}
-          <div ref={loaderRef} />
-        </Section>
-      ) : (
+      <GamesControls
+        platform={platform}
+        genre={genre}
+        openedSelect={openedSelect}
+        onTitle={titleHandler}
+        onGenre={genreHandler}
+        onModal={openModalHandler}
+        onPlatform={platformHandler}
+        onSelect={openedSelectHandler}
+      />
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && error && <ErrorSection title={`${error.status}`} text={error.message} />}
+      {!isLoading && !error && filteredGames.length === 0 && (
         <EmptySection
           title="No games yet"
           text="No games added yet. This library is built by the community. Be the first to add a game."
@@ -111,6 +87,14 @@ const Games = () => {
           </Button>
         </EmptySection>
       )}
+      {!isLoading && !error && filteredGames.length > 0 && (
+        <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filteredGames.map((game: GamePreview) => (
+            <GameLink key={game.id} data={game} className="w-full" />
+          ))}
+        </Section>
+      )}
+      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={closeModalHandler} />}
     </>
   );
 };

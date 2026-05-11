@@ -4,10 +4,10 @@ import RatingBadge from "../layout/RatingBadge";
 
 import Hero from "../layout/Hero";
 
-import { Game } from "@/app/types";
+import { GamePreview } from "@/app/types";
 import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
 
-type Props = { data: Game; className?: string };
+type Props = { data: GamePreview; className?: string };
 
 const GameLink = ({ data, className }: Props) => {
   return (
@@ -16,7 +16,7 @@ const GameLink = ({ data, className }: Props) => {
       aria-label={data.slug}
       className={`${className && className} relative flex h-52 flex-col justify-end gap-3 overflow-hidden rounded-xl p-4 transition hover:scale-95 sm:px-6 md:px-4 lg:gap-4`}
     >
-      <Hero src={data.imageFull} width={300} height={100} alt={data.title} />
+      <Hero src={data.image} width={300} height={100} alt={data.title} />
       <h3 className="z-10 text-15 font-bold leading-4 text-White sm:text-base sm:leading-4">{data.title}</h3>
       <div className="z-10 flex items-center justify-between gap-2">
         <RatingBadge rating={data.rating} reversed light />

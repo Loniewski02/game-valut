@@ -33,3 +33,13 @@ export type Game = {
 };
 
 export type Feature = { id: string; title: string; desc: string; icon: IconType };
+
+export type GamePreview = {
+  id: number;
+  slug: string;
+  title: string;
+  rating: number;
+  image: string;
+  platforms: string[];
+  genres: string[];
+};

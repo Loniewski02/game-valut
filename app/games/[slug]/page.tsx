@@ -28,8 +28,8 @@ const Game = () => {
             <GameDetailAbout description={game.description} />
           </Wrapper>
           <GameDetailsScreens />
-          <GameDetailRating rating={game.rating} />
           <GameDetailSimilarGames game={game} />
+          <GameDetailRating rating={game.rating} />
           <GameDetailsReviews />
         </>
       )}

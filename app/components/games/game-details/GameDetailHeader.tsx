@@ -11,6 +11,9 @@ import { Game } from "@/app/types";
 import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
 
 const GameDetailHeader = ({ data }: { data: Game }) => {
+  const revieved = false;
+  const addedToList = false;
+
   return (
     <Header>
       <Hero width={1200} height={600} alt=";" src={data.imageFull} />
@@ -41,14 +44,18 @@ const GameDetailHeader = ({ data }: { data: Game }) => {
           <p className="text-13 text-Gray md:mt-4">Release Date: {data.releaseDate}</p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">
-          <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
-            <Plus />
-            Add Review
-          </Button>
-          <Button className="sm:max-w-56 lg:min-w-56" transparent>
-            <Plus />
-            Add To List
-          </Button>
+          {!revieved && (
+            <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
+              <Plus />
+              Add Review
+            </Button>
+          )}
+          {!addedToList && (
+            <Button className="sm:max-w-56 lg:min-w-56" transparent>
+              <Plus />
+              Add To List
+            </Button>
+          )}
         </div>
       </div>
     </Header>
