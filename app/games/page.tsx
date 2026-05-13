@@ -15,6 +15,7 @@ import { GamePreview } from "../types";
 import { useGames } from "../hooks/useGames";
 import { BiSad } from "react-icons/bi";
 import ErrorSection from "../components/layout/ErrorSection";
+import LoadingIndicator from "../components/ui/LoadingIndicator";
 
 const Games = () => {
   const [platform, setPlatform] = useState<string | null>(null);
@@ -73,7 +74,7 @@ const Games = () => {
         onPlatform={platformHandler}
         onSelect={openedSelectHandler}
       />
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <LoadingIndicator />}
       {!isLoading && error && <ErrorSection title={`${error.status}`} text={error.message} />}
       {!isLoading && !error && filteredGames.length === 0 && (
         <EmptySection
