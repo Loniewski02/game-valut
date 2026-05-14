@@ -13,7 +13,6 @@ import GamesControls from "../components/games/GamesControls";
 
 import { GamePreview } from "../types";
 import { useGames } from "../hooks/useGames";
-import { BiSad } from "react-icons/bi";
 import ErrorSection from "../components/layout/ErrorSection";
 import LoadingIndicator from "../components/ui/LoadingIndicator";
 

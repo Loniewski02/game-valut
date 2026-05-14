@@ -35,10 +35,10 @@ export type Game = {
 export type Feature = { id: string; title: string; desc: string; icon: IconType };
 
 export type GamePreview = {
-  id: number;
+  id: string | number;
   slug: string;
   title: string;
-  rating: number;
+  // rating: number;
   image: string;
   platforms: string[];
   genres: string[];
