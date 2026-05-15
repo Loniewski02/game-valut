@@ -1,6 +1,6 @@
-const LoadingIndicator = () => {
+const LoadingIndicator = ({ className }: { className?: string }) => {
   return (
-    <div className="mt-20 text-center">
+    <div className={`${className && className} text-center`}>
       <div role="status">
         <svg
           aria-hidden="true"

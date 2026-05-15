@@ -77,8 +77,8 @@ export const GAMES_FILTER_INPUT = {
 };
 
 export const ADD_GAME_INPUT = {
-  id: "add-game-title",
-  name: "add-game-title",
+  id: "query",
+  name: "query",
   placeholder: "Game title ...",
   type: "text",
   label: "game title",

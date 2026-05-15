@@ -1,27 +1,41 @@
 import { IoMdClose } from "react-icons/io";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 
 import Wrapper from "../layout/Wrapper";
-import Button from "../ui/Button";
 import FormBox from "../ui/FormBox";
+import LoadingIndicator from "../ui/LoadingIndicator";
+import Submit from "../auth/Submit";
 
-import img from "@/public/assets/witcher-3-cover.jpg";
+import defalutImage from "@/public/assets/default.png";
 import { ADD_GAME_INPUT } from "@/app/utils/constant";
+
 
 type Props = {
   onClose: () => void;
   isShown: boolean;
 };
 
-const Item = () => {
+type Game = {
+  name: string;
+  slug: string;
+  background_image: string;
+};
+
+const Item = ({ game }: { game: Game }) => {
   return (
     <>
       <div className="mb-2 flex items-center justify-between py-2 last:mb-0">
         <div className="flex items-center gap-2">
-          <Image className="h-12 w-12 rounded-xl object-cover" width={50} height={100} alt="2" src={img.src} />
-          <h4 className="text-base font-semibold tracking-tight">The witcher 3: Wild Hunt</h4>
+          <Image
+            className="h-12 w-20 rounded-xl object-cover"
+            width={100}
+            height={50}
+            alt="2"
+            src={game.background_image ? game.background_image : defalutImage.src}
+          />
+          <h4 className="text-base font-semibold tracking-tight">{game.name}</h4>
         </div>
         <button className="rounded-lg border border-Primary bg-Primary px-6 py-1 text-15 font-semibold text-White transition first-letter:uppercase hover:bg-PrimaryHover active:scale-95">
           add
@@ -32,6 +46,9 @@ const Item = () => {
 };
 
 const AddGameModal = ({ onClose, isShown }: Props) => {
+  const [games, setGames] = useState<Game[] | []>([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     document.body.style.overflow = isShown ? "hidden" : "";
     document.body.style.position = isShown ? "fixed" : "";
@@ -41,6 +58,40 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
       document.body.style.position = "";
     };
   }, [isShown]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const query = formData.get("query");
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/games/RAWG/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch games");
+      }
+
+      const data = await response.json();
+
+      setGames(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 top-0 z-50 grid place-items-center p-4">
@@ -60,20 +111,18 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         <p className="mb-2 text-15 leading-tight text-GrayishBlue first-letter:uppercase">
           search for a game by title and add it to our library.
         </p>
-        <div className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-2">
           <FormBox input={ADD_GAME_INPUT} />
-          <Button>
+          <Submit>
             <BiSearch className="text-xl text-White" />
-          </Button>
-        </div>
-        <div className="mt-6 max-h-[300px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-        </div>
+          </Submit>
+        </form>
+        {games && games.length > 0 && (
+          <div className="mt-6 max-h-[450px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
+            {!loading && games.map((game) => <Item key={game.name} game={game} />)}
+          </div>
+        )}
+        {loading && <LoadingIndicator className="mt-8" />}
       </Wrapper>
     </div>
   );

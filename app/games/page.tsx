@@ -11,7 +11,6 @@ import EmptySection from "../components/layout/EmptySection";
 
 import GamesControls from "../components/games/GamesControls";
 
-import { GamePreview } from "../types";
 import { useGames } from "../hooks/useGames";
 import ErrorSection from "../components/layout/ErrorSection";
 import LoadingIndicator from "../components/ui/LoadingIndicator";
@@ -73,7 +72,7 @@ const Games = () => {
         onPlatform={platformHandler}
         onSelect={openedSelectHandler}
       />
-      {isLoading && <LoadingIndicator />}
+      {isLoading && <LoadingIndicator className="mt-20" />}
       {!isLoading && error && <ErrorSection title={`${error.status}`} text={error.message} />}
       {!isLoading && !error && filteredGames.length === 0 && (
         <EmptySection
