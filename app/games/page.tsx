@@ -89,7 +89,7 @@ const Games = () => {
       )}
       {!isLoading && !error && filteredGames.length > 0 && (
         <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredGames.map((game: GamePreview) => (
+          {filteredGames.map((game) => (
             <GameLink key={game.id} data={game} className="w-full" />
           ))}
         </Section>

@@ -9,11 +9,34 @@ export async function GET() {
         title: true,
         slug: true,
         image: true,
+        genres: true,
         platforms: true,
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
       },
     });
 
-    return NextResponse.json(games);
+    const mappedGames = games.map((game) => {
+      const rating =
+        game.reviews.length > 0
+          ? game.reviews.reduce((acc, review) => acc + review.rating, 0) / game.reviews.length
+          : null;
+
+      return {
+        id: game.id,
+        title: game.title,
+        slug: game.slug,
+        image: game.image,
+        genres: game.genres,
+        platforms: game.platforms,
+        rating,
+      };
+    });
+
+    return NextResponse.json(mappedGames);
   } catch (error) {
     console.error(error);
 

@@ -38,8 +38,8 @@ export type GamePreview = {
   id: string | number;
   slug: string;
   title: string;
-  // rating: number;
+  rating: number;
   image: string;
-  platforms: string[];
   genres: string[];
+  platforms: string[];
 };
