@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -8,22 +9,7 @@ import imggie from "@/public/assets/witcher-3-hero.jpg";
 import imggie2 from "@/public/assets/witcher-3-cover.jpg";
 import imggie3 from "@/public/assets/hero.png";
 
-const screens = [
-  imggie.src,
-  imggie2.src,
-  imggie3.src,
-  imggie.src,
-  imggie3.src,
-  imggie2.src,
-  imggie.src,
-  imggie3.src,
-  imggie.src,
-  imggie3.src,
-  imggie2.src,
-  imggie.src,
-];
-
-const GameDetailsScreens = () => {
+const GameDetailsScreens = ({ screenshots }: { screenshots: string[] }) => {
   const [current, setCurrentScreenshot] = useState(0);
   const [isShown, setIsShown] = useState<boolean>(true);
 
@@ -43,11 +29,11 @@ const GameDetailsScreens = () => {
   }, [isShown]);
 
   const nextHandler = () => {
-    setCurrentScreenshot((prev) => (prev + 1) % screens.length);
+    setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
   };
 
   const prevHandler = () => {
-    setCurrentScreenshot((prev) => (prev === 0 ? screens.length - 1 : prev - 1));
+    setCurrentScreenshot((prev) => (prev === 0 ? screenshots.length - 1 : prev - 1));
   };
 
   return (
@@ -55,7 +41,7 @@ const GameDetailsScreens = () => {
       <div className="flex flex-col gap-3 lg:flex-row">
         {isShown && (
           <div className="hidden h-[500px] flex-col gap-1 overflow-y-scroll lg:flex">
-            {screens.map((screen, index) => (
+            {screenshots.map((screen, index) => (
               <button
                 key={screen}
                 onClick={() => setCurrentScreenshot(index)}
@@ -75,7 +61,7 @@ const GameDetailsScreens = () => {
         )}
         <div className="relative order-1 overflow-hidden rounded-2xl lg:order-2 lg:flex-1">
           <Image
-            src={screens[current]}
+            src={screenshots[current]}
             width={1200}
             height={700}
             alt="game screenshot"

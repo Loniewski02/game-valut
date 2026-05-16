@@ -28,14 +28,18 @@ model Game {
   title         String
   slug          String   @unique
 
-  description   String?
+  description   String
 
-  image         String?
+  image         String
+  cover         String
+  esrb          String?
+  modes         String[] @default([])
 
-  releaseDate   DateTime?
+  releaseDate   DateTime
 
-  developer     String?
-  publisher     String?
+  developer     String[] @default([])
+  publisher     String[] @default([])
+  screenshots   String[] @default([])
 
   platforms     String[]
   genres        String[]

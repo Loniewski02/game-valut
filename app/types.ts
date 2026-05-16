@@ -38,7 +38,7 @@ export type GamePreview = {
   id: string | number;
   slug: string;
   title: string;
-  rating: number;
+  rating: number | null;
   image: string;
   genres: string[];
   platforms: string[];

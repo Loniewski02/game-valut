@@ -1,26 +1,30 @@
+import { Game } from "@/app/generated/prisma/client";
 import Section from "../../layout/Section";
+import { dateFormatter } from "@/app/functions";
 
-import { Game } from "@/app/types";
-
-const Box = ({ label, value }: { label: string; value: string | string[] }) => {
+const Box = ({ label, value }: { label: string; value: string | string[] | null }) => {
   return (
-    <div className="flex justify-between gap-4 text-15">
-      <p className="font-medium">{label}</p>
-      <p className="text-right text-13">{Array.isArray(value) ? value.join(", ") : value}</p>
-    </div>
+    <>
+      {value && (
+        <div className="flex justify-between gap-4 text-15">
+          <p className="min-w-max font-medium">{label}</p>
+          <p className="text-right text-13">{Array.isArray(value) ? value.join(", ") : value}</p>
+        </div>
+      )}
+    </>
   );
 };
 
-const GameDetailInfo = ({ data }: { data: Game }) => {
+const GameDetailInfo = ({ game }: { game: Game }) => {
   return (
-    <Section className="order-2 lg:w-2/5" wrapperClassName="flex flex-col gap-4">
-      <Box label="Developer:" value={data.developer} />
-      <Box label="Publisher:" value={data.publisher} />
-      <Box label="Release Date:" value={data.releaseDate} />
-      <Box label="Genres:" value={data.genres} />
-      <Box label="Platforms:" value={data.platforms} />
-      <Box label="Game Modes:" value={data.gameModes} />
-      <Box label="ESRB:" value={data.esrb} />
+    <Section className="order-2 h-min lg:w-2/5" wrapperClassName="flex flex-col gap-4">
+      <Box label="Developer:" value={game.developer} />
+      <Box label="Publisher:" value={game.publisher} />
+      <Box label="Release Date:" value={dateFormatter(game.releaseDate)} />
+      <Box label="Genres:" value={game.genres} />
+      <Box label="Platforms:" value={game.platforms} />
+      <Box label="Game Modes:" value={game.modes} />
+      <Box label="ESRB:" value={game.esrb} />
     </Section>
   );
 };

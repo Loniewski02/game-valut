@@ -1,16 +1,15 @@
+
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { BiSearch } from "react-icons/bi";
 
 import Wrapper from "../layout/Wrapper";
 import FormBox from "../ui/FormBox";
+import AddGameItem from "./AddGameItem";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import Submit from "../auth/Submit";
 
-import defalutImage from "@/public/assets/default.png";
 import { ADD_GAME_INPUT } from "@/app/utils/constant";
-
 
 type Props = {
   onClose: () => void;
@@ -18,31 +17,9 @@ type Props = {
 };
 
 type Game = {
+  id: number;
   name: string;
-  slug: string;
-  background_image: string;
-};
-
-const Item = ({ game }: { game: Game }) => {
-  return (
-    <>
-      <div className="mb-2 flex items-center justify-between py-2 last:mb-0">
-        <div className="flex items-center gap-2">
-          <Image
-            className="h-12 w-20 rounded-xl object-cover"
-            width={100}
-            height={50}
-            alt="2"
-            src={game.background_image ? game.background_image : defalutImage.src}
-          />
-          <h4 className="text-base font-semibold tracking-tight">{game.name}</h4>
-        </div>
-        <button className="rounded-lg border border-Primary bg-Primary px-6 py-1 text-15 font-semibold text-White transition first-letter:uppercase hover:bg-PrimaryHover active:scale-95">
-          add
-        </button>
-      </div>
-    </>
-  );
+  backgroundImage: string;
 };
 
 const AddGameModal = ({ onClose, isShown }: Props) => {
@@ -69,7 +46,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/games/RAWG/search", {
+      const response = await fetch("/api/games/add-game/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +96,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         </form>
         {games && games.length > 0 && (
           <div className="mt-6 max-h-[450px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
-            {!loading && games.map((game) => <Item key={game.name} game={game} />)}
+            {!loading && games.map((game) => <AddGameItem key={game.name} game={game} onClose={onClose} />)}
           </div>
         )}
         {loading && <LoadingIndicator className="mt-8" />}

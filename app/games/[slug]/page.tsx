@@ -1,5 +1,4 @@
-"use client";
-import { useParams } from "next/navigation";
+import { prisma } from "@/app/lib/prisma";
 
 import Wrapper from "@/app/components/layout/Wrapper";
 import NotFound from "@/app/not-found";
@@ -11,29 +10,54 @@ import GameDetailRating from "@/app/components/games/game-details/GameDetailRati
 import GameDetailsReviews from "@/app/components/games/game-details/GameDetailsReviews";
 import GameDetailsScreens from "@/app/components/games/game-details/GameDetailsScreens";
 
-import { GAMES } from "@/app/utils/constant";
+const Game = async ({ params }: { params: { slug: string } }) => {
+  const game = await prisma.game.findUnique({
+    where: {
+      slug: params.slug,
+    },
+    include: {
+      reviews: true,
+      addedBy: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
 
-const Game = () => {
-  const { slug } = useParams<{ slug: string }>();
+  if (!game) {
+    return <NotFound />;
+  }
 
-  const game = GAMES.find((game) => game.slug === slug);
+  const totalReviews = game.reviews.length;
+
+  const average =
+    totalReviews > 0
+      ? Number(game.reviews.reduce((acc, review) => acc + review.rating, 0) / totalReviews).toFixed(2)
+      : 0;
+
+  const distribution = [5, 4, 3, 2, 1].map((rating) => ({
+    rating,
+    count: game.reviews.filter((review) => review.rating === rating).length,
+  }));
+
+  const rating = {
+    average,
+    count: totalReviews,
+    distribution,
+  };
 
   return (
     <>
-      {game && (
-        <>
-          <GameDetailHeader data={game} />
-          <Wrapper className="lg:flex lg:gap-4">
-            <GameDetailInfo data={game} />
-            <GameDetailAbout description={game.description} />
-          </Wrapper>
-          <GameDetailsScreens />
-          <GameDetailSimilarGames game={game} />
-          <GameDetailRating rating={game.rating} />
-          <GameDetailsReviews />
-        </>
-      )}
-      {!game && <NotFound />}
+      <GameDetailHeader game={game} addedBy={game.addedBy.username} rating={rating.average} count={rating.count} />
+      <Wrapper className="justify-start lg:flex lg:gap-4">
+        <GameDetailInfo game={game} />
+        <GameDetailAbout description={game.description} />
+      </Wrapper>
+      {rating.count > 0 && <GameDetailRating rating={rating} />}
+      <GameDetailsScreens screenshots={game.screenshots} />
+      <GameDetailSimilarGames game={game} />
+      <GameDetailsReviews gameId={game.id} />
     </>
   );
 };

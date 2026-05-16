@@ -2,9 +2,22 @@ import Section from "../../layout/Section";
 import Button from "../../ui/Button";
 import ReviewCard from "./ReviewCard";
 
-import { REVIEWS } from "@/app/utils/constant";
+import { prisma } from "@/app/lib/prisma";
 
-const GameDetailsReviews = () => {
+const GameDetailsReviews = async ({ gameId }: { gameId: string }) => {
+  const reviews = await prisma.review.findMany({
+    where: {
+      gameId: gameId,
+    },
+    include: {
+      user: {
+        select: {
+          username: true,
+        },
+      },
+    },
+  });
+
   return (
     <Section title="Reviews" id="reviews" wrapperClassName="relative">
       <form action="">
@@ -23,11 +36,14 @@ const GameDetailsReviews = () => {
           </div>
         </div>
       </form>
-      <div className="flex flex-col gap-16 rounded-2xl md:p-4 lg:gap-12 lg:bg-LightGray/40 lg:p-6">
-        {REVIEWS.map((item) => (
-          <ReviewCard key={item.id} item={item} />
-        ))}
-      </div>
+      {reviews && reviews.length > 0 && (
+        <div className="flex flex-col gap-16 rounded-2xl md:p-4 lg:gap-12 lg:bg-LightGray/40 lg:p-6">
+          {reviews.map((item) => (
+            <ReviewCard key={item.id} item={item} postedBy={item.user.username} />
+          ))}
+        </div>
+      )}
+      {reviews && reviews.length === 0 && <p className="text-center text-GrayishBlue">no reviews yet</p>}
     </Section>
   );
 };

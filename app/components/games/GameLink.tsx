@@ -22,7 +22,7 @@ const GameLink = ({ data, className }: Props) => {
       <Hero src={image} width={300} height={100} alt={data.title} />
       <h3 className="z-10 text-15 font-bold leading-4 text-White sm:text-base sm:leading-4">{data.title}</h3>
       <div className="z-10 flex items-center justify-between gap-2">
-        <RatingBadge rating={data.rating} reversed light />
+        {data.rating && <RatingBadge rating={data.rating} reversed light />}
         <div className="flex justify-end gap-1 ">
           {data.platforms.map((item) => (
             <span key={item} className="rounded-md bg-Gray/20 px-2 py-1 text-13 uppercase tracking-tighter text-White">

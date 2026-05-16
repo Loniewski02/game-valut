@@ -1,6 +1,12 @@
 import { AiFillStar } from "react-icons/ai";
 
-type Props = { rating: number; light?: boolean; reversed?: boolean; iconClassName?: string; textClassName?: string };
+type Props = {
+  rating: number | string;
+  light?: boolean;
+  reversed?: boolean;
+  iconClassName?: string;
+  textClassName?: string;
+};
 
 const RatingBadge = ({ rating, light, reversed, iconClassName, textClassName }: Props) => {
   return (

@@ -22,8 +22,8 @@ export async function GET() {
     const mappedGames = games.map((game) => {
       const rating =
         game.reviews.length > 0
-          ? game.reviews.reduce((acc, review) => acc + review.rating, 0) / game.reviews.length
-          : null;
+          ? Number((game.reviews.reduce((acc, review) => acc + review.rating, 0) / game.reviews.length).toFixed(2))
+          : 0;
 
       return {
         id: game.id,

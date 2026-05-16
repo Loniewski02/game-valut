@@ -2,18 +2,17 @@
 import { useMemo, useState } from "react";
 import { BsController } from "react-icons/bs";
 
+import { useGames } from "../hooks/useGames";
+
 import Section from "../components/layout/Section";
 import GameLink from "../components/games/GameLink";
 import Plus from "../components/layout/Plus";
 import Button from "../components/ui/Button";
 import AddGameModal from "../components/games/AddGameModal";
 import EmptySection from "../components/layout/EmptySection";
-
-import GamesControls from "../components/games/GamesControls";
-
-import { useGames } from "../hooks/useGames";
 import ErrorSection from "../components/layout/ErrorSection";
 import LoadingIndicator from "../components/ui/LoadingIndicator";
+import GamesControls from "../components/games/GamesControls";
 
 const Games = () => {
   const [platform, setPlatform] = useState<string | null>(null);
