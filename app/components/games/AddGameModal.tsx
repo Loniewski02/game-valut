@@ -1,15 +1,16 @@
+import { useEffect, useState } from "react";
+
+import { ADD_GAME_INPUT } from "@/app/lib/constant";
 
 import { IoMdClose } from "react-icons/io";
-import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
-
-import Wrapper from "../layout/Wrapper";
-import FormBox from "../ui/FormBox";
+import Wrapper from "../shared/layout/Wrapper";
+import FormBox from "../shared/ui/FormBox";
+import Submit from "../shared/ui/Submit";
 import AddGameItem from "./AddGameItem";
-import LoadingIndicator from "../ui/LoadingIndicator";
-import Submit from "../auth/Submit";
+import LoadingIndicator from "../shared/states/LoadingIndicator";
 
-import { ADD_GAME_INPUT } from "@/app/utils/constant";
+
 
 type Props = {
   onClose: () => void;
@@ -36,7 +37,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
     };
   }, [isShown]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -88,7 +89,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         <p className="mb-2 text-15 leading-tight text-GrayishBlue first-letter:uppercase">
           search for a game by title and add it to our library.
         </p>
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form onSubmit={submitHandler} className="flex gap-2">
           <FormBox input={ADD_GAME_INPUT} />
           <Submit>
             <BiSearch className="text-xl text-White" />

@@ -2,12 +2,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import Section from "../../layout/Section";
-
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
-import imggie from "@/public/assets/witcher-3-hero.jpg";
-import imggie2 from "@/public/assets/witcher-3-cover.jpg";
-import imggie3 from "@/public/assets/hero.png";
+import Section from "../shared/layout/Section";
+
 
 const GameDetailsScreens = ({ screenshots }: { screenshots: string[] }) => {
   const [current, setCurrentScreenshot] = useState(0);
@@ -40,7 +37,7 @@ const GameDetailsScreens = ({ screenshots }: { screenshots: string[] }) => {
     <Section title="screenshots">
       <div className="flex flex-col gap-3 lg:flex-row">
         {isShown && (
-          <div className="hidden h-[500px] flex-col gap-1 overflow-y-scroll lg:flex">
+          <div className="hidden h-[580px] flex-col gap-1 overflow-y-scroll lg:flex">
             {screenshots.map((screen, index) => (
               <button
                 key={screen}
@@ -59,13 +56,14 @@ const GameDetailsScreens = ({ screenshots }: { screenshots: string[] }) => {
             ))}
           </div>
         )}
-        <div className="relative order-1 overflow-hidden rounded-2xl lg:order-2 lg:flex-1">
+        <div className="relative order-1 overflow-hidden rounded-2xl bg-LightGray lg:order-2 lg:flex-1">
           <Image
             src={screenshots[current]}
             width={1200}
             height={700}
             alt="game screenshot"
-            className="aspect-video h-[200px] w-full object-cover md:h-[360px] lg:h-[500px]"
+            className="h-[200px] w-full object-cover md:h-[360px]
+             lg:h-[580px]"
           />
           <button
             onClick={prevHandler}

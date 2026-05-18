@@ -15,22 +15,6 @@ export type Input = {
   placeholder: string;
 };
 
-export type Game = {
-  id: string;
-  slug: string;
-  title: string;
-  platforms: string[];
-  genres: string[];
-  rating: number;
-  imageFull: string;
-  imageSmall: string;
-  releaseDate: string;
-  description: string;
-  developer: string;
-  publisher: string;
-  gameModes: string[];
-  esrb: string;
-};
 
 export type Feature = { id: string; title: string; desc: string; icon: IconType };
 
@@ -38,8 +22,19 @@ export type GamePreview = {
   id: string | number;
   slug: string;
   title: string;
-  rating: number | null;
+  rating: number;
   image: string;
   genres: string[];
   platforms: string[];
+};
+
+export type RankingItemType = {
+  id: string | number;
+  slug: string;
+  title: string;
+  rating: number;
+  image: string;
+  genres: string[];
+  platforms: string[];
+  releaseDate: Date;
 };

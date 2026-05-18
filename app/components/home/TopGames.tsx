@@ -1,13 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+
 import { BsArrowRightShort } from "react-icons/bs";
+import Section from "../shared/layout/Section";
+import RatingBadge from "../shared/ui/RatingBadge";
 
-import RatingBadge from "../layout/RatingBadge";
-import Section from "../layout/Section";
-
-import { Game } from "@/app/types";
-
-const TopGames = ({ games }: { games: Game[] }) => {
+const TopGames = ({ games }: { games: any[] }) => {
   return (
     <Section title="top games this week" className="lg:w-1/2">
       {games.map((game, index) => (

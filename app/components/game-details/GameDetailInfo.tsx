@@ -1,15 +1,27 @@
 import { Game } from "@/app/generated/prisma/client";
-import Section from "../../layout/Section";
-import { dateFormatter } from "@/app/functions";
+import { dateFormatter } from "@/app/lib/helpers";
+
+import Section from "../shared/layout/Section";
+
 
 const Box = ({ label, value }: { label: string; value: string | string[] | null }) => {
   return (
     <>
       {value && (
-        <div className="flex justify-between gap-4 text-15">
-          <p className="min-w-max font-medium">{label}</p>
-          <p className="text-right text-13">{Array.isArray(value) ? value.join(", ") : value}</p>
-        </div>
+        <>
+          {Array.isArray(value) && value.length > 0 && (
+            <div className="flex justify-between gap-4 text-15">
+              <p className="min-w-max font-medium">{label}</p>
+              <p className="text-right text-13">{value.join(", ")}</p>
+            </div>
+          )}
+          {!Array.isArray(value) && value !== "" && (
+            <div className="flex justify-between gap-4 text-15">
+              <p className="min-w-max font-medium">{label}</p>
+              <p className="text-right text-13">{value}</p>
+            </div>
+          )}
+        </>
       )}
     </>
   );

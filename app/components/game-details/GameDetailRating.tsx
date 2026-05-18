@@ -1,5 +1,6 @@
-import Section from "../../layout/Section";
-import RatingBadge from "../../layout/RatingBadge";
+import Section from "../shared/layout/Section";
+import RatingBadge from "../shared/ui/RatingBadge";
+
 
 const GameDetailRating = ({
   rating,

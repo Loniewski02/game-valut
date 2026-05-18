@@ -1,8 +1,8 @@
-import TextLink from "../../ui/TextLink";
-import Submit from "../Submit";
-import FormBox from "../../ui/FormBox";
+import FormBox from "../../shared/ui/FormBox";
+import TextLink from "../../shared/ui/TextLink";
+import Submit from "../../shared/ui/Submit";
 
-import { REGISTER_INPUTS } from "@/app/utils/constant";
+import { REGISTER_INPUTS } from "@/app/lib/constant";
 
 const RegisterForm = () => {
   return (

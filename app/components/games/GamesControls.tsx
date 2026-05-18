@@ -1,27 +1,35 @@
-import Wrapper from "../layout/Wrapper";
-import Button from "../ui/Button";
-import Plus from "../layout/Plus";
-import FormBox from "../ui/FormBox";
-import SelectButton from "../ui/SelectButton";
 
-import { GAMES_FILTER_INPUT, GENRES, PLATFORMS } from "@/app/utils/constant";
+import { GENRES, PLATFORMS } from "@/app/lib/constant";
+import Wrapper from "../shared/layout/Wrapper";
+import Button from "../shared/ui/Button";
+import Plus from "../shared/ui/Plus";
+import SelectButton from "../shared/ui/SelectButton";
 
 type Props = {
+  search: string;
   platform: string | null;
   genre: string | null;
   openedSelect: string | null;
-  onSelect: (text: string | null) => void;
-  onPlatform: (text: string | null) => void;
-  onGenre: (text: string | null) => void;
-  onTitle: (text: string) => void;
+  onSearch: (value: string) => void;
+  onSubmit: (event: React.FormEvent) => void;
+  onPlatform: (value: string | null) => void;
+  onGenre: (value: string | null) => void;
+  onSelect: (value: string | null) => void;
   onModal: () => void;
 };
 
-const GamesControls = ({ platform, genre, openedSelect, onSelect, onPlatform, onGenre, onTitle, onModal }: Props) => {
-  const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onTitle(event.currentTarget.value);
-  };
-
+const GamesControls = ({
+  search,
+  platform,
+  genre,
+  openedSelect,
+  onSearch,
+  onSubmit,
+  onPlatform,
+  onGenre,
+  onSelect,
+  onModal,
+}: Props) => {
   return (
     <section className="py-2 md:py-4">
       <Wrapper>
@@ -35,8 +43,20 @@ const GamesControls = ({ platform, genre, openedSelect, onSelect, onPlatform, on
             Add Game
           </Button>
         </div>
-        <div className="overflow relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
-          <FormBox input={GAMES_FILTER_INPUT} className="col-span-2 md:col-span-1" />
+        <div className="relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
+          <form onSubmit={onSubmit} className="relative flex w-full flex-col gap-2">
+            <label htmlFor="game-title" className="sr-only">
+              search by title
+            </label>
+            <input
+              id="game-title"
+              type="text"
+              value={search}
+              onChange={(e) => onSearch(e.currentTarget.value)}
+              placeholder="Search games..."
+              className="z-20 rounded-xl border border-Gray bg-White py-3 pl-5 pr-4 text-15 text-DarkGrayishBlue placeholder:text-GrayishBlue"
+            />
+          </form>
           <SelectButton
             text="All platforms"
             name="platform"
@@ -47,7 +67,7 @@ const GamesControls = ({ platform, genre, openedSelect, onSelect, onPlatform, on
             opened={openedSelect}
           />
           <SelectButton
-            text="all genres"
+            text="All genres"
             name="genre"
             items={GENRES}
             selected={genre}

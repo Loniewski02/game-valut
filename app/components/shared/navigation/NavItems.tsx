@@ -1,12 +1,11 @@
-import { BiLogIn } from "react-icons/bi";
-
-import Logo from "../../ui/Logo";
-import TextLink from "../../ui/TextLink";
-import Button from "../../ui/Button";
-import NavLink from "./NavLink";
-
-import { ROUTES } from "@/app/utils/constant";
 import { Route } from "@/app/types";
+import { ROUTES } from "@/app/lib/constant";
+
+import { BiLogIn } from "react-icons/bi";
+import Logo from "../ui/Logo";
+import NavLink from "./NavLink";
+import Button from "../ui/Button";
+import TextLink from "../ui/TextLink";
 
 type Props = {
   isShown: boolean;

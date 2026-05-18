@@ -2,13 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { BsArrowRightShort } from "react-icons/bs";
+import Section from "../shared/layout/Section";
+import RatingBadge from "../shared/ui/RatingBadge";
 
-import RatingBadge from "../layout/RatingBadge";
-import Section from "../layout/Section";
-
-import { Game } from "@/app/types";
-
-const LatestReview = ({ data }: { data: Game }) => {
+const LatestReview = ({ data }: { data: any }) => {
   return (
     <Section title="latest review" className="lg:w-1/2">
       <div className="flex items-start justify-between gap-4 rounded-2xl bg-White ">

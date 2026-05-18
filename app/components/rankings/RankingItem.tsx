@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import Badge from "../layout/Badge";
-import RatingBadge from "../layout/RatingBadge";
+import { RankingItemType } from "@/app/types";
+import { dateFormatter } from "@/app/lib/helpers";
+import { PLATFORM_SHORTCUTS } from "@/app/lib/constant";
 
-import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
-import { Game } from "@/app/types";
+import Badge from "../shared/ui/Badge";
+import RatingBadge from "../shared/ui/RatingBadge";
 
-const RankingItem = ({ item, index }: { item: Game; index: number }) => {
+const RankingItem = ({ item, index }: { item: RankingItemType; index: number }) => {
   return (
     <Link
       href={`/games/${item.slug}`}
@@ -19,7 +20,7 @@ const RankingItem = ({ item, index }: { item: Game; index: number }) => {
           width={100}
           height={200}
           alt={item.title}
-          src={item.imageFull}
+          src={item.image}
           className="absolute left-0 top-0 h-full w-full object-cover"
         />
         <div className="absolute left-0 top-0 z-10 h-full w-full bg-DarkGrayishBlue/20" />
@@ -28,7 +29,7 @@ const RankingItem = ({ item, index }: { item: Game; index: number }) => {
         <span className="transition hover:text-Primary group-hover:text-Primary sm:text-base lg:text-lg">
           {item.title}
         </span>
-        <span className="hidden text-13 font-light text-GrayishBlue md:block">{item.releaseDate}</span>
+        <span className="hidden text-13 font-light text-GrayishBlue md:block">{dateFormatter(item.releaseDate)}</span>
       </div>
       <div className="hidden place-content-start gap-1 text-GrayishBlue md:flex">
         {item.platforms.map((platform) => (

@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import RatingBadge from "../layout/RatingBadge";
-
-import Hero from "../layout/Hero";
-
 import { GamePreview } from "@/app/types";
-import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
+import { PLATFORM_SHORTCUTS } from "@/app/lib/constant";
+
+import Hero from "../shared/layout/Hero";
+import RatingBadge from "../shared/ui/RatingBadge";
+
 import defalutImage from "@/public/assets/default.png";
 
 type Props = { data: GamePreview; className?: string };

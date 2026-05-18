@@ -1,14 +1,12 @@
-import Section from "../layout/Section";
+import { FEATURES } from "@/app/lib/constant";
 
-import { FEATURES } from "@/app/utils/constant";
-
-const features = FEATURES;
+import Section from "../shared/layout/Section";
 
 const Features = () => {
   return (
     <Section title="features">
       <div className="flex flex-col items-center gap-4 lg:flex-row">
-        {features.map((feature) => {
+        {FEATURES.map((feature) => {
           const Icon = feature.icon;
           return (
             <div key={feature.id} className="flex max-w-lg items-center gap-4 rounded-2xl bg-LightGray p-4">

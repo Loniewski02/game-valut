@@ -1,8 +1,9 @@
-import Section from "../../layout/Section";
-import Button from "../../ui/Button";
+import { prisma } from "@/app/lib/prisma";
+
+import Section from "../shared/layout/Section";
+import Button from "../shared/ui/Button";
 import ReviewCard from "./ReviewCard";
 
-import { prisma } from "@/app/lib/prisma";
 
 const GameDetailsReviews = async ({ gameId }: { gameId: string }) => {
   const reviews = await prisma.review.findMany({
@@ -43,7 +44,9 @@ const GameDetailsReviews = async ({ gameId }: { gameId: string }) => {
           ))}
         </div>
       )}
-      {reviews && reviews.length === 0 && <p className="text-center text-GrayishBlue">no reviews yet</p>}
+      {reviews && reviews.length === 0 && (
+        <p className="text-DarkGrayishBlue">No reviews yet. Be the first one to rate and review this game!</p>
+      )}
     </Section>
   );
 };

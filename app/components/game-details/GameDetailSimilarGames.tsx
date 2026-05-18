@@ -1,9 +1,10 @@
-import { Game } from "@/app/generated/prisma/client";
-import Section from "../../layout/Section";
-import GameLink from "../GameLink";
-
 import { prisma } from "@/app/lib/prisma";
+
+import { Game } from "@/app/generated/prisma/client";
 import { GamePreview } from "@/app/types";
+
+import Section from "../shared/layout/Section";
+import GameLink from "../games/GameLink";
 
 const GameDetailSimilarGames = async ({ game }: { game: Game }) => {
   const similarGames = await prisma.game.findMany({
@@ -23,6 +24,11 @@ const GameDetailSimilarGames = async ({ game }: { game: Game }) => {
       image: true,
       platforms: true,
       genres: true,
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
     },
   });
 
@@ -43,11 +49,13 @@ const GameDetailSimilarGames = async ({ game }: { game: Game }) => {
         <Section title="Similar Games">
           <div className="flex gap-4 overflow-y-hidden pb-2">
             {sortedGames.map((item) => {
+              const totalRating = item.reviews.reduce((sum, review) => sum + review.rating, 0);
+
               const data: GamePreview = {
                 id: item.id,
                 slug: item.slug,
                 title: item.title,
-                rating: null,
+                rating: item.reviews.length > 0 ? Number((totalRating / item.reviews.length).toFixed(2)) : 0,
                 image: item.image,
                 genres: item.genres,
                 platforms: item.platforms,

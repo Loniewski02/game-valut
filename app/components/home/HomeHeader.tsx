@@ -1,6 +1,6 @@
-import Header from "../layout/Header";
-import Hero from "../layout/Hero";
-import Button from "../ui/Button";
+import Header from "../shared/layout/Header";
+import Hero from "../shared/layout/Hero";
+import Button from "../shared/ui/Button";
 
 const HomeHeader = () => {
   return (

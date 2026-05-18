@@ -68,14 +68,6 @@ export const RESET_INPUT = {
   validity: (val: string) => emailReg.test(val),
 };
 
-export const GAMES_FILTER_INPUT = {
-  id: "search-game",
-  name: "search-game",
-  placeholder: "Search games...",
-  type: "text",
-  label: "Search games",
-};
-
 export const ADD_GAME_INPUT = {
   id: "query",
   name: "query",

@@ -1,9 +1,34 @@
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+
+    const platform = searchParams.get("platform");
+    const genre = searchParams.get("genre");
+    const title = searchParams.get("title");
+
     const games = await prisma.game.findMany({
+      where: {
+        ...(platform && {
+          platforms: {
+            has: platform,
+          },
+        }),
+        ...(genre && {
+          genres: {
+            has: genre,
+          },
+        }),
+        ...(title && {
+          title: {
+            contains: title,
+            mode: "insensitive",
+          },
+        }),
+      },
+
       select: {
         id: true,
         title: true,
@@ -17,22 +42,18 @@ export async function GET() {
           },
         },
       },
+
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
-    const mappedGames = games.map((game) => {
-      const rating =
-        game.reviews.length > 0
-          ? Number((game.reviews.reduce((acc, review) => acc + review.rating, 0) / game.reviews.length).toFixed(2))
-          : 0;
+    const mappedGames = games.map(({ reviews, ...game }) => {
+      const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
 
       return {
-        id: game.id,
-        title: game.title,
-        slug: game.slug,
-        image: game.image,
-        genres: game.genres,
-        platforms: game.platforms,
-        rating,
+        ...game,
+        rating: reviews.length > 0 ? Number((totalRating / reviews.length).toFixed(2)) : 0,
       };
     });
 
@@ -40,6 +61,11 @@ export async function GET() {
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json({ message: "Failed to fetch games" }, { status: 500 });
+    return NextResponse.json(
+      {
+        message: "Failed to fetch games",
+      },
+      { status: 500 },
+    );
   }
 }

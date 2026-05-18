@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import defalutImage from "@/public/assets/default.png";
@@ -8,7 +9,9 @@ type Game = {
   backgroundImage: string;
 };
 
-const AddGameItem = ({ game, onClose }: { game: Game; onClose: () => void }) => {
+const AddGameItem = ({ game }: { game: Game; onClose: () => void }) => {
+  const router = useRouter();
+
   const addGameHandler = async () => {
     const id = game.id;
 
@@ -23,8 +26,8 @@ const AddGameItem = ({ game, onClose }: { game: Game; onClose: () => void }) => 
       if (!response.ok) {
         throw new Error("Failed to fetch games");
       }
-      onClose();
-      return;
+      const { slug } = await response.json();
+      router.push(`/games/${slug}`);
     } catch (error) {
       console.error(error);
     }

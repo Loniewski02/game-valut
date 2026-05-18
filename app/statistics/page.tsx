@@ -1,16 +1,15 @@
 "use client";
 import { useState } from "react";
 
+import { PERIODS } from "../lib/constant";
+
 import { BiCalendar } from "react-icons/bi";
 import { IoLogoGameControllerB } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 import { FaUsers } from "react-icons/fa";
-
-import SelectButton from "../components/ui/SelectButton";
-import ControlsSection from "../components/layout/ControlsSection";
-import Wrapper from "../components/layout/Wrapper";
-
-import { PERIODS } from "../utils/constant";
+import ControlsSection from "../components/shared/layout/ControlsSection";
+import SelectButton from "../components/shared/ui/SelectButton";
+import Wrapper from "../components/shared/layout/Wrapper";
 
 const Statistics = () => {
   const [period, setPeriod] = useState<string | null>(null);

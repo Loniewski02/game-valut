@@ -1,8 +1,8 @@
-import TextLink from "../../ui/TextLink";
-import Submit from "../Submit";
-import FormBox from "../../ui/FormBox";
+import FormBox from "../../shared/ui/FormBox";
+import TextLink from "../../shared/ui/TextLink";
+import Submit from "../../shared/ui/Submit";
 
-import { RESET_INPUT } from "@/app/utils/constant";
+import { RESET_INPUT } from "@/app/lib/constant";
 
 const ResetForm = () => {
   return (

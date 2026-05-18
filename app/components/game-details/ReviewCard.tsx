@@ -1,10 +1,11 @@
 import Image from "next/image";
 
+import { Review } from "@/app/generated/prisma/client";
+import { dateFormatterToNow } from "@/app/lib/helpers";
+
 import { AiFillStar } from "react-icons/ai";
 
 import profile from "@/public/assets/witcher-3-cover.jpg";
-import { Review } from "@/app/generated/prisma/client";
-import { dateFormatterToNow } from "@/app/functions";
 
 const ReviewCard = ({ item, postedBy }: { item: Review; postedBy: string }) => {
   return (

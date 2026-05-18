@@ -1,8 +1,8 @@
-import TextLink from "../../ui/TextLink";
-import FormBox from "../../ui/FormBox";
-import Submit from "../Submit";
+import FormBox from "../../shared/ui/FormBox";
+import TextLink from "../../shared/ui/TextLink";
+import Submit from "../../shared/ui/Submit";
 
-import { LOGIN_INPUTS } from "@/app/utils/constant";
+import { LOGIN_INPUTS } from "@/app/lib/constant";
 
 const LoginForm = () => {
   return (

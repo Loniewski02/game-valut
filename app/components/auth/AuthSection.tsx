@@ -1,4 +1,4 @@
-import Wrapper from "../layout/Wrapper";
+import Wrapper from "../shared/layout/Wrapper";
 
 type Props = { children: React.ReactNode; txtBig?: string; txt?: string };
 

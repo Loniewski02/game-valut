@@ -62,8 +62,8 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         screenshots: screenshots,
         developer: developers,
         publisher: publishers,
-        esrb: data.esrb_rating?.name ?? "Not Rated",
-        modes: gameModes.length === 0 ? ["Singleplayer"] : gameModes,
+        esrb: data.esrb_rating?.name ?? "",
+        modes: gameModes.length === 0 ? [] : gameModes,
         addedById: "user1", // potem auth
       },
     });

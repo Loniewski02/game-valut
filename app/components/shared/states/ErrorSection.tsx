@@ -1,5 +1,5 @@
 import { BiSad } from "react-icons/bi";
-import Section from "./Section";
+import Section from "../layout/Section";
 
 type Props = {
   title: string;

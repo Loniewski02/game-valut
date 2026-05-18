@@ -1,12 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-
-import BurgerBtn from "../../ui/BurgerBtn";
-import Logo from "../../ui/Logo";
+import Wrapper from "../layout/Wrapper";
+import BurgerBtn from "../ui/BurgerBtn";
 import NavItems from "./NavItems";
-import Wrapper from "../../layout/Wrapper";
+import Logo from "../ui/Logo";
 
-const NavBar = () => {
+const Navigation = () => {
   const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
@@ -51,4 +50,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navigation;

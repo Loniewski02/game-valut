@@ -1,14 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import Header from "../../layout/Header";
-import Hero from "../../layout/Hero";
-import RatingBadge from "../../layout/RatingBadge";
-import Badge from "../../layout/Badge";
-import Button from "../../ui/Button";
-import Plus from "../../layout/Plus";
-
-import { PLATFORM_SHORTCUTS } from "@/app/utils/constant";
 import { Game } from "@/app/generated/prisma/client";
+import { PLATFORM_SHORTCUTS } from "@/app/lib/constant";
+
+import Header from "../shared/layout/Header";
+import Hero from "../shared/layout/Hero";
+import RatingBadge from "../shared/ui/RatingBadge";
+import Badge from "../shared/ui/Badge";
+import Button from "../shared/ui/Button";
+import Plus from "../shared/ui/Plus";
+
 
 const GameDetailHeader = ({
   game,
@@ -49,7 +51,9 @@ const GameDetailHeader = ({
               <Badge key={item} item={item} dark />
             ))}
           </div>
-          <p className="text-13 text-Gray md:mt-4">Added by: {addedBy}</p>
+          <p className="text-13 text-Gray md:mt-4">
+            Added by: <Link href={`/users/${addedBy}`}>{addedBy}</Link>
+          </p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">
           {!revieved && (

@@ -1,98 +1,108 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { useFetch } from "../hooks/useFetch";
+import { GamePreview } from "../types";
+
 import { BsController } from "react-icons/bs";
-
-import { useGames } from "../hooks/useGames";
-
-import Section from "../components/layout/Section";
-import GameLink from "../components/games/GameLink";
-import Plus from "../components/layout/Plus";
-import Button from "../components/ui/Button";
-import AddGameModal from "../components/games/AddGameModal";
-import EmptySection from "../components/layout/EmptySection";
-import ErrorSection from "../components/layout/ErrorSection";
-import LoadingIndicator from "../components/ui/LoadingIndicator";
 import GamesControls from "../components/games/GamesControls";
+import FetchSection from "../components/shared/states/FetchSection";
+import EmptySection from "../components/shared/states/EmptySection";
+import Button from "../components/shared/ui/Button";
+import Plus from "../components/shared/ui/Plus";
+import Section from "../components/shared/layout/Section";
+import GameLink from "../components/games/GameLink";
+import AddGameModal from "../components/games/AddGameModal";
+
 
 const Games = () => {
-  const [platform, setPlatform] = useState<string | null>(null);
-  const [genre, setGenre] = useState<string | null>(null);
-  const [title, setTitle] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const platform = searchParams.get("platform");
+  const genre = searchParams.get("genre");
+  const title = searchParams.get("title") ?? "";
+
+  const { data: games, isLoading, error } = useFetch<GamePreview[]>(`/api/games?${searchParams.toString()}`);
   const [openedSelect, setOpenedSelect] = useState<string | null>(null);
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [search, setSearch] = useState(title);
 
-  const { games, isLoading, error } = useGames();
+  const updateParams = (key: string, value: string | null) => {
+    const params = new URLSearchParams(searchParams.toString());
 
-  const platformHandler = (text: string | null) => {
-    setPlatform(text);
+    if (!value) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    router.push(`?${params.toString()}`);
   };
 
-  const genreHandler = (text: string | null) => {
-    setGenre(text);
+  const clearFiltersHandler = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.delete("title");
+    params.delete("genre");
+    params.delete("platform");
+
+    setOpenedSelect(null);
+    setSearch("");
+
+    router.push(`?${params.toString()}`);
   };
 
-  const titleHandler = (text: string) => {
-    setTitle(text);
+  const selectHandler = (text: string | null) => {
+    setOpenedSelect((prev) => (prev === text ? null : text));
   };
 
-  const openedSelectHandler = (name: string | null) => {
-    setOpenedSelect((prev) => (prev === name ? null : name));
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    updateParams("title", search);
   };
 
-  const filteredGames = useMemo(() => {
-    return games.filter((game) => {
-      const matchesPlatform = !platform || game.platforms.includes(platform);
-
-      const matchesGenre = !genre || game.genres.includes(genre);
-
-      const matchesName = title.length === 0 || game.title.toLowerCase().includes(title.toLowerCase());
-
-      return matchesPlatform && matchesGenre && matchesName;
-    });
-  }, [games, platform, genre, title]);
-
-  const openModalHandler = () => {
-    setIsModalOpened(true);
-  };
-
-  const closeModalHandler = () => {
-    setIsModalOpened(false);
-  };
+  const platformHandler = (value: string | null) => updateParams("platform", value);
+  const genreHandler = (value: string | null) => updateParams("genre", value);
+  const openModalHandler = () => setIsModalOpened(true);
 
   return (
     <>
       <GamesControls
+        search={search}
         platform={platform}
         genre={genre}
         openedSelect={openedSelect}
-        onTitle={titleHandler}
-        onGenre={genreHandler}
-        onModal={openModalHandler}
+        onSearch={setSearch}
+        onSubmit={submitHandler}
         onPlatform={platformHandler}
-        onSelect={openedSelectHandler}
+        onGenre={genreHandler}
+        onSelect={selectHandler}
+        onModal={openModalHandler}
       />
-      {isLoading && <LoadingIndicator className="mt-20" />}
-      {!isLoading && error && <ErrorSection title={`${error.status}`} text={error.message} />}
-      {!isLoading && !error && filteredGames.length === 0 && (
-        <EmptySection
-          title="No games yet"
-          text="No games added yet. This library is built by the community. Be the first to add a game."
-          Icon={BsController}
-        >
-          <Button className="mt-6">
-            <Plus />
-            Add Game
-          </Button>
-        </EmptySection>
-      )}
-      {!isLoading && !error && filteredGames.length > 0 && (
-        <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredGames.map((game) => (
-            <GameLink key={game.id} data={game} className="w-full" />
-          ))}
-        </Section>
-      )}
-      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={closeModalHandler} />}
+      <FetchSection isLoading={isLoading} error={error}>
+        {games.length === 0 ? (
+          <EmptySection
+            title="No games yet"
+            text="No games added yet. This library is built by the community."
+            Icon={BsController}
+            hasFilters={platform || genre || title}
+            onClear={clearFiltersHandler}
+          >
+            <Button className="mt-6" onClick={() => setIsModalOpened(true)}>
+              <Plus />
+              Add Game
+            </Button>
+          </EmptySection>
+        ) : (
+          <Section wrapperClassName="grid place-items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {games.map((game) => (
+              <GameLink key={game.id} data={game} className="w-full" />
+            ))}
+          </Section>
+        )}
+      </FetchSection>
+      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={() => setIsModalOpened(false)} />}
     </>
   );
 };

@@ -32,7 +32,7 @@ model Game {
 
   image         String
   cover         String
-  esrb          String?
+  esrb          String
   modes         String[] @default([])
 
   releaseDate   DateTime

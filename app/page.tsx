@@ -1,10 +1,10 @@
-import Wrapper from "./components/layout/Wrapper";
+import { GAMES } from "./lib/constant";
+
 import Features from "./components/home/Features";
 import HomeHeader from "./components/home/HomeHeader";
 import LatestReview from "./components/home/LatestReview";
 import TopGames from "./components/home/TopGames";
-
-import { GAMES } from "./utils/constant";
+import Wrapper from "./components/shared/layout/Wrapper";
 
 export default function Home() {
   const topGames = [...GAMES].sort((a, b) => b.rating - a.rating).slice(0, 5);
