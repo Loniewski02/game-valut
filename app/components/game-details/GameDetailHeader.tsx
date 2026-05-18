@@ -11,7 +11,6 @@ import Badge from "../shared/ui/Badge";
 import Button from "../shared/ui/Button";
 import Plus from "../shared/ui/Plus";
 
-
 const GameDetailHeader = ({
   game,
   addedBy,

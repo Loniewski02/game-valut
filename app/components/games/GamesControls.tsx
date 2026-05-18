@@ -1,4 +1,3 @@
-
 import { GENRES, PLATFORMS } from "@/app/lib/constant";
 import Wrapper from "../shared/layout/Wrapper";
 import Button from "../shared/ui/Button";
@@ -44,7 +43,7 @@ const GamesControls = ({
           </Button>
         </div>
         <div className="relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
-          <form onSubmit={onSubmit} className="relative flex w-full flex-col gap-2">
+          <form onSubmit={onSubmit} className="relative col-span-2 flex w-full flex-col gap-2 md:col-span-1">
             <label htmlFor="game-title" className="sr-only">
               search by title
             </label>

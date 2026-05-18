@@ -15,7 +15,6 @@ import Section from "../components/shared/layout/Section";
 import GameLink from "../components/games/GameLink";
 import AddGameModal from "../components/games/AddGameModal";
 
-
 const Games = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -59,7 +58,7 @@ const Games = () => {
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    updateParams("title", search);
+    updateParams("title", search.trim());
   };
 
   const platformHandler = (value: string | null) => updateParams("platform", value);
@@ -81,7 +80,7 @@ const Games = () => {
         onModal={openModalHandler}
       />
       <FetchSection isLoading={isLoading} error={error}>
-        {games.length === 0 ? (
+        {!games || games.length === 0 ? (
           <EmptySection
             title="No games yet"
             text="No games added yet. This library is built by the community."

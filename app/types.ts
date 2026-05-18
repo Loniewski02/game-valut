@@ -15,7 +15,6 @@ export type Input = {
   placeholder: string;
 };
 
-
 export type Feature = { id: string; title: string; desc: string; icon: IconType };
 
 export type GamePreview = {
@@ -37,4 +36,11 @@ export type RankingItemType = {
   genres: string[];
   platforms: string[];
   releaseDate: Date;
+};
+
+export type MainStats = {
+  totalGames: number;
+  averageRating: number;
+  totalReviews: number;
+  yearsCovered: string;
 };

@@ -39,7 +39,7 @@ export const useFetch = <T>(url: string) => {
   }, [url]);
 
   return {
-    data: data ?? [],
+    data: data ?? null,
     isLoading,
     error,
   };

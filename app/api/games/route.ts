@@ -1,6 +1,8 @@
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 
+import { Prisma } from "@/app/generated/prisma/client";
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -9,26 +11,27 @@ export async function GET(req: Request) {
     const genre = searchParams.get("genre");
     const title = searchParams.get("title");
 
-    const games = await prisma.game.findMany({
-      where: {
-        ...(platform && {
-          platforms: {
-            has: platform,
-          },
-        }),
-        ...(genre && {
-          genres: {
-            has: genre,
-          },
-        }),
-        ...(title && {
-          title: {
-            contains: title,
-            mode: "insensitive",
-          },
-        }),
-      },
+    const gameFilters: Prisma.GameWhereInput = {
+      ...(platform && {
+        platforms: {
+          has: platform,
+        },
+      }),
+      ...(genre && {
+        genres: {
+          has: genre,
+        },
+      }),
+      ...(title?.trim() && {
+        title: {
+          contains: title.trim(),
+          mode: "insensitive",
+        },
+      }),
+    };
 
+    const games = await prisma.game.findMany({
+      where: gameFilters,
       select: {
         id: true,
         title: true,
@@ -42,7 +45,6 @@ export async function GET(req: Request) {
           },
         },
       },
-
       orderBy: {
         createdAt: "desc",
       },
