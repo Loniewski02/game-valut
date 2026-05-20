@@ -44,3 +44,32 @@ export type MainStats = {
   totalReviews: number;
   yearsCovered: string;
 };
+
+export type RegisterData = {
+  message: string | null;
+  status: number | null;
+  data: { username: string; email: string; password: string; password2: string };
+};
+
+export type LatestReviewType = {
+  game: {
+    title: string;
+    slug: string;
+    image: string;
+  };
+  id: string;
+  createdAt: Date;
+  rating: number;
+  content: string;
+  user: {
+    username: string;
+  };
+} | null;
+
+export type TopGamesType = {
+  rating: number;
+  image: string;
+  title: string;
+  id: string;
+  slug: string;
+}[];

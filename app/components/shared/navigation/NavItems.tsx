@@ -1,3 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
+
 import { Route } from "@/app/types";
 import { ROUTES } from "@/app/lib/constant";
 
@@ -7,6 +12,9 @@ import NavLink from "./NavLink";
 import Button from "../ui/Button";
 import TextLink from "../ui/TextLink";
 
+import test from "@/public/assets/witcher-3-hero.jpg";
+import LoadingIndicator from "../states/LoadingIndicator";
+
 type Props = {
   isShown: boolean;
   onClose: () => void;
@@ -15,6 +23,18 @@ type Props = {
 const loginBtnData: Route = { id: "login-link", name: "sign in", url: "/auth?mode=login", icon: BiLogIn };
 
 const NavItems = ({ isShown, onClose }: Props) => {
+  const { data: session, status } = useSession();
+  const [opened, setOpened] = useState(false);
+
+  const menuToggler = () => setOpened((prev) => !prev);
+  const closeMenuHandler = () => setOpened(false);
+  const logoutHandler = () => {
+    closeMenuHandler();
+    signOut({
+      callbackUrl: "/",
+    });
+  };
+
   return (
     <div
       className={`${isShown ? "translate-x-0" : "translate-x-full"} fixed inset-0 z-40 transition-transform duration-300 md:relative md:block md:translate-x-0`}
@@ -28,9 +48,39 @@ const NavItems = ({ isShown, onClose }: Props) => {
           {ROUTES.map((route) => (
             <NavLink key={route.id} data={route} onClick={onClose} />
           ))}
-          <Button className="ml-6 hidden md:block" href="/auth?mode=login" link>
-            Log in
-          </Button>
+          {session && status === "authenticated" && (
+            <div className="relative hidden min-w-24 md:block">
+              <button onClick={menuToggler} className="flex items-center gap-2">
+                <div className="relative h-8 w-8 overflow-hidden rounded-full border border-Gray">
+                  <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
+                </div>
+                <span className="text-13">{session.user.username}</span>
+              </button>
+              {opened && (
+                <div className="absolute right-0 mt-2 w-max rounded-xl border border-Gray bg-White p-2 shadow-md">
+                  <Link
+                    href={`/users/${session.user.username}`}
+                    className="block rounded-md px-3 py-2 text-sm hover:bg-LightGray"
+                    onClick={closeMenuHandler}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={logoutHandler}
+                    className="mt-1 w-full rounded-md border border-red-400 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
+                  >
+                    Log out
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          {status === "unauthenticated" && (
+            <Button className="ml-6 hidden md:block" href="/auth?mode=login" link>
+              Log in
+            </Button>
+          )}
+          {status === "loading" && <LoadingIndicator small className="ml-6" />}
         </div>
         <div className="relative flex flex-col gap-4 pt-6 md:hidden">
           <div className="absolute top-0 h-[2px] w-full rounded-sm bg-Gray" />

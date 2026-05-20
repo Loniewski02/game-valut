@@ -1,5 +1,8 @@
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+
+import { MessagesContext } from "../_providers/MessagesContext";
 
 import defalutImage from "@/public/assets/default.png";
 
@@ -11,25 +14,26 @@ type Game = {
 
 const AddGameItem = ({ game }: { game: Game; onClose: () => void }) => {
   const router = useRouter();
+  const { setNewMessage } = useContext(MessagesContext);
 
   const addGameHandler = async () => {
-    const id = game.id;
-
     try {
-      const response = await fetch(`/api/games/add-game/${id}`, {
+      const response = await fetch(`/api/games/add-game/${game.id}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error("Failed to fetch games");
+        setNewMessage(response.status, data.message);
+        return;
       }
-      const { slug } = await response.json();
-      router.push(`/games/${slug}`);
+
+      setNewMessage(response.status, data.message);
+
+      router.push(`/games/${data.game.slug}`);
     } catch (error) {
       console.error(error);
+      setNewMessage(500, "Something went wrong");
     }
   };
 

@@ -1,10 +1,10 @@
-const LoadingIndicator = ({ className }: { className?: string }) => {
+const LoadingIndicator = ({ className, small }: { className?: string; small?: boolean }) => {
   return (
     <div className={`${className && className} text-center`}>
       <div role="status">
         <svg
           aria-hidden="true"
-          className="inline h-20 w-20 animate-spin fill-Primary text-Gray"
+          className={`${small ? "h-8 w-8" : "h-20 w-20"} inline animate-spin fill-Primary text-Gray`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

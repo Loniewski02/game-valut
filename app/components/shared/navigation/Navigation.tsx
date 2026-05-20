@@ -7,6 +7,7 @@ import Logo from "../ui/Logo";
 
 const Navigation = () => {
   const [isShown, setIsShown] = useState(false);
+  
 
   useEffect(() => {
     const handleResize = () => {

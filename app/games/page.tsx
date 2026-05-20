@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { MessagesContext } from "../components/_providers/MessagesContext";
 
 import { useFetch } from "../hooks/useFetch";
 import { GamePreview } from "../types";
@@ -16,6 +18,7 @@ import GameLink from "../components/games/GameLink";
 import AddGameModal from "../components/games/AddGameModal";
 
 const Games = () => {
+  const { status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const platform = searchParams.get("platform");
@@ -26,6 +29,7 @@ const Games = () => {
   const [openedSelect, setOpenedSelect] = useState<string | null>(null);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [search, setSearch] = useState(title);
+  const { setNewMessage } = useContext(MessagesContext);
 
   const updateParams = (key: string, value: string | null) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -63,7 +67,14 @@ const Games = () => {
 
   const platformHandler = (value: string | null) => updateParams("platform", value);
   const genreHandler = (value: string | null) => updateParams("genre", value);
-  const openModalHandler = () => setIsModalOpened(true);
+
+  const openModalHandler = () => {
+    if (status === "unauthenticated") {
+      setNewMessage(401, "You must be logged in");
+      return;
+    }
+    setIsModalOpened(true);
+  };
 
   return (
     <>
@@ -88,7 +99,7 @@ const Games = () => {
             hasFilters={platform || genre || title}
             onClear={clearFiltersHandler}
           >
-            <Button className="mt-6" onClick={() => setIsModalOpened(true)}>
+            <Button className="mt-6" onClick={openModalHandler}>
               <Plus />
               Add Game
             </Button>

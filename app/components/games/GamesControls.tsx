@@ -1,4 +1,7 @@
+import { useSession } from "next-auth/react";
+
 import { GENRES, PLATFORMS } from "@/app/lib/constant";
+
 import Wrapper from "../shared/layout/Wrapper";
 import Button from "../shared/ui/Button";
 import Plus from "../shared/ui/Plus";
@@ -29,6 +32,11 @@ const GamesControls = ({
   onSelect,
   onModal,
 }: Props) => {
+  
+  const openModalHandler = () => {
+    onModal();
+  };
+
   return (
     <section className="py-2 md:py-4">
       <Wrapper>
@@ -37,7 +45,7 @@ const GamesControls = ({
             Games Library
           </h2>
           <p className="text-GrayishBlue sm:order-3 sm:col-span-2">This library is built by the community.</p>
-          <Button className="sm:order-2 sm:w-max sm:place-self-end" onClick={onModal}>
+          <Button className="sm:order-2 sm:w-max sm:place-self-end" onClick={openModalHandler}>
             <Plus />
             Add Game
           </Button>

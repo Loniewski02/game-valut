@@ -1,10 +1,28 @@
 import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import defaultImg from "@/public/assets/default.png";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json({ message: "User not found" }, { status: 401 });
+    }
+
     const id = params.id;
 
     const response = await fetch(`https://api.rawg.io/api/games/${id}?key=${process.env.RAWG_API_KEY}`);
@@ -64,14 +82,19 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         publisher: publishers,
         esrb: data.esrb_rating?.name ?? "",
         modes: gameModes.length === 0 ? [] : gameModes,
-        addedById: "user1", // potem auth
+        addedById: existingUser.id,
       },
     });
 
-    return NextResponse.json(game);
+    return NextResponse.json(
+      {
+        message: "Game added successfully",
+        game,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-
     return NextResponse.json({ message: "Something went wrong" }, { status: 500 });
   }
 }

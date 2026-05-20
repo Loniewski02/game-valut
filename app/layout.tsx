@@ -3,6 +3,9 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/shared/navigation/Navigation";
 import Footer from "./components/shared/layout/Footer";
+import AuthProvider from "./components/_providers/auth-provider";
+import MessagesProvider from "./components/_providers/MessagesContext";
+import Message from "./components/shared/ui/Message";
 
 const fontMontserrat = Montserrat({
   subsets: ["latin"],
@@ -24,11 +27,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontMontserrat.variable} flex min-h-dvh w-full flex-col font-montserrat`}>
-        <Navigation />
-        <main id="main" className="flex-1 bg-LightGray p-6 md:p-8">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <MessagesProvider>
+            <Navigation />
+            <main id="main" className="relative flex-1 bg-LightGray p-6 md:p-8">
+              {children}
+              <Message />
+            </main>
+            <Footer />
+          </MessagesProvider>
+        </AuthProvider>
       </body>
     </html>
   );
