@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 
 import { emailReg } from "@/utils/constant";
 
-import profile from "@/public/assets/profile.png";
-
 export async function POST(req: Request) {
   try {
     const data = await req.formData();
@@ -74,7 +72,7 @@ export async function POST(req: Request) {
         username,
         email,
         password: hashedPassword,
-        image: profile.src,
+        image: "/assets/profile.png",
       },
     });
 

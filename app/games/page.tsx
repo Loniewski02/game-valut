@@ -70,7 +70,7 @@ const Games = () => {
 
   const openModalHandler = () => {
     if (status === "unauthenticated") {
-      setNewMessage(401, "You must be logged in");
+      setNewMessage(401, "Unauthorized");
       return;
     }
     setIsModalOpened(true);

@@ -1,3 +1,4 @@
+import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -11,9 +12,9 @@ import Logo from "../ui/Logo";
 import NavLink from "./NavLink";
 import Button from "../ui/Button";
 import TextLink from "../ui/TextLink";
+import LoadingIndicator from "../states/LoadingIndicator";
 
 import test from "@/public/assets/witcher-3-hero.jpg";
-import LoadingIndicator from "../states/LoadingIndicator";
 
 type Props = {
   isShown: boolean;
@@ -84,10 +85,33 @@ const NavItems = ({ isShown, onClose }: Props) => {
         </div>
         <div className="relative flex flex-col gap-4 pt-6 md:hidden">
           <div className="absolute top-0 h-[2px] w-full rounded-sm bg-Gray" />
-          <NavLink data={loginBtnData} onClick={onClose} />
-          <TextLink href="/auth?mode=register" text="Don't have an account?" onClick={onClose}>
-            Sign up.
-          </TextLink>
+          {session && status === "authenticated" && (
+            <>
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={logoutHandler}
+                  className="flex items-center gap-4 py-2 text-lg text-red-800 transition hover:text-red-500 md:gap-1 md:py-0 md:text-15"
+                >
+                  <BiLogOut className="text-2xl md:hidden" />
+                  <span className="first-letter:uppercase">log out</span>
+                </button>
+                <Link href={`/users/${session.user.username}`} className="flex items-center gap-4">
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full border border-Gray">
+                    <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
+                  </div>
+                  <span>{session.user.username}</span>
+                </Link>
+              </div>
+            </>
+          )}
+          {status === "unauthenticated" && (
+            <>
+              <NavLink data={loginBtnData} onClick={onClose} />
+              <TextLink href="/auth?mode=register" text="Don't have an account?" onClick={onClose}>
+                Sign up.
+              </TextLink>
+            </>
+          )}
         </div>
       </div>
       <div
