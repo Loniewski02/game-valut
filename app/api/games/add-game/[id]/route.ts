@@ -38,8 +38,8 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const developers = data.developers?.map((dev: any) => dev.name) || [];
     const screenshots = screenshotsData.results?.map((screen: any) => screen.image) || [];
 
-    const gameModes = [
-      ...new Set(
+    const gameModes = Array.from(
+      new Set(
         data.tags.map((item: any) => {
           const name = item.name.toLowerCase();
 
@@ -50,10 +50,10 @@ export async function POST(req: Request, { params }: { params: { id: string } })
           return null;
         }),
       ),
-    ].filter((mode): mode is string => mode !== null);
+    ).filter((mode): mode is string => mode !== null);
 
-    const platforms = [
-      ...new Set(
+    const platforms = Array.from(
+      new Set(
         data.platforms.map((item: any) => {
           const name = item.platform.name.toLowerCase();
 
@@ -65,7 +65,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
           return null;
         }),
       ),
-    ].filter((platform): platform is string => platform !== null);
+    ).filter((platform): platform is string => platform !== null);
 
     const game = await prisma.game.create({
       data: {
