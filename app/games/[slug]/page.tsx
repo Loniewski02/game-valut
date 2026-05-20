@@ -10,7 +10,7 @@ import GameDetailsScreens from "@/components/game-details/GameDetailsScreens";
 import Wrapper from "@/components/shared/layout/Wrapper";
 import NotFound from "@/app/not-found";
 
-const Game = async ({ params }: { params: { slug: string } }) => {
+const GameDetailPage = async ({ params }: { params: { slug: string } }) => {
   const game = await prisma.game.findUnique({
     where: {
       slug: params.slug,
@@ -62,4 +62,4 @@ const Game = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default Game;
+export default GameDetailPage;

@@ -10,7 +10,7 @@ import SelectButton from "../../components/shared/ui/SelectButton";
 import FetchSection from "../../components/shared/states/FetchSection";
 import StatisticsCards from "../../components/statistics/StatisticsCards";
 
-const Statistics = () => {
+const StatisticsPage = () => {
   const [period, setPeriod] = useState<string | null>(null);
   const [opened, setOpened] = useState<string | null>(null);
 
@@ -44,4 +44,4 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+export default StatisticsPage;

@@ -6,7 +6,7 @@ import LatestReview from "../components/home/LatestReview";
 import TopGames from "../components/home/TopGames";
 import Wrapper from "../components/shared/layout/Wrapper";
 
-export default async function Home() {
+export default async function HomePage() {
   const topGames = await prisma.game.findMany({
     where: {
       reviews: {

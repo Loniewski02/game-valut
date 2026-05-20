@@ -17,7 +17,7 @@ import Section from "../../components/shared/layout/Section";
 import GameLink from "../../components/games/GameLink";
 import AddGameModal from "../../components/games/AddGameModal";
 
-const Games = () => {
+const GamesPage = () => {
   const { status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -117,4 +117,4 @@ const Games = () => {
   );
 };
 
-export default Games;
+export default GamesPage;
