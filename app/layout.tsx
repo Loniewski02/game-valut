@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/shared/navigation/Navigation";
-import Footer from "./components/shared/layout/Footer";
-import AuthProvider from "./components/_providers/auth-provider";
-import MessagesProvider from "./components/_providers/MessagesContext";
-import Message from "./components/shared/ui/Message";
+import Navigation from "../components/shared/navigation/Navigation";
+import Footer from "../components/shared/layout/Footer";
+import AuthProvider from "../components/_providers/auth-provider";
+import MessagesProvider from "../components/_providers/MessagesContext";
+import Message from "../components/shared/ui/Message";
 
 const fontMontserrat = Montserrat({
   subsets: ["latin"],

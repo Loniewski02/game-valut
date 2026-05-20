@@ -2,20 +2,20 @@
 import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { MessagesContext } from "../components/_providers/MessagesContext";
+import { MessagesContext } from "../../components/_providers/MessagesContext";
 
-import { useFetch } from "../hooks/useFetch";
-import { GamePreview } from "../types";
+import { useFetch } from "../../hooks/useFetch";
+import { GamePreview } from "../../types";
 
 import { BsController } from "react-icons/bs";
-import GamesControls from "../components/games/GamesControls";
-import FetchSection from "../components/shared/states/FetchSection";
-import EmptySection from "../components/shared/states/EmptySection";
-import Button from "../components/shared/ui/Button";
-import Plus from "../components/shared/ui/Plus";
-import Section from "../components/shared/layout/Section";
-import GameLink from "../components/games/GameLink";
-import AddGameModal from "../components/games/AddGameModal";
+import GamesControls from "../../components/games/GamesControls";
+import FetchSection from "../../components/shared/states/FetchSection";
+import EmptySection from "../../components/shared/states/EmptySection";
+import Button from "../../components/shared/ui/Button";
+import Plus from "../../components/shared/ui/Plus";
+import Section from "../../components/shared/layout/Section";
+import GameLink from "../../components/games/GameLink";
+import AddGameModal from "../../components/games/AddGameModal";
 
 const Games = () => {
   const { status } = useSession();

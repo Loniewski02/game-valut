@@ -1,6 +1,6 @@
-import Login from "../components/auth/login/Login";
-import Register from "../components/auth/register/Register";
-import Reset from "../components/auth/reset/Reset";
+import Login from "../../components/auth/login/Login";
+import Register from "../../components/auth/register/Register";
+import Reset from "../../components/auth/reset/Reset";
 
 type Props = { searchParams: { mode: string } };
 

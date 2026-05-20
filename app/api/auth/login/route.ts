@@ -1,8 +1,8 @@
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
-import { emailReg } from "@/app/lib/constant";
+import { emailReg } from "@/utils/constant";
 
 export async function POST(req: Request) {
   try {

@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 
-import { useFetch } from "../hooks/useFetch";
-import { MainStats } from "@/app/types";
-import { PERIODS } from "../lib/constant";
+import { useFetch } from "../../hooks/useFetch";
+import { MainStats } from "@/types";
+import { PERIODS } from "@/utils/constant";
 
-import ControlsSection from "../components/shared/layout/ControlsSection";
-import SelectButton from "../components/shared/ui/SelectButton";
-import FetchSection from "../components/shared/states/FetchSection";
-import StatisticsCards from "../components/statistics/StatisticsCards";
+import ControlsSection from "../../components/shared/layout/ControlsSection";
+import SelectButton from "../../components/shared/ui/SelectButton";
+import FetchSection from "../../components/shared/states/FetchSection";
+import StatisticsCards from "../../components/statistics/StatisticsCards";
 
 const Statistics = () => {
   const [period, setPeriod] = useState<string | null>(null);

@@ -2,17 +2,17 @@
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 
-import { RankingItemType } from "../types";
+import { RankingItemType } from "../../types";
 
 import { BsController } from "react-icons/bs";
-import FetchSection from "../components/shared/states/FetchSection";
-import EmptySection from "../components/shared/states/EmptySection";
-import Button from "../components/shared/ui/Button";
-import Section from "../components/shared/layout/Section";
-import RankingItem from "../components/rankings/RankingItem";
-import RankingsControls from "../components/rankings/RankingsControls";
+import FetchSection from "../../components/shared/states/FetchSection";
+import EmptySection from "../../components/shared/states/EmptySection";
+import Button from "../../components/shared/ui/Button";
+import Section from "../../components/shared/layout/Section";
+import RankingItem from "../../components/rankings/RankingItem";
+import RankingsControls from "../../components/rankings/RankingsControls";
 
 const Rankings = () => {
   const router = useRouter();

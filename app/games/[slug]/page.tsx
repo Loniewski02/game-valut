@@ -1,15 +1,14 @@
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
-import GameDetailAbout from "@/app/components/game-details/GameDetailAbout";
-import GameDetailHeader from "@/app/components/game-details/GameDetailHeader";
-import GameDetailInfo from "@/app/components/game-details/GameDetailInfo";
-import GameDetailRating from "@/app/components/game-details/GameDetailRating";
-import GameDetailSimilarGames from "@/app/components/game-details/GameDetailSimilarGames";
-import GameDetailsReviews from "@/app/components/game-details/GameDetailsReviews";
-import GameDetailsScreens from "@/app/components/game-details/GameDetailsScreens";
-import Wrapper from "@/app/components/shared/layout/Wrapper";
+import GameDetailAbout from "@/components/game-details/GameDetailAbout";
+import GameDetailHeader from "@/components/game-details/GameDetailHeader";
+import GameDetailInfo from "@/components/game-details/GameDetailInfo";
+import GameDetailRating from "@/components/game-details/GameDetailRating";
+import GameDetailSimilarGames from "@/components/game-details/GameDetailSimilarGames";
+import GameDetailsReviews from "@/components/game-details/GameDetailsReviews";
+import GameDetailsScreens from "@/components/game-details/GameDetailsScreens";
+import Wrapper from "@/components/shared/layout/Wrapper";
 import NotFound from "@/app/not-found";
-
 
 const Game = async ({ params }: { params: { slug: string } }) => {
   const game = await prisma.game.findUnique({
