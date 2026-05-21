@@ -29,6 +29,7 @@ const NavItems = ({ isShown, onClose }: Props) => {
 
   const menuToggler = () => setOpened((prev) => !prev);
   const closeMenuHandler = () => setOpened(false);
+
   const logoutHandler = () => {
     closeMenuHandler();
     signOut({
@@ -88,6 +89,12 @@ const NavItems = ({ isShown, onClose }: Props) => {
           {session && status === "authenticated" && (
             <>
               <div className="flex items-center justify-between">
+                <Link href={`/users/${session.user.username}`} onClick={onClose} className="flex items-center gap-4">
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full border border-Gray">
+                    <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
+                  </div>
+                  <span>{session.user.username}</span>
+                </Link>
                 <button
                   onClick={logoutHandler}
                   className="flex items-center gap-4 py-2 text-lg text-red-800 transition hover:text-red-500 md:gap-1 md:py-0 md:text-15"
@@ -95,12 +102,6 @@ const NavItems = ({ isShown, onClose }: Props) => {
                   <BiLogOut className="text-2xl md:hidden" />
                   <span className="first-letter:uppercase">log out</span>
                 </button>
-                <Link href={`/users/${session.user.username}`} className="flex items-center gap-4">
-                  <div className="relative h-12 w-12 overflow-hidden rounded-full border border-Gray">
-                    <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
-                  </div>
-                  <span>{session.user.username}</span>
-                </Link>
               </div>
             </>
           )}
