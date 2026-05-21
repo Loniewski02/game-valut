@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import Games from "./Games";
 
+import Games from "./Games";
 import LoadingIndicator from "@/components/shared/states/LoadingIndicator";
 
 const GamesPage = () => {
