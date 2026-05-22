@@ -113,8 +113,10 @@ export const GENRES: string[] = [
   "Simulation",
   "Sports",
   "Racing",
-  "Horror",
-  "Souls-like",
+  "Puzzle",
+  "Platformer",
+  "Fighting",
+  "Indie",
 ];
 
 export const PLATFORMS: string[] = ["PC", "PlayStation", "Xbox", "Nintendo"];

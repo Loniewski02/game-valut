@@ -1,8 +1,6 @@
 "use client";
-import { Suspense, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-
 import { useFetch } from "../../hooks/useFetch";
+import { useFilters } from "@/hooks/useFilters";
 
 import { RankingItemType } from "../../types";
 
@@ -15,65 +13,28 @@ import RankingItem from "../../components/rankings/RankingItem";
 import RankingsControls from "../../components/rankings/RankingsControls";
 
 const Rankings = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { searchParams, clear } = useFilters();
+
   const platform = searchParams.get("platform");
   const genre = searchParams.get("genre");
-  const period = searchParams.get("period") ?? "";
+  const period = searchParams.get("period");
 
   const { data: games, isLoading, error } = useFetch<RankingItemType[]>(`/api/rankings?${searchParams.toString()}`);
-  const [openedSelect, setOpenedSelect] = useState<string | null>(null);
-
-  const updateParams = (key: string, value: string | null) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (!value) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    router.push(`?${params.toString()}`);
-  };
-
-  const selectHandler = (text: string | null) => {
-    setOpenedSelect((prev) => (prev === text ? null : text));
-  };
-
-  const platformHandler = (value: string | null) => updateParams("platform", value);
-  const genreHandler = (value: string | null) => updateParams("genre", value);
-  const periodHandler = (value: string | null) => updateParams("period", value);
 
   const clearFiltersHandler = () => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.delete("period");
-    params.delete("genre");
-    params.delete("platform");
-
-    setOpenedSelect(null);
-
-    router.push(`?${params.toString()}`);
+    clear(["period", "genre", "platform"]);
   };
 
   return (
-    <Suspense>
-      <RankingsControls
-        genre={genre}
-        platform={platform}
-        period={period}
-        onGenre={genreHandler}
-        onPlatform={platformHandler}
-        onPeriod={periodHandler}
-        onSelect={selectHandler}
-        openedSelect={openedSelect}
-      />
+    <>
+      <RankingsControls />
       <FetchSection isLoading={isLoading} error={error}>
         {!games || games.length === 0 ? (
           <EmptySection
             title="No ranked games yet"
             text="No games have been rated yet. Be the first to rate one."
             Icon={BsController}
-            hasFilters={platform || genre}
+            hasFilters={platform || genre || period}
             onClear={clearFiltersHandler}
           >
             <Button className="mt-6" href="/games" link>
@@ -96,7 +57,7 @@ const Rankings = () => {
           </Section>
         )}
       </FetchSection>
-    </Suspense>
+    </>
   );
 };
 

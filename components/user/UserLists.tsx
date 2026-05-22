@@ -14,7 +14,7 @@ const games = [
 const UserLists = () => {
   return (
     <Wrapper className="xl:flex xl:justify-start xl:gap-4">
-      <Section className="w-full" title="playing" txt="currently active">
+      <Section className="w-full" title="playing">
         <div>
           {games.map((game) => (
             <div key={game.id} className="flex items-center gap-3">
@@ -27,7 +27,7 @@ const UserLists = () => {
           ))}
         </div>
       </Section>
-      <Section className="w-full" title="Want To Play" txt="Wishlist">
+      <Section className="w-full" title="Want To Play">
         <div>
           {games.map((game) => (
             <div key={game.id} className="flex items-center gap-3">
@@ -40,7 +40,7 @@ const UserLists = () => {
           ))}
         </div>
       </Section>
-      <Section className="w-full" title="completed" txt="Finished games">
+      <Section className="w-full" title="completed">
         <div>
           {games.map((game) => (
             <div key={game.id} className="flex items-center gap-3">

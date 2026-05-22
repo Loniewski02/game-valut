@@ -12,24 +12,26 @@ type Game = {
   backgroundImage: string;
 };
 
-const AddGameItem = ({ game }: { game: Game; onClose: () => void }) => {
+const AddGameItem = ({ game, onLoading }: { game: Game; onLoading: (t: boolean) => void }) => {
   const router = useRouter();
   const { setNewMessage } = useContext(MessagesContext);
 
   const addGameHandler = async () => {
     try {
+      onLoading(true);
       const response = await fetch(`/api/games/add-game/${game.id}`, {
         method: "POST",
       });
 
       const data = await response.json();
       if (!response.ok) {
+        onLoading(false);
         setNewMessage(response.status, data.message);
         return;
       }
 
       setNewMessage(response.status, data.message);
-
+      onLoading(false);
       router.push(`/games/${data.game.slug}`);
     } catch (error) {
       console.error(error);

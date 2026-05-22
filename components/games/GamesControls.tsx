@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useFilters } from "@/hooks/useFilters";
+
 import { GENRES, PLATFORMS } from "@/utils/constant";
 
 import Wrapper from "../shared/layout/Wrapper";
@@ -7,29 +10,29 @@ import SelectButton from "../shared/ui/SelectButton";
 
 type Props = {
   search: string;
-  platform: string | null;
-  genre: string | null;
-  openedSelect: string | null;
-  onSearch: (value: string) => void;
-  onSubmit: (event: React.FormEvent) => void;
-  onPlatform: (value: string | null) => void;
-  onGenre: (value: string | null) => void;
-  onSelect: (value: string | null) => void;
+  onSearch: (txt: string) => void;
   onModal: () => void;
 };
 
-const GamesControls = ({
-  search,
-  platform,
-  genre,
-  openedSelect,
-  onSearch,
-  onSubmit,
-  onPlatform,
-  onGenre,
-  onSelect,
-  onModal,
-}: Props) => {
+const GamesControls = ({ search, onSearch, onModal }: Props) => {
+  const [openedSelect, setOpenedSelect] = useState<string | null>(null);
+  const { searchParams, update } = useFilters();
+
+  const platform = searchParams.get("platform");
+  const genre = searchParams.get("genre");
+
+  const paltformHandler = (value: string | null) => update("platform", value);
+  const genreHandler = (value: string | null) => update("genre", value);
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    update("title", search.trim());
+  };
+
+  const openedSelectHandler = (text: string | null) => {
+    setOpenedSelect((prev) => (prev === text ? null : text));
+  };
+
   return (
     <section className="py-2 md:py-4">
       <Wrapper>
@@ -44,7 +47,7 @@ const GamesControls = ({
           </Button>
         </div>
         <div className="relative grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-[1fr,auto,auto] md:grid-rows-1">
-          <form onSubmit={onSubmit} className="relative col-span-2 flex w-full flex-col gap-2 md:col-span-1">
+          <form onSubmit={submitHandler} className="relative col-span-2 flex w-full flex-col gap-2 md:col-span-1">
             <label htmlFor="game-title" className="sr-only">
               search by title
             </label>
@@ -62,8 +65,8 @@ const GamesControls = ({
             name="platform"
             items={PLATFORMS}
             selected={platform}
-            onSelect={onPlatform}
-            onOpen={onSelect}
+            onSelect={paltformHandler}
+            onOpen={openedSelectHandler}
             opened={openedSelect}
           />
           <SelectButton
@@ -71,8 +74,8 @@ const GamesControls = ({
             name="genre"
             items={GENRES}
             selected={genre}
-            onSelect={onGenre}
-            onOpen={onSelect}
+            onSelect={genreHandler}
+            onOpen={openedSelectHandler}
             opened={openedSelect}
           />
         </div>

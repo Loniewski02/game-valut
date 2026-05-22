@@ -1,4 +1,3 @@
-import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -8,6 +7,7 @@ import { Route } from "@/types";
 import { ROUTES } from "@/utils/constant";
 
 import { BiLogIn } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import Logo from "../ui/Logo";
 import NavLink from "./NavLink";
 import Button from "../ui/Button";
@@ -51,30 +51,30 @@ const NavItems = ({ isShown, onClose }: Props) => {
             <NavLink key={route.id} data={route} onClick={onClose} />
           ))}
           {session && status === "authenticated" && (
-            <div className="relative hidden min-w-24 md:block">
-              <button onClick={menuToggler} className="flex items-center gap-2">
-                <div className="relative h-8 w-8 overflow-hidden rounded-full border border-Gray">
+            <div className="relative ml-6 hidden min-w-24 md:block">
+              <button onClick={menuToggler} className="flex items-center gap-3">
+                <span className="text-15">{session.user.username}</span>
+                <div className="relative h-10 w-10 overflow-hidden rounded-full border border-Gray">
                   <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
                 </div>
-                <span className="text-13">{session.user.username}</span>
               </button>
-              {opened && (
-                <div className="absolute right-0 mt-2 w-max rounded-xl border border-Gray bg-White p-2 shadow-md">
-                  <Link
-                    href={`/users/${session.user.username}`}
-                    className="block rounded-md px-3 py-2 text-sm hover:bg-LightGray"
-                    onClick={closeMenuHandler}
-                  >
-                    Profile
-                  </Link>
-                  <button
-                    onClick={logoutHandler}
-                    className="mt-1 w-full rounded-md border border-red-400 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
-                  >
-                    Log out
-                  </button>
-                </div>
-              )}
+              <div
+                className={`${opened ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"} opacity-1 -0 absolute -bottom-3 left-0 z-30 flex w-max translate-y-full flex-col rounded-xl border border-Gray bg-White p-4 transition`}
+              >
+                <Link
+                  href={`/users/${session.user.username}`}
+                  className="block px-3 py-2 text-15 hover:text-Primary"
+                  onClick={closeMenuHandler}
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={logoutHandler}
+                  className="mt-1 w-full rounded-md border border-red-400 px-3 py-2 text-sm text-red-500 hover:bg-red-50"
+                >
+                  Log out
+                </button>
+              </div>
             </div>
           )}
           {status === "unauthenticated" && (
@@ -88,8 +88,12 @@ const NavItems = ({ isShown, onClose }: Props) => {
           <div className="absolute top-0 h-[2px] w-full rounded-sm bg-Gray" />
           {session && status === "authenticated" && (
             <>
-              <div className="flex items-center justify-between">
-                <Link href={`/users/${session.user.username}`} onClick={onClose} className="flex items-center gap-4">
+              <div className="">
+                <Link
+                  href={`/users/${session.user.username}`}
+                  onClick={onClose}
+                  className="mb-4 flex items-center gap-4"
+                >
                   <div className="relative h-12 w-12 overflow-hidden rounded-full border border-Gray">
                     <Image fill src={session.user.image || test.src} alt="profile" className="object-cover" />
                   </div>
@@ -97,7 +101,7 @@ const NavItems = ({ isShown, onClose }: Props) => {
                 </Link>
                 <button
                   onClick={logoutHandler}
-                  className="flex items-center gap-4 py-2 text-lg text-red-800 transition hover:text-red-500 md:gap-1 md:py-0 md:text-15"
+                  className="flex w-full items-center gap-4 py-2 text-lg text-red-800 transition hover:text-red-500 md:gap-1 md:py-0"
                 >
                   <BiLogOut className="text-2xl md:hidden" />
                   <span className="first-letter:uppercase">log out</span>

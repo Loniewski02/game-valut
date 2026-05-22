@@ -15,7 +15,7 @@ const FetchSection = ({
 }) => {
   return (
     <>
-      {isLoading && !error && <LoadingIndicator className="mt-20" />}
+      {isLoading && !error && <LoadingIndicator className="my-20" />}
       {!isLoading && error && <ErrorSection title={`${error.status}`} text={error.message} />}
       {!isLoading && !error && children}
     </>

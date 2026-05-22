@@ -1,8 +1,13 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/next-auth";
+
 import Header from "../shared/layout/Header";
 import Hero from "../shared/layout/Hero";
 import Button from "../shared/ui/Button";
 
-const HomeHeader = () => {
+const HomeHeader = async () => {
+  const session = await getServerSession(authOptions);
+
   return (
     <Header>
       <Hero width={1000} height={500} alt=";" src={"/assets/hero.png"} main />
@@ -16,12 +21,14 @@ const HomeHeader = () => {
           }
         </p>
         <div className="mt-10 flex flex-col gap-4 md:flex-row">
-          <Button href="/auth?mode=register" className="max-w-56" link>
-            Get Started
-          </Button>
-          <Button href="/games" className="max-w-56" link transparent>
+          <Button href="/games" className="max-w-56" link>
             Browse Games
           </Button>
+          {!session && (
+            <Button href="/auth?mode=register" className="max-w-56" link transparent>
+              Get Started
+            </Button>
+          )}
         </div>
       </div>
     </Header>

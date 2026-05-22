@@ -51,7 +51,10 @@ const GameDetailHeader = ({
             ))}
           </div>
           <p className="text-13 text-Gray md:mt-4">
-            Added by: <Link href={`/users/${addedBy}`}>{addedBy}</Link>
+            Added by:{" "}
+            <Link href={`/users/${addedBy}`} className="text-Primary transition hover:text-PrimaryHover">
+              {addedBy}
+            </Link>
           </p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">

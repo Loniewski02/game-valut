@@ -1,30 +1,14 @@
-"use client";
-import { useState } from "react";
+import { Suspense } from "react";
 
-import UserHeader from "@/components/user/UserHeader";
-import UserControls from "@/components/user/UserControls";
-import UserReviews from "@/components/user/UserReviews";
-import UserOverview from "@/components/user/UserOverview";
-import UserLists from "@/components/user/UserLists";
-import UserSettings from "@/components/user/UserSettings";
+import LoadingIndicator from "@/components/shared/states/LoadingIndicator";
+import UserDetails from "./UserDetails";
 
-const page = () => {
-  const [section, setSection] = useState("overview");
-
-  const sectionHandler = (text: string) => {
-    setSection(text);
-  };
-
+const UserDetailsPage = () => {
   return (
-    <>
-      <UserHeader />
-      <UserControls onSection={sectionHandler} section={section} />
-      {section === "overview" && <UserOverview />}
-      {section === "reviews" && <UserReviews />}
-      {section === "lists" && <UserLists />}
-      {section === "settings" && <UserSettings />}
-    </>
+    <Suspense fallback={<LoadingIndicator />}>
+      <UserDetails />
+    </Suspense>
   );
 };
 
-export default page;
+export default UserDetailsPage;

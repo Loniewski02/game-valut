@@ -95,7 +95,7 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         </form>
         {games && games.length > 0 && (
           <div className="mt-6 max-h-[450px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
-            {!loading && games.map((game) => <AddGameItem key={game.name} game={game} onClose={onClose} />)}
+            {!loading && games.map((game) => <AddGameItem key={game.name} game={game} onLoading={setLoading} />)}
           </div>
         )}
         {loading && <LoadingIndicator className="mt-8" />}
