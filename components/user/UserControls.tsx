@@ -7,16 +7,16 @@ const CONTROLS = ["overview", "reviews", "lists", "settings"];
 const UserControls = () => {
   const { searchParams, update } = useFilters();
 
-  const section = searchParams.get("section");
+  const section = searchParams.get("section") ?? "overview";
 
   const sectionHandler = (value: string | null) => update("section", value);
 
   return (
-    <Section wrapperClassName="flex justify-between gap-2">
+    <Section wrapperClassName="flex flex-wrap justify-evenly gap-4">
       {CONTROLS.map((control) => (
         <button
           key={control}
-          className={`${section === control && "text-Primary"} w-1/4 text-15 font-semibold uppercase tracking-tight transition hover:text-Primary`}
+          className={`${section === control && "text-Primary"} w-max px-6 py-2 text-15 font-semibold uppercase tracking-tight transition hover:text-Primary`}
           onClick={() => sectionHandler(control)}
         >
           {control}
