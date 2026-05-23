@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ADD_GAME_INPUT } from "@/utils/constant";
+import { GamePreview } from "@/types";
 
 import { IoMdClose } from "react-icons/io";
 import { BiSearch } from "react-icons/bi";
@@ -11,8 +12,9 @@ import AddGameItem from "./AddGameItem";
 import LoadingIndicator from "../shared/states/LoadingIndicator";
 
 type Props = {
-  onClose: () => void;
   isShown: boolean;
+  onClose: () => void;
+  onAddGame: (game: GamePreview) => void;
 };
 
 type Game = {
@@ -21,7 +23,7 @@ type Game = {
   backgroundImage: string;
 };
 
-const AddGameModal = ({ onClose, isShown }: Props) => {
+const AddGameModal = ({ onClose, isShown, onAddGame }: Props) => {
   const [games, setGames] = useState<Game[] | []>([]);
   const [loading, setLoading] = useState(false);
 
@@ -95,7 +97,10 @@ const AddGameModal = ({ onClose, isShown }: Props) => {
         </form>
         {games && games.length > 0 && (
           <div className="mt-6 max-h-[450px] overflow-y-scroll scroll-smooth rounded-2xl bg-LightGray/50 p-2">
-            {!loading && games.map((game) => <AddGameItem key={game.name} game={game} onLoading={setLoading} />)}
+            {!loading &&
+              games.map((game) => (
+                <AddGameItem key={game.name} game={game} onAdd={onAddGame} onLoading={setLoading} onClose={onClose} />
+              ))}
           </div>
         )}
         {loading && <LoadingIndicator className="mt-8" />}

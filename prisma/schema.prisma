@@ -9,95 +9,64 @@ datasource db {
 
 model User {
   id              String   @id @default(cuid())
-
   username        String   @unique
   usernameLower   String   @unique
   email           String   @unique
   password        String
-
   image           String   @default("")
   backgroundImage String   @default("")
   description     String   @default("")
-
   favoriteGameId  String?
-  favoriteGame    Game? @relation("FavoriteGame", fields: [favoriteGameId], references: [id])
-
+  favoriteGame    Game? @relation( "FavoriteGame",fields: [favoriteGameId],references: [id])
   reviews         Review[]
   lists           GameList[]
-
   addedGames      Game[] @relation("GameCreator")
-
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
 
 model Game {
-  id              String   @id @default(cuid())
-
-  title           String
-  slug            String   @unique
-
-  description     String
-
-  image           String
-  cover           String
-  esrb            String
-
-  modes           String[] @default([])
-
-  releaseDate     DateTime
-
-  developer       String[] @default([])
-  publisher       String[] @default([])
-  screenshots     String[] @default([])
-
-  platforms       String[] @default([])
-  genres          String[] @default([])
-
-  addedByName     String
-
-  addedById       String?
-  addedBy         User? @relation("GameCreator", fields: [addedById], references: [id], onDelete: SetNull)
-
-  favoritedBy     User[] @relation("FavoriteGame")
-
-  reviews         Review[]
-  userLists       GameList[]
-
-  createdAt       DateTime @default(now())
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String
+  image         String
+  cover         String
+  esrb          String
+  modes         String[] @default([])
+  releaseDate   DateTime
+  developer     String[] @default([])
+  publisher     String[] @default([])
+  screenshots   String[] @default([])
+  platforms     String[] @default([])
+  genres        String[] @default([])
+  addedById     String
+  addedBy       User @relation("GameCreator", fields: [addedById], references: [id])
+  favoritedBy   User[] @relation("FavoriteGame")
+  reviews       Review[]
+  userLists     GameList[]
+  createdAt     DateTime @default(now())
 }
 
 model Review {
-  id              String   @id @default(cuid())
-
-  rating          Int
-  content         String
-
-  username        String
-  userImage       String
-
-  userId          String?
-  gameId          String
-
-  user            User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-  game            Game @relation(fields: [gameId], references: [id])
-
-  createdAt       DateTime @default(now())
+  id            String   @id @default(cuid())
+  rating        Int
+  content       String
+  userId        String
+  gameId        String
+  user          User @relation(fields: [userId], references: [id])
+  game          Game @relation(fields: [gameId], references: [id])
+  createdAt     DateTime @default(now())
 }
 
 model GameList {
-  id              String   @id @default(cuid())
-
-  status          GameStatus
-
-  userId          String
-  gameId          String
-
-  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  game            Game @relation(fields: [gameId], references: [id])
-
-  createdAt       DateTime @default(now())
-
+  id            String   @id @default(cuid())
+  status        GameStatus
+  userId        String
+  gameId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game          Game @relation(fields: [gameId], references: [id])
+  createdAt     DateTime @default(now())
   @@unique([userId, gameId])
 }
 

@@ -9,8 +9,6 @@ export async function POST(req: Request) {
     const identifier = data.get("identifier")?.toString().trim().toLowerCase();
     const password = data.get("password")?.toString();
 
-    console.log(identifier);
-
     if (!identifier || !password) {
       return NextResponse.json(
         {
@@ -42,7 +40,7 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!user) {
+    if (!user || user.username === user.id) {
       return NextResponse.json(
         {
           message: "No user found. Please check credentials",

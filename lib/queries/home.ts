@@ -37,11 +37,14 @@ export const getHomeData = async () => {
       createdAt: "desc",
     },
     select: {
-      id: true,
       content: true,
       rating: true,
-      username: true,
       createdAt: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
       game: {
         select: {
           title: true,

@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { MessagesContext } from "../../components/_providers/MessagesContext";
 
@@ -27,15 +27,24 @@ const Games = () => {
   const genre = searchParams.get("genre");
   const title = searchParams.get("title") ?? "";
 
-  const { data: games, isLoading, error } = useFetch<GamePreview[]>(`/api/games?${searchParams.toString()}`);
+  const { data, isLoading, error } = useFetch<GamePreview[]>(`/api/games?${searchParams.toString()}`);
 
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [search, setSearch] = useState(title);
+  const [games, setGames] = useState<GamePreview[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setGames(data);
+    }
+  }, [data]);
 
   const clearFiltersHandler = () => {
     setSearch("");
     clear(["title", "genre", "platform"]);
   };
+
+  const addGameHandler = (game: GamePreview) => setGames((prev) => [game, ...prev]);
 
   const openModalHandler = () => {
     if (status === "unauthenticated") {
@@ -44,6 +53,8 @@ const Games = () => {
     }
     setIsModalOpened(true);
   };
+
+  const closeModalHandler = () => setIsModalOpened(false);
 
   return (
     <>
@@ -70,7 +81,7 @@ const Games = () => {
           </Section>
         )}
       </FetchSection>
-      {isModalOpened && <AddGameModal isShown={isModalOpened} onClose={() => setIsModalOpened(false)} />}
+      {isModalOpened && <AddGameModal isShown={isModalOpened} onAddGame={addGameHandler} onClose={closeModalHandler} />}
     </>
   );
 };

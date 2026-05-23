@@ -774,7 +774,6 @@ export const GameScalarFieldEnum = {
   screenshots: 'screenshots',
   platforms: 'platforms',
   genres: 'genres',
-  addedByName: 'addedByName',
   addedById: 'addedById',
   createdAt: 'createdAt'
 } as const
@@ -786,8 +785,6 @@ export const ReviewScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
   content: 'content',
-  username: 'username',
-  userImage: 'userImage',
   userId: 'userId',
   gameId: 'gameId',
   createdAt: 'createdAt'

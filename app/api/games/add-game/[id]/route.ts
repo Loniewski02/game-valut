@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+
 import { authOptions } from "@/lib/next-auth";
 
 import defaultImg from "@/public/assets/default.png";
@@ -10,37 +11,74 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const session = await getServerSession(authOptions);
 
     if (!session) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(
+        {
+          message: "Unauthorized",
+        },
+        {
+          status: 401,
+        },
+      );
     }
 
-    const existingUser = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         id: session.user.id,
       },
+      select: {
+        id: true,
+        username: true,
+      },
     });
 
-    if (!existingUser) {
-      return NextResponse.json({ message: "User not found" }, { status: 401 });
+    if (!user || user.username === user.id) {
+      return NextResponse.json(
+        {
+          message: "User not found",
+        },
+        {
+          status: 404,
+        },
+      );
     }
 
-    const id = params.id;
+    const rawgId = params.id;
 
-    const response = await fetch(`https://api.rawg.io/api/games/${id}?key=${process.env.RAWG_API_KEY}`);
-    const screenshotsResponse = await fetch(
-      `https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.RAWG_API_KEY}`,
-    );
+    const [response, screenshotsResponse] = await Promise.all([
+      fetch(`https://api.rawg.io/api/games/${rawgId}?key=${process.env.RAWG_API_KEY}`),
+      fetch(`https://api.rawg.io/api/games/${rawgId}/screenshots?key=${process.env.RAWG_API_KEY}`),
+    ]);
 
     const data = await response.json();
+
     const screenshotsData = await screenshotsResponse.json();
 
-    const genres = data.genres?.map((genre: any) => genre.name) || [];
-    const publishers = data.publishers?.map((pub: any) => pub.name) || [];
-    const developers = data.developers?.map((dev: any) => dev.name) || [];
-    const screenshots = screenshotsData.results?.map((screen: any) => screen.image) || [];
+    const existingGame = await prisma.game.findUnique({
+      where: {
+        slug: data.slug,
+      },
+    });
+
+    if (existingGame) {
+      return NextResponse.json(
+        {
+          message: "Game already exists",
+          game: existingGame,
+        },
+        {
+          status: 409,
+        },
+      );
+    }
+
+    const genres = data.genres?.map((genre: any) => genre.name) ?? [];
+    const publishers = data.publishers?.map((pub: any) => pub.name) ?? [];
+    const developers = data.developers?.map((dev: any) => dev.name) ?? [];
+    const screenshots = screenshotsData.results?.map((screen: any) => screen.image) ?? [];
 
     const gameModes = Array.from(
       new Set(
-        data.tags.map((item: any) => {
+        data.tags?.map((item: any) => {
           const name = item.name.toLowerCase();
 
           if (name.includes("singleplayer")) return "Singleplayer";
@@ -48,13 +86,13 @@ export async function POST(req: Request, { params }: { params: { id: string } })
           if (name.includes("co-op")) return "Co-op";
 
           return null;
-        }),
+        }) ?? [],
       ),
     ).filter((mode): mode is string => mode !== null);
 
     const platforms = Array.from(
       new Set(
-        data.platforms.map((item: any) => {
+        data.platforms?.map((item: any) => {
           const name = item.platform.name.toLowerCase();
 
           if (name.includes("playstation")) return "PlayStation";
@@ -63,7 +101,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
           if (name.includes("pc")) return "PC";
 
           return null;
-        }),
+        }) ?? [],
       ),
     ).filter((platform): platform is string => platform !== null);
 
@@ -71,30 +109,48 @@ export async function POST(req: Request, { params }: { params: { id: string } })
       data: {
         title: data.name,
         slug: data.slug,
-        description: data.description_raw,
-        image: data.background_image ? data.background_image : defaultImg.src,
-        cover: data.background_image_additional ? data.background_image_additional : defaultImg.src,
+        description: data.description_raw ?? "",
+        image: data.background_image ?? defaultImg.src,
+        cover: data.background_image_additional ?? defaultImg.src,
         releaseDate: data.released ? new Date(data.released) : new Date(),
-        genres: genres,
-        platforms: platforms,
-        screenshots: screenshots,
+        genres,
+        platforms,
+        screenshots,
         developer: developers,
         publisher: publishers,
         esrb: data.esrb_rating?.name ?? "",
-        modes: gameModes.length === 0 ? [] : gameModes,
-        addedById: existingUser.id,
+        modes: gameModes,
+        addedById: user.id,
       },
     });
 
     return NextResponse.json(
       {
         message: "Game added successfully",
-        game,
+        game: {
+          id: game.id,
+          slug: game.slug,
+          title: game.title,
+          rating: 0,
+          image: game.image,
+          genres: game.genres,
+          platforms: game.platforms,
+        },
       },
-      { status: 200 },
+      {
+        status: 201,
+      },
     );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "Something went wrong" }, { status: 500 });
+
+    return NextResponse.json(
+      {
+        message: "Something went wrong",
+      },
+      {
+        status: 500,
+      },
+    );
   }
 }

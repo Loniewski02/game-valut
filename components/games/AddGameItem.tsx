@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
 import { MessagesContext } from "../_providers/MessagesContext";
+import { GamePreview } from "@/types";
 
 import defalutImage from "@/public/assets/default.png";
 
@@ -12,8 +12,14 @@ type Game = {
   backgroundImage: string;
 };
 
-const AddGameItem = ({ game, onLoading }: { game: Game; onLoading: (t: boolean) => void }) => {
-  const router = useRouter();
+type Props = {
+  game: Game;
+  onLoading: (t: boolean) => void;
+  onAdd: (t: GamePreview) => void;
+  onClose: () => void;
+};
+
+const AddGameItem = ({ game, onLoading, onAdd, onClose }: Props) => {
   const { setNewMessage } = useContext(MessagesContext);
 
   const addGameHandler = async () => {
@@ -30,9 +36,10 @@ const AddGameItem = ({ game, onLoading }: { game: Game; onLoading: (t: boolean) 
         return;
       }
 
-      setNewMessage(response.status, data.message);
+      onClose();
       onLoading(false);
-      router.push(`/games/${data.game.slug}`);
+      onAdd(data.game);
+      setNewMessage(response.status, data.message);
     } catch (error) {
       console.error(error);
       setNewMessage(500, "Something went wrong");

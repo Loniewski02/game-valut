@@ -52,18 +52,17 @@ export type RegisterData = {
 };
 
 export type LatestReviewType = {
+  content: string;
+  rating: number;
+  createdAt: Date;
+  user: {
+    username: string;
+  };
   game: {
     title: string;
     slug: string;
     image: string;
   };
-
-  id: string;
-  createdAt: Date;
-  rating: number;
-  content: string;
-
-  username: string;
 };
 
 export type TopGamesType = {

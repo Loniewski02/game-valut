@@ -34,9 +34,9 @@ const LatestReview = ({ data }: { data: LatestReviewType }) => {
           <p className="text-GrayishBlue">
             <span className="text-13">by</span>
             <Link
-              href={`/users/${data.username}`}
+              href={`/users/${data.user.username}`}
               className="text-15 font-bold transition hover:text-PrimaryHover"
-            >{` ${data.username} `}</Link>
+            >{` ${data.user.username} `}</Link>
             <span className="text-13 ">{dateFormatterToNow(data.createdAt)}</span>
           </p>
           <Link

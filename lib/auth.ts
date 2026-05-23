@@ -39,7 +39,7 @@ export async function FormLoginAction(prevState: any, formData: FormData) {
     redirect: false,
   });
 
-  if (signInResponse?.error) {
+  if (!signInResponse || signInResponse.error) {
     return {
       message: "Failed to login",
       status: 401,

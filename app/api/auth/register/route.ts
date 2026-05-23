@@ -9,11 +9,22 @@ export async function POST(req: Request) {
     const data = await req.formData();
 
     const username = data.get("username")?.toString().trim() as string;
-    const email = data.get("email")?.toString().trim();
+    const email = data.get("email")?.toString().trim().toLowerCase();
     const password = data.get("password")?.toString();
     const password2 = data.get("password2")?.toString();
 
     const usernameLower = username.toLowerCase();
+
+    const cuidPattern = /^c[a-z0-9]{24}$/;
+
+    if (cuidPattern.test(usernameLower)) {
+      return NextResponse.json(
+        {
+          message: "Username unavailable",
+        },
+        { status: 400 },
+      );
+    }
 
     if (!username || !email || !password || !password2) {
       return NextResponse.json(
