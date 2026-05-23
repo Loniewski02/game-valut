@@ -64,7 +64,7 @@ export type LatestReviewType = {
   content: string;
 
   username: string;
-} | null;
+};
 
 export type TopGamesType = {
   rating: number;
