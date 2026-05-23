@@ -109,6 +109,7 @@ export async function POST(req: Request) {
         email,
         password: hashedPassword,
         image: "/assets/profile.png",
+        backgroundImage: "/assets/default.png",
       },
     });
 

@@ -72,3 +72,36 @@ export type TopGamesType = {
   id: string;
   slug: string;
 }[];
+
+export type UserProfileType = {
+  id: string;
+  username: string;
+  image: string;
+  backgroundImage: string;
+  description: string;
+  createdAt: string;
+  favoriteGame: {
+    title: string;
+    slug: string;
+    image: string;
+  } | null;
+  reviewsCount: number;
+  addedGamesCount: number;
+  listCount: number;
+  reviews: {
+    id: string;
+    createdAt: Date;
+    content: string;
+    rating: number;
+    game: { title: string };
+  }[];
+  lists: {
+    id: string;
+  }[];
+  addedGames: {
+    id: string;
+    title: string;
+    slug: string;
+    image: string;
+  }[];
+};
