@@ -14,7 +14,7 @@ const HomePage = async () => {
       <HomeHeader />
       <Features />
       <Wrapper className="lg:flex lg:items-start lg:gap-4">
-        <TopGames games={topGames} />
+        {topGames.length > 0 && <TopGames games={topGames} />}
         <LatestReview data={latestReview} />
       </Wrapper>
     </>

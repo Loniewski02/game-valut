@@ -26,6 +26,7 @@ const RegisterForm = () => {
     if (state.status && state.message) {
       setNewMessage(state.status, state.message);
     }
+    console.log(state);
   }, [state]);
 
   useEffect(() => {

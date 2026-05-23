@@ -42,20 +42,18 @@ export const REGISTER_INPUTS = [
 
 export const LOGIN_INPUTS = [
   {
-    id: "email",
-    name: "email",
-    placeholder: "Enter your email",
-    type: "email",
-    label: "Email Address",
-    validity: (val: string) => emailReg.test(val),
+    id: "identifier",
+    name: "identifier",
+    placeholder: "Username or email",
+    type: "text",
+    label: "Username or email",
   },
   {
     id: "password",
     name: "password",
-    placeholder: "Enter your password",
+    placeholder: "Password",
     type: "password",
     label: "Password",
-    validity: (val: string) => val.trim().length > 8,
   },
 ];
 

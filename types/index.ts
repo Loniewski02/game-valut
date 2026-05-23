@@ -57,13 +57,13 @@ export type LatestReviewType = {
     slug: string;
     image: string;
   };
+
   id: string;
   createdAt: Date;
   rating: number;
   content: string;
-  user: {
-    username: string;
-  };
+
+  username: string;
 } | null;
 
 export type TopGamesType = {

@@ -6,12 +6,17 @@ export async function FormRegisterAction(prevState: any, formData: FormData) {
     method: "POST",
     body: formData,
   });
+  const data = await res.json();
 
-  return res.json();
+  return {
+    ...data,
+    status: res.status,
+  };
 }
 
 export async function FormLoginAction(prevState: any, formData: FormData) {
-  const email = formData.get("email") as string;
+  const identifier = formData.get("identifier") as string;
+
   const password = formData.get("password") as string;
 
   const res = await fetch("/api/auth/login", {
@@ -22,11 +27,14 @@ export async function FormLoginAction(prevState: any, formData: FormData) {
   const response = await res.json();
 
   if (!res.ok) {
-    return response;
+    return {
+      ...response,
+      status: res.status,
+    };
   }
 
   const signInResponse = await signIn("credentials", {
-    email,
+    identifier,
     password,
     redirect: false,
   });
@@ -38,7 +46,10 @@ export async function FormLoginAction(prevState: any, formData: FormData) {
     };
   }
 
-  return response;
+  return {
+    ...response,
+    status: res.status,
+  };
 }
 
 export function requireAuth(session: Session | null, setNewMessage: (status: number, message: string) => void) {

@@ -12,7 +12,7 @@
 export const GameStatus = {
   WANT_TO_PLAY: 'WANT_TO_PLAY',
   PLAYING: 'PLAYING',
-  COMPLETED: 'COMPLETED'
+  PLAYED: 'PLAYED'
 } as const
 
 export type GameStatus = (typeof GameStatus)[keyof typeof GameStatus]

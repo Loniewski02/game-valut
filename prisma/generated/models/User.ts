@@ -27,9 +27,13 @@ export type AggregateUser = {
 export type UserMinAggregateOutputType = {
   id: string | null
   username: string | null
+  usernameLower: string | null
   email: string | null
   password: string | null
   image: string | null
+  backgroundImage: string | null
+  description: string | null
+  favoriteGameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -37,9 +41,13 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   username: string | null
+  usernameLower: string | null
   email: string | null
   password: string | null
   image: string | null
+  backgroundImage: string | null
+  description: string | null
+  favoriteGameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,9 +55,13 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   username: number
+  usernameLower: number
   email: number
   password: number
   image: number
+  backgroundImage: number
+  description: number
+  favoriteGameId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -59,9 +71,13 @@ export type UserCountAggregateOutputType = {
 export type UserMinAggregateInputType = {
   id?: true
   username?: true
+  usernameLower?: true
   email?: true
   password?: true
   image?: true
+  backgroundImage?: true
+  description?: true
+  favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -69,9 +85,13 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   username?: true
+  usernameLower?: true
   email?: true
   password?: true
   image?: true
+  backgroundImage?: true
+  description?: true
+  favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -79,9 +99,13 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   username?: true
+  usernameLower?: true
   email?: true
   password?: true
   image?: true
+  backgroundImage?: true
+  description?: true
+  favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -162,9 +186,13 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image: string | null
+  image: string
+  backgroundImage: string
+  description: string
+  favoriteGameId: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -193,11 +221,16 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
+  usernameLower?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  image?: Prisma.StringNullableFilter<"User"> | string | null
+  image?: Prisma.StringFilter<"User"> | string
+  backgroundImage?: Prisma.StringFilter<"User"> | string
+  description?: Prisma.StringFilter<"User"> | string
+  favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  favoriteGame?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
   reviews?: Prisma.ReviewListRelationFilter
   lists?: Prisma.GameListListRelationFilter
   addedGames?: Prisma.GameListRelationFilter
@@ -206,11 +239,16 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  usernameLower?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  image?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrder
+  backgroundImage?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  favoriteGameId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  favoriteGame?: Prisma.GameOrderByWithRelationInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   lists?: Prisma.GameListOrderByRelationAggregateInput
   addedGames?: Prisma.GameOrderByRelationAggregateInput
@@ -219,25 +257,34 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   username?: string
+  usernameLower?: string
   email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
-  image?: Prisma.StringNullableFilter<"User"> | string | null
+  image?: Prisma.StringFilter<"User"> | string
+  backgroundImage?: Prisma.StringFilter<"User"> | string
+  description?: Prisma.StringFilter<"User"> | string
+  favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  favoriteGame?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
   reviews?: Prisma.ReviewListRelationFilter
   lists?: Prisma.GameListListRelationFilter
   addedGames?: Prisma.GameListRelationFilter
-}, "id" | "username" | "email">
+}, "id" | "username" | "usernameLower" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  usernameLower?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  image?: Prisma.SortOrderInput | Prisma.SortOrder
+  image?: Prisma.SortOrder
+  backgroundImage?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  favoriteGameId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -251,9 +298,13 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
+  usernameLower?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  image?: Prisma.StringWithAggregatesFilter<"User"> | string
+  backgroundImage?: Prisma.StringWithAggregatesFilter<"User"> | string
+  description?: Prisma.StringWithAggregatesFilter<"User"> | string
+  favoriteGameId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -261,11 +312,15 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
@@ -274,9 +329,13 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
+  favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
@@ -287,11 +346,15 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
@@ -300,9 +363,13 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -313,9 +380,13 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
+  favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -323,9 +394,12 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -333,9 +407,13 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -343,9 +421,13 @@ export type UserUncheckedUpdateManyInput = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  usernameLower?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  backgroundImage?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -353,9 +435,13 @@ export type UserCountOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  usernameLower?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  backgroundImage?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -363,11 +449,30 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  usernameLower?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  backgroundImage?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -379,12 +484,12 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type UserCreateNestedOneWithoutAddedGamesInput = {
@@ -393,12 +498,56 @@ export type UserCreateNestedOneWithoutAddedGamesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutAddedGamesNestedInput = {
+export type UserCreateNestedManyWithoutFavoriteGameInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput> | Prisma.UserCreateWithoutFavoriteGameInput[] | Prisma.UserUncheckedCreateWithoutFavoriteGameInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteGameInput | Prisma.UserCreateOrConnectWithoutFavoriteGameInput[]
+  createMany?: Prisma.UserCreateManyFavoriteGameInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutFavoriteGameInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput> | Prisma.UserCreateWithoutFavoriteGameInput[] | Prisma.UserUncheckedCreateWithoutFavoriteGameInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteGameInput | Prisma.UserCreateOrConnectWithoutFavoriteGameInput[]
+  createMany?: Prisma.UserCreateManyFavoriteGameInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateOneWithoutAddedGamesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAddedGamesInput, Prisma.UserUncheckedCreateWithoutAddedGamesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAddedGamesInput
   upsert?: Prisma.UserUpsertWithoutAddedGamesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddedGamesInput, Prisma.UserUpdateWithoutAddedGamesInput>, Prisma.UserUncheckedUpdateWithoutAddedGamesInput>
+}
+
+export type UserUpdateManyWithoutFavoriteGameNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput> | Prisma.UserCreateWithoutFavoriteGameInput[] | Prisma.UserUncheckedCreateWithoutFavoriteGameInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteGameInput | Prisma.UserCreateOrConnectWithoutFavoriteGameInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutFavoriteGameInput | Prisma.UserUpsertWithWhereUniqueWithoutFavoriteGameInput[]
+  createMany?: Prisma.UserCreateManyFavoriteGameInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutFavoriteGameInput | Prisma.UserUpdateWithWhereUniqueWithoutFavoriteGameInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutFavoriteGameInput | Prisma.UserUpdateManyWithWhereWithoutFavoriteGameInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutFavoriteGameNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput> | Prisma.UserCreateWithoutFavoriteGameInput[] | Prisma.UserUncheckedCreateWithoutFavoriteGameInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoriteGameInput | Prisma.UserCreateOrConnectWithoutFavoriteGameInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutFavoriteGameInput | Prisma.UserUpsertWithWhereUniqueWithoutFavoriteGameInput[]
+  createMany?: Prisma.UserCreateManyFavoriteGameInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutFavoriteGameInput | Prisma.UserUpdateWithWhereUniqueWithoutFavoriteGameInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutFavoriteGameInput | Prisma.UserUpdateManyWithWhereWithoutFavoriteGameInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutReviewsInput = {
@@ -407,10 +556,12 @@ export type UserCreateNestedOneWithoutReviewsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+export type UserUpdateOneWithoutReviewsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput
   upsert?: Prisma.UserUpsertWithoutReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
 }
@@ -432,11 +583,15 @@ export type UserUpdateOneRequiredWithoutListsNestedInput = {
 export type UserCreateWithoutAddedGamesInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
 }
@@ -444,9 +599,13 @@ export type UserCreateWithoutAddedGamesInput = {
 export type UserUncheckedCreateWithoutAddedGamesInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
+  favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
@@ -456,6 +615,48 @@ export type UserUncheckedCreateWithoutAddedGamesInput = {
 export type UserCreateOrConnectWithoutAddedGamesInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutAddedGamesInput, Prisma.UserUncheckedCreateWithoutAddedGamesInput>
+}
+
+export type UserCreateWithoutFavoriteGameInput = {
+  id?: string
+  username: string
+  usernameLower: string
+  email: string
+  password: string
+  image?: string
+  backgroundImage?: string
+  description?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  lists?: Prisma.GameListCreateNestedManyWithoutUserInput
+  addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
+}
+
+export type UserUncheckedCreateWithoutFavoriteGameInput = {
+  id?: string
+  username: string
+  usernameLower: string
+  email: string
+  password: string
+  image?: string
+  backgroundImage?: string
+  description?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
+  addedGames?: Prisma.GameUncheckedCreateNestedManyWithoutAddedByInput
+}
+
+export type UserCreateOrConnectWithoutFavoriteGameInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput>
+}
+
+export type UserCreateManyFavoriteGameInputEnvelope = {
+  data: Prisma.UserCreateManyFavoriteGameInput | Prisma.UserCreateManyFavoriteGameInput[]
+  skipDuplicates?: boolean
 }
 
 export type UserUpsertWithoutAddedGamesInput = {
@@ -472,11 +673,15 @@ export type UserUpdateToOneWithWhereWithoutAddedGamesInput = {
 export type UserUpdateWithoutAddedGamesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
 }
@@ -484,23 +689,64 @@ export type UserUpdateWithoutAddedGamesInput = {
 export type UserUncheckedUpdateWithoutAddedGamesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
 }
 
+export type UserUpsertWithWhereUniqueWithoutFavoriteGameInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFavoriteGameInput, Prisma.UserUncheckedUpdateWithoutFavoriteGameInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoriteGameInput, Prisma.UserUncheckedCreateWithoutFavoriteGameInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutFavoriteGameInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFavoriteGameInput, Prisma.UserUncheckedUpdateWithoutFavoriteGameInput>
+}
+
+export type UserUpdateManyWithWhereWithoutFavoriteGameInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutFavoriteGameInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  username?: Prisma.StringFilter<"User"> | string
+  usernameLower?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
+  image?: Prisma.StringFilter<"User"> | string
+  backgroundImage?: Prisma.StringFilter<"User"> | string
+  description?: Prisma.StringFilter<"User"> | string
+  favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+}
+
 export type UserCreateWithoutReviewsInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
 }
@@ -508,9 +754,13 @@ export type UserCreateWithoutReviewsInput = {
 export type UserUncheckedCreateWithoutReviewsInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
+  favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
@@ -536,11 +786,15 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 export type UserUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
 }
@@ -548,9 +802,13 @@ export type UserUpdateWithoutReviewsInput = {
 export type UserUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
@@ -560,11 +818,15 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
 export type UserCreateWithoutListsInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
 }
@@ -572,9 +834,13 @@ export type UserCreateWithoutListsInput = {
 export type UserUncheckedCreateWithoutListsInput = {
   id?: string
   username: string
+  usernameLower: string
   email: string
   password: string
-  image?: string | null
+  image?: string
+  backgroundImage?: string
+  description?: string
+  favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
@@ -600,11 +866,15 @@ export type UserUpdateToOneWithWhereWithoutListsInput = {
 export type UserUpdateWithoutListsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
 }
@@ -612,13 +882,75 @@ export type UserUpdateWithoutListsInput = {
 export type UserUncheckedUpdateWithoutListsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserCreateManyFavoriteGameInput = {
+  id?: string
+  username: string
+  usernameLower: string
+  email: string
+  password: string
+  image?: string
+  backgroundImage?: string
+  description?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutFavoriteGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
+  addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFavoriteGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
+  addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutFavoriteGameInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  usernameLower?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundImage?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -673,11 +1005,16 @@ export type UserCountOutputTypeCountAddedGamesArgs<ExtArgs extends runtime.Types
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   username?: boolean
+  usernameLower?: boolean
   email?: boolean
   password?: boolean
   image?: boolean
+  backgroundImage?: boolean
+  description?: boolean
+  favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   lists?: boolean | Prisma.User$listsArgs<ExtArgs>
   addedGames?: boolean | Prisma.User$addedGamesArgs<ExtArgs>
@@ -687,46 +1024,66 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   username?: boolean
+  usernameLower?: boolean
   email?: boolean
   password?: boolean
   image?: boolean
+  backgroundImage?: boolean
+  description?: boolean
+  favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   username?: boolean
+  usernameLower?: boolean
   email?: boolean
   password?: boolean
   image?: boolean
+  backgroundImage?: boolean
+  description?: boolean
+  favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   username?: boolean
+  usernameLower?: boolean
   email?: boolean
   password?: boolean
   image?: boolean
+  backgroundImage?: boolean
+  description?: boolean
+  favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "email" | "password" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "usernameLower" | "email" | "password" | "image" | "backgroundImage" | "description" | "favoriteGameId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   lists?: boolean | Prisma.User$listsArgs<ExtArgs>
   addedGames?: boolean | Prisma.User$addedGamesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    favoriteGame: Prisma.$GamePayload<ExtArgs> | null
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     lists: Prisma.$GameListPayload<ExtArgs>[]
     addedGames: Prisma.$GamePayload<ExtArgs>[]
@@ -734,9 +1091,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     username: string
+    usernameLower: string
     email: string
     password: string
-    image: string | null
+    image: string
+    backgroundImage: string
+    description: string
+    favoriteGameId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1133,6 +1494,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  favoriteGame<T extends Prisma.User$favoriteGameArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoriteGameArgs<ExtArgs>>): Prisma.Prisma__GameClient<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lists<T extends Prisma.User$listsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$listsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GameListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   addedGames<T extends Prisma.User$addedGamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addedGamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1167,9 +1529,13 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
+  readonly usernameLower: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly image: Prisma.FieldRef<"User", 'String'>
+  readonly backgroundImage: Prisma.FieldRef<"User", 'String'>
+  readonly description: Prisma.FieldRef<"User", 'String'>
+  readonly favoriteGameId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1426,6 +1792,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1496,6 +1866,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1562,6 +1936,25 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.favoriteGame
+ */
+export type User$favoriteGameArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Game
+   */
+  select?: Prisma.GameSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Game
+   */
+  omit?: Prisma.GameOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameInclude<ExtArgs> | null
+  where?: Prisma.GameWhereInput
 }
 
 /**

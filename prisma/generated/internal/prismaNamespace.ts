@@ -745,9 +745,13 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
+  usernameLower: 'usernameLower',
   email: 'email',
   password: 'password',
   image: 'image',
+  backgroundImage: 'backgroundImage',
+  description: 'description',
+  favoriteGameId: 'favoriteGameId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -770,6 +774,7 @@ export const GameScalarFieldEnum = {
   screenshots: 'screenshots',
   platforms: 'platforms',
   genres: 'genres',
+  addedByName: 'addedByName',
   addedById: 'addedById',
   createdAt: 'createdAt'
 } as const
@@ -781,6 +786,8 @@ export const ReviewScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
   content: 'content',
+  username: 'username',
+  userImage: 'userImage',
   userId: 'userId',
   gameId: 'gameId',
   createdAt: 'createdAt'
