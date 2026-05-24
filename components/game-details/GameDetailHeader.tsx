@@ -22,7 +22,6 @@ const GameDetailHeader = ({
   rating: number | string;
   count: number;
 }) => {
-  const revieved = false;
   const addedToList = false;
 
   return (
@@ -58,12 +57,9 @@ const GameDetailHeader = ({
           </p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">
-          {!revieved && (
-            <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
-              <Plus />
-              Add Review
-            </Button>
-          )}
+          <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
+            View reviews
+          </Button>
           {!addedToList && (
             <Button className="sm:max-w-56 lg:min-w-56" transparent>
               <Plus />

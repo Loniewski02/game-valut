@@ -14,7 +14,6 @@ import Submit from "../../shared/ui/Submit";
 const initialState = {
   message: null,
   status: null,
-  data: { username: "", email: "", password: "", password2: "" },
 };
 
 const RegisterForm = () => {
@@ -26,7 +25,6 @@ const RegisterForm = () => {
     if (state.status && state.message) {
       setNewMessage(state.status, state.message);
     }
-    console.log(state);
   }, [state]);
 
   useEffect(() => {

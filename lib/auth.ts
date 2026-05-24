@@ -16,7 +16,6 @@ export async function FormRegisterAction(prevState: any, formData: FormData) {
 
 export async function FormLoginAction(prevState: any, formData: FormData) {
   const identifier = formData.get("identifier") as string;
-
   const password = formData.get("password") as string;
 
   const res = await fetch("/api/auth/login", {

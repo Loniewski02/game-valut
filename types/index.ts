@@ -1,3 +1,4 @@
+import { Review } from "@/prisma/generated/client";
 import { IconType } from "react-icons";
 
 export type Route = {
@@ -105,3 +106,7 @@ export type UserProfileType = {
     image: string;
   }[];
 };
+
+export type ReviewType = {
+  user: { username: string; image: string };
+} & Review;

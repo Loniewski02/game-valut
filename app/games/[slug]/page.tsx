@@ -20,6 +20,7 @@ const GameDetailPage = async ({ params }: { params: { slug: string } }) => {
       addedBy: {
         select: {
           username: true,
+          id: true,
         },
       },
     },

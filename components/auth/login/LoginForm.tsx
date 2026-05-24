@@ -14,7 +14,6 @@ import { LOGIN_INPUTS } from "@/utils/constant";
 const initialState = {
   message: null,
   status: null,
-  usrname: "",
 };
 
 const LoginForm = () => {

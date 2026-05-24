@@ -26,14 +26,16 @@ const UserReviews = ({ reviews }: { reviews: Review[] }) => {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col">
                   <h3 className="text-lg font-semibold md:text-xl">{item.game.title}</h3>
-                  <span className="mt-1 text-13 text-GrayishBlue">Reviewed {formatDistanceToNow(item.createdAt)}</span>
+                  <span className="mt-1 text-13 text-GrayishBlue">
+                    Reviewed {formatDistanceToNow(item.createdAt)} ago
+                  </span>
                 </div>
                 <div className="flex w-max items-center gap-1 md:place-self-start lg:col-start-4 lg:justify-self-end">
                   <AiFillStar className="order-1 text-xl text-Yellow md:text-2xl" />
                   <span className="order-2 min-w-5 text-base md:text-lg">{item.rating}/5</span>
                 </div>
               </div>
-              <p className="max-w-3xl leading-relaxed text-GrayishBlue">{item.content}</p>
+              <p className="max-w-3xl leading-relaxed text-DarkGrayishBlue">{item.content}</p>
             </div>
           ))}
         </div>
