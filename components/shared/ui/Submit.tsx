@@ -3,9 +3,9 @@ import { useFormStatus } from "react-dom";
 
 import LoadingIndicator from "../states/LoadingIndicator";
 
-type Props = { children: React.ReactNode; isDisabled?: boolean };
+type Props = { children: React.ReactNode };
 
-const Submit = ({ children, isDisabled }: Props) => {
+const Submit = ({ children }: Props) => {
   const { pending } = useFormStatus();
   return (
     <>
@@ -14,7 +14,7 @@ const Submit = ({ children, isDisabled }: Props) => {
           type="submit"
           aria-label="submit-form"
           className="block max-h-12 rounded-xl border border-transparent bg-Primary px-6 py-3 text-15 font-medium text-White transition hover:bg-PrimaryHover active:scale-95"
-          disabled={isDisabled || pending}
+          disabled={pending}
         >
           {children}
         </button>

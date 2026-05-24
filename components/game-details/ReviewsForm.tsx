@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { FormAddReviewAction } from "@/lib/reviews";
 
 import { AiFillStar } from "react-icons/ai";
 import Submit from "../shared/ui/Submit";
 import { ReviewType } from "@/types";
+import { MessagesContext } from "../_providers/MessagesContext";
 
 const initialState = {
   message: "",
@@ -15,6 +16,13 @@ const initialState = {
 const ReviewsForm = ({ gameId, onNewReview }: { gameId: string; onNewReview: (rev: ReviewType) => void }) => {
   const [rating, setRating] = useState(0);
   const [state, action] = useFormState(FormAddReviewAction, initialState);
+  const { setNewMessage } = useContext(MessagesContext);
+
+  useEffect(() => {
+    if (state.status && state.message) {
+      setNewMessage(state.status, state.message);
+    }
+  }, [state]);
 
   useEffect(() => {
     if (state.data) {
@@ -43,7 +51,7 @@ const ReviewsForm = ({ gameId, onNewReview }: { gameId: string; onNewReview: (re
               </button>
             ))}
           </div>
-          <Submit isDisabled={rating === 0}>Add review</Submit>
+          <Submit>Add review</Submit>
         </div>
         <input type="hidden" name="rating" value={rating} />
         <input type="hidden" name="gameId" value={gameId} />
