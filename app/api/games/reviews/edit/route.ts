@@ -1,16 +1,14 @@
-import { authOptions } from "@/lib/next-auth";
+import { getCurrentUser } from "@/lib/helpers";
 import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     const { reviewId, editedContent, editedRating } = await req.json();
 
-    console.log(editedContent);
-    const session = await getServerSession(authOptions);
+    const user = await getCurrentUser();
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json(
         {
           message: "You must be logged in",
@@ -67,17 +65,6 @@ export async function POST(req: Request) {
         },
         {
           status: 404,
-        },
-      );
-    }
-
-    if (review.userId !== session.user.id) {
-      return NextResponse.json(
-        {
-          message: "Unauthorized",
-        },
-        {
-          status: 403,
         },
       );
     }

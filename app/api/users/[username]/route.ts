@@ -7,7 +7,6 @@ export async function GET(req: Request, { params }: { params: { username: string
       where: {
         usernameLower: params.username.toLowerCase(),
       },
-
       select: {
         id: true,
         username: true,

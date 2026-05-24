@@ -1,8 +1,11 @@
 "use client";
-import { useFilters } from "@/hooks/useFilters";
-
+import { useContext, useEffect } from "react";
 import { useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+
+import { useFilters } from "@/hooks/useFilters";
 import { useFetch } from "@/hooks/useFetch";
+import { MessagesContext } from "@/components/_providers/MessagesContext";
 
 import { UserProfileType } from "@/types";
 
@@ -15,11 +18,21 @@ import UserSettings from "@/components/user/UserSettings";
 import FetchSection from "@/components/shared/states/FetchSection";
 
 const UserDetails = () => {
+  const { data: session } = useSession();
   const { searchParams } = useFilters();
   const params = useParams();
   const { data, isLoading, error } = useFetch<UserProfileType>(`/api/users/${params.username}`);
-  
+  const { setNewMessage } = useContext(MessagesContext);
+
   const section = searchParams.get("section") ?? "overview";
+
+  useEffect(() => {
+    if (error) {
+      setNewMessage(error.status, error.message);
+    }
+  }, [error]);
+
+  const isCurrentUser = session?.user.id === data?.id;
 
   return (
     <>
@@ -27,11 +40,11 @@ const UserDetails = () => {
         {data && (
           <>
             <UserHeader data={data} />
-            <UserControls />
+            <UserControls isCurrentUser={isCurrentUser} />
             {section === "overview" && <UserOverview />}
             {section === "reviews" && <UserReviews reviews={data.reviews} />}
             {section === "lists" && <UserLists />}
-            {section === "settings" && <UserSettings />}
+            {isCurrentUser && section === "settings" && <UserSettings />}
           </>
         )}
       </FetchSection>

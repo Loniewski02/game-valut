@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
-import { FormAddReviewAction } from "@/lib/reviews";
+import { FormAddReviewAction } from "@/lib/queries/reviews";
 
 import { AiFillStar } from "react-icons/ai";
 import Submit from "../../shared/ui/Submit";

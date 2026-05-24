@@ -8,7 +8,7 @@ import FormBox from "../../shared/ui/FormBox";
 import TextLink from "../../shared/ui/TextLink";
 import Submit from "../../shared/ui/Submit";
 
-import { FormLoginAction } from "@/lib/auth";
+import { FormLoginAction } from "@/lib/queries/auth";
 import { LOGIN_INPUTS } from "@/utils/constant";
 
 const initialState = {

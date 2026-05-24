@@ -1,13 +1,18 @@
-import { authOptions } from "@/lib/next-auth";
+import { getCurrentUser } from "@/lib/helpers";
 import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const data = await req.formData();
 
-    if (!session) {
+    const review = data.get("review")?.toString().trim();
+    const gameId = data.get("gameId")?.toString();
+    const rating = Number(data.get("rating"));
+
+    const user = await getCurrentUser();
+
+    if (!user) {
       return NextResponse.json(
         {
           message: "You must be logged in",
@@ -17,12 +22,6 @@ export async function POST(req: Request) {
         },
       );
     }
-
-    const data = await req.formData();
-
-    const review = data.get("review")?.toString().trim();
-    const gameId = data.get("gameId")?.toString();
-    const rating = Number(data.get("rating"));
 
     if (!review || !gameId || Number.isNaN(rating)) {
       return NextResponse.json(
@@ -53,23 +52,6 @@ export async function POST(req: Request) {
         },
         {
           status: 400,
-        },
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-    });
-
-    if (!user || user.username === user.id) {
-      return NextResponse.json(
-        {
-          message: "User not found",
-        },
-        {
-          status: 404,
         },
       );
     }

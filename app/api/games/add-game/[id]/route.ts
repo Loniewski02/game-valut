@@ -1,43 +1,20 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-
-import { authOptions } from "@/lib/next-auth";
+import { getCurrentUser } from "@/lib/helpers";
 
 import defaultImg from "@/public/assets/default.png";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
-    const session = await getServerSession(authOptions);
+    const user = await getCurrentUser();
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json(
         {
-          message: "Unauthorized",
+          message: "You must be logged in",
         },
         {
           status: 401,
-        },
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-      select: {
-        id: true,
-        username: true,
-      },
-    });
-
-    if (!user || user.username === user.id) {
-      return NextResponse.json(
-        {
-          message: "User not found",
-        },
-        {
-          status: 404,
         },
       );
     }

@@ -1,37 +1,20 @@
-import { authOptions } from "@/lib/next-auth";
+import { getCurrentUser } from "@/lib/helpers";
 import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     const { reviewId } = await req.json();
-    const session = await getServerSession(authOptions);
 
-    if (!session) {
+    const user = await getCurrentUser();
+
+    if (!user) {
       return NextResponse.json(
         {
           message: "You must be logged in",
         },
         {
           status: 401,
-        },
-      );
-    }
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-    });
-
-    if (!user || user.username === user.id) {
-      return NextResponse.json(
-        {
-          message: "User not found",
-        },
-        {
-          status: 404,
         },
       );
     }

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { MessagesContext } from "../../_providers/MessagesContext";
 
-import { FormRegisterAction } from "@/lib/auth";
+import { FormRegisterAction } from "@/lib/queries/auth";
 import { REGISTER_INPUTS } from "@/utils/constant";
 
 import FormBox from "../../shared/ui/FormBox";
