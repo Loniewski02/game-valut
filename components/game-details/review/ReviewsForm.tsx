@@ -1,12 +1,13 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
+import { useRouter } from "next/navigation";
 import { FormAddReviewAction } from "@/lib/reviews";
 
 import { AiFillStar } from "react-icons/ai";
-import Submit from "../shared/ui/Submit";
+import Submit from "../../shared/ui/Submit";
 import { ReviewType } from "@/types";
-import { MessagesContext } from "../_providers/MessagesContext";
+import { MessagesContext } from "../../_providers/MessagesContext";
 
 const initialState = {
   message: "",
@@ -14,6 +15,7 @@ const initialState = {
 };
 
 const ReviewsForm = ({ gameId, onNewReview }: { gameId: string; onNewReview: (rev: ReviewType) => void }) => {
+  const router = useRouter();
   const [rating, setRating] = useState(0);
   const [state, action] = useFormState(FormAddReviewAction, initialState);
   const { setNewMessage } = useContext(MessagesContext);
@@ -21,6 +23,7 @@ const ReviewsForm = ({ gameId, onNewReview }: { gameId: string; onNewReview: (re
   useEffect(() => {
     if (state.status && state.message) {
       setNewMessage(state.status, state.message);
+      router.refresh();
     }
   }, [state]);
 

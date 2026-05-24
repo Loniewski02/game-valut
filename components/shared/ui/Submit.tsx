@@ -13,7 +13,7 @@ const Submit = ({ children }: Props) => {
         <button
           type="submit"
           aria-label="submit-form"
-          className="block max-h-12 rounded-xl border border-transparent bg-Primary px-6 py-3 text-15 font-medium text-White transition hover:bg-PrimaryHover active:scale-95"
+          className="block rounded-xl border border-transparent bg-Primary px-6 py-3 text-15 font-medium text-White transition hover:bg-PrimaryHover active:scale-95"
           disabled={pending}
         >
           {children}

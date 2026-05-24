@@ -6,9 +6,11 @@ import { useFetch } from "@/hooks/useFetch";
 import { ReviewType } from "@/types";
 
 import Section from "../shared/layout/Section";
-import ReviewCard from "./ReviewCard";
+import ReviewCard from "./review/ReviewCard";
 import FetchSection from "../shared/states/FetchSection";
-import ReviewsForm from "./ReviewsForm";
+import ReviewsForm from "./review/ReviewsForm";
+import EmptySection from "../shared/states/EmptySection";
+import { BiSad } from "react-icons/bi";
 
 const GameDetailsReviews = ({ gameId }: { gameId: string }) => {
   const { data: session } = useSession();
@@ -23,6 +25,7 @@ const GameDetailsReviews = ({ gameId }: { gameId: string }) => {
   });
 
   const [reviews, setReviews] = useState<ReviewType[]>([]);
+
   useEffect(() => {
     if (data) {
       setReviews(data);
@@ -35,6 +38,10 @@ const GameDetailsReviews = ({ gameId }: { gameId: string }) => {
 
   const reviewd = !!session && reviews.some((review) => review.userId === session.user.id);
 
+  const hideReviewHandler = (rid: string) => {
+    setReviews((prev) => prev.filter((item) => item.id !== rid));
+  };
+
   return (
     <>
       <FetchSection isLoading={isLoading} error={error}>
@@ -43,14 +50,20 @@ const GameDetailsReviews = ({ gameId }: { gameId: string }) => {
           {reviews && reviews.length > 0 && (
             <div className="flex flex-col gap-16 rounded-2xl md:p-4 lg:gap-12 lg:bg-LightGray/40 lg:p-6">
               {reviews.map((item) => (
-                <ReviewCard key={item.id} item={item} postedBy={item.user} />
+                <ReviewCard
+                  key={item.id}
+                  item={item}
+                  postedBy={item.user}
+                  reviewd={reviewd}
+                  onHide={hideReviewHandler}
+                />
               ))}
             </div>
           )}
-          {reviews && reviews.length === 0 && (
-            <p className="text-DarkGrayishBlue">No reviews yet. Be the first one to rate and review this game!</p>
-          )}
         </Section>
+        {reviews && reviews.length === 0 && (
+          <EmptySection Icon={BiSad} title="No reviews yet" text="Be the first one to rate and review this game!" />
+        )}
       </FetchSection>
     </>
   );
