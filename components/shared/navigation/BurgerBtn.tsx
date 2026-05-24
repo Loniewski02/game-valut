@@ -9,7 +9,7 @@ const barClasses = "block w-full h-[3px] bg-DarkGrayishBlue rounded-sm absolute 
 
 const BurgerBtn = ({ onClick, isShown }: Props) => {
   return (
-    <button aria-label="menu-button" onClick={onClick} className="z-50 p-2 md:hidden">
+    <button aria-label="menu-button" onClick={onClick} className="z-50 p-2 lg:hidden">
       <span className="relative block h-[23px] w-6 ">
         <motion.span
           animate={{

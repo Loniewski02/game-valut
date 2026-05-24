@@ -1,17 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import Wrapper from "../layout/Wrapper";
-import BurgerBtn from "../ui/BurgerBtn";
+import BurgerBtn from "./BurgerBtn";
 import NavItems from "./NavItems";
 import Logo from "../ui/Logo";
 
 const Navigation = () => {
   const [isShown, setIsShown] = useState(false);
-  
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsShown(false);
       }
     };
