@@ -15,8 +15,9 @@ const fontMontserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "My App",
-  description: "My App",
+  title: "Game Beast",
+  description:
+    "Rate, search for, and discover new games. Create your own lists, keep track of the games you've played, and browse game rankings and statistics.",
 };
 
 export default function RootLayout({

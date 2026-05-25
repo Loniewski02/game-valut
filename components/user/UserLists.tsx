@@ -13,7 +13,7 @@ const games = [
 
 const UserLists = () => {
   return (
-    <Wrapper className="xl:flex xl:justify-start xl:gap-4">
+    <Wrapper className="max-w-[1440px] xl:flex xl:justify-start xl:gap-4">
       <Section className="w-full" title="playing">
         <div>
           {games.map((game) => (

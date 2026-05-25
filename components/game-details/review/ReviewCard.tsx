@@ -5,16 +5,16 @@ import { Review } from "@/prisma/generated/client";
 import { dateFormatterToNow } from "@/utils/helpers";
 
 import { AiFillStar } from "react-icons/ai";
-import { BiDotsHorizontal } from "react-icons/bi";
 import { MessagesContext } from "../../_providers/MessagesContext";
 import { useRouter } from "next/navigation";
 import ReviewEdit from "./ReviewEdit";
 import ReviewControls from "./ReviewControls";
+import Link from "next/link";
 
 type Props = {
   reviewd: boolean;
   item: Review;
-  postedBy: { username: string; image: string };
+  postedBy: { username: string; usernameLower: string; image: string };
   onHide: (rid: string) => void;
 };
 
@@ -60,6 +60,10 @@ const ReviewCard = ({ reviewd, item, postedBy, onHide }: Props) => {
 
   const saveReviewHandler = async () => {
     try {
+      if (item.content === content && item.rating === rating) {
+        setNewMessage(400, "Nothing has changed");
+        return;
+      }
       const res = await fetch("/api/games/reviews/edit", {
         method: "POST",
         headers: {
@@ -95,15 +99,22 @@ const ReviewCard = ({ reviewd, item, postedBy, onHide }: Props) => {
 
   return (
     <div className="group relative grid grid-cols-[48px,1fr,auto] gap-3 md:grid-cols-[56px,1fr,auto] md:gap-6 md:gap-y-0 lg:grid-cols-[64px,164px,1fr,164px]">
-      <Image
-        src={postedBy.image}
-        alt="profile picture"
-        width={60}
-        height={60}
-        className="h-12 w-12 rounded-full border-[2px] border-Gray object-cover md:h-14 md:w-14 lg:h-16 lg:w-16"
-      />
+      <Link href={`/users${postedBy.usernameLower}`}>
+        <Image
+          src={postedBy.image}
+          alt="profile picture"
+          width={60}
+          height={60}
+          className="h-12 w-12 rounded-full border-[2px] border-Gray object-cover md:h-14 md:w-14 lg:h-16 lg:w-16"
+        />
+      </Link>
       <div className="flex flex-col md:gap-2">
-        <p className="font-semibold md:text-lg">{postedBy.username}</p>
+        <Link
+          href={`/users/${postedBy.usernameLower}`}
+          className="font-semibold transition hover:text-Primary md:text-lg"
+        >
+          {postedBy.username}
+        </Link>
         <span className="col-start-2 text-13 text-GrayishBlue">{dateFormatterToNow(item.createdAt)}</span>
       </div>
       <div className="relative flex flex-col items-end sm:flex-row sm:items-center sm:gap-4 md:place-self-start lg:col-start-4 lg:justify-self-end">

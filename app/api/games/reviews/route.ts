@@ -23,7 +23,9 @@ export async function POST(req: Request) {
       include: {
         user: {
           select: {
+            id: true,
             username: true,
+            usernameLower: true,
             image: true,
           },
         },

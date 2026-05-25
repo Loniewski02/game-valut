@@ -77,6 +77,7 @@ export type TopGamesType = {
 export type UserProfileType = {
   id: string;
   username: string;
+  usernameLower: string;
   image: string;
   backgroundImage: string;
   description: string;
@@ -88,14 +89,8 @@ export type UserProfileType = {
   } | null;
   reviewsCount: number;
   addedGamesCount: number;
+  averageRating: number;
   listCount: number;
-  reviews: {
-    id: string;
-    createdAt: Date;
-    content: string;
-    rating: number;
-    game: { title: string };
-  }[];
   lists: {
     id: string;
   }[];
@@ -108,5 +103,5 @@ export type UserProfileType = {
 };
 
 export type ReviewType = {
-  user: { username: string; image: string };
+  user: { username: string; image: string; usernameLower: string; id: string };
 } & Review;

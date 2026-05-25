@@ -10,6 +10,7 @@ export async function GET(req: Request, { params }: { params: { username: string
       select: {
         id: true,
         username: true,
+        usernameLower: true,
         image: true,
         backgroundImage: true,
         description: true,
@@ -23,15 +24,7 @@ export async function GET(req: Request, { params }: { params: { username: string
         },
         reviews: {
           select: {
-            id: true,
             rating: true,
-            content: true,
-            createdAt: true,
-            game: {
-              select: {
-                title: true,
-              },
-            },
           },
         },
         addedGames: {
@@ -58,9 +51,14 @@ export async function GET(req: Request, { params }: { params: { username: string
       );
     }
 
+    const averageRating = user.reviews.length
+      ? (user.reviews.reduce((sum, review) => sum + review.rating, 0) / user.reviews.length).toFixed(2)
+      : 0;
+
     return NextResponse.json(
       {
         ...user,
+        averageRating,
         reviewsCount: user.reviews.length,
         addedGamesCount: user.addedGames.length,
         listCount: user.lists.length,

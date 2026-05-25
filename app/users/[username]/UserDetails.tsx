@@ -21,7 +21,7 @@ const UserDetails = () => {
   const { data: session } = useSession();
   const { searchParams } = useFilters();
   const params = useParams();
-  const { data, isLoading, error } = useFetch<UserProfileType>(`/api/users/${params.username}`);
+  const { data, isLoading, error } = useFetch<UserProfileType>(`/api/${params.username}`);
   const { setNewMessage } = useContext(MessagesContext);
 
   const section = searchParams.get("section") ?? "overview";
@@ -41,8 +41,8 @@ const UserDetails = () => {
           <>
             <UserHeader data={data} />
             <UserControls isCurrentUser={isCurrentUser} />
-            {section === "overview" && <UserOverview />}
-            {section === "reviews" && <UserReviews reviews={data.reviews} />}
+            {section === "overview" && <UserOverview favGame={data.favoriteGame} averageRating={data.averageRating} />}
+            {section === "reviews" && <UserReviews username={data.usernameLower} />}
             {section === "lists" && <UserLists />}
             {isCurrentUser && section === "settings" && <UserSettings />}
           </>
