@@ -1,6 +1,6 @@
 import { BiSad } from "react-icons/bi";
 import EmptySection from "../components/shared/states/EmptySection";
-import Button from "../components/shared/ui/Button";
+import Button from "../components/shared/ui/buttons/Button";
 
 const NotFound = () => {
   return (

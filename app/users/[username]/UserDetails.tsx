@@ -1,7 +1,6 @@
 "use client";
 import { useContext, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import { useFilters } from "@/hooks/useFilters";
 import { useFetch } from "@/hooks/useFetch";
@@ -13,12 +12,11 @@ import UserHeader from "@/components/user/UserHeader";
 import UserControls from "@/components/user/UserControls";
 import UserReviews from "@/components/user/UserReviews";
 import UserOverview from "@/components/user/UserOverview";
-import UserLists from "@/components/user/UserLists";
+import UserLists from "@/components/user/lists/UserLists";
 import UserSettings from "@/components/user/UserSettings";
 import FetchSection from "@/components/shared/states/FetchSection";
 
 const UserDetails = () => {
-  const { data: session } = useSession();
   const { searchParams } = useFilters();
   const params = useParams();
   const { data, isLoading, error } = useFetch<UserProfileType>(`/api/${params.username}`);
@@ -32,19 +30,17 @@ const UserDetails = () => {
     }
   }, [error]);
 
-  const isCurrentUser = session?.user.id === data?.id;
-
   return (
     <>
       <FetchSection error={error} isLoading={isLoading}>
         {data && (
           <>
             <UserHeader data={data} />
-            <UserControls isCurrentUser={isCurrentUser} />
+            <UserControls isCurrentUser={data.isCurrentUser} />
             {section === "overview" && <UserOverview favGame={data.favoriteGame} averageRating={data.averageRating} />}
             {section === "reviews" && <UserReviews username={data.usernameLower} />}
             {section === "lists" && <UserLists />}
-            {isCurrentUser && section === "settings" && <UserSettings />}
+            {data.isCurrentUser && section === "settings" && <UserSettings />}
           </>
         )}
       </FetchSection>

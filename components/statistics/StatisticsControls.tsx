@@ -5,7 +5,7 @@ import { useFilters } from "@/hooks/useFilters";
 import { PERIODS } from "@/utils/constant";
 
 import ControlsSection from "../shared/layout/ControlsSection";
-import SelectButton from "../shared/ui/SelectButton";
+import SelectButton from "../shared/ui/buttons/SelectButton";
 
 const StatisticsControls = () => {
   const [openedSelect, setOpenedSelect] = useState<string | null>(null);

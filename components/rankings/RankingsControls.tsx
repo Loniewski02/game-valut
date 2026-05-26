@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 import { useFilters } from "@/hooks/useFilters";
+
 import { GENRES, PERIODS, PLATFORMS } from "@/utils/constant";
 
 import ControlsSection from "../shared/layout/ControlsSection";
-import SelectButton from "../shared/ui/SelectButton";
+import SelectButton from "../shared/ui/buttons/SelectButton";
 
 const RankingsControls = () => {
   const [openedSelect, setOpenedSelect] = useState<string | null>(null);

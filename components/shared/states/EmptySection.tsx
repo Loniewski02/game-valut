@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 
 import Section from "../layout/Section";
-import Button from "../ui/Button";
+import Button from "../ui/buttons/Button";
 
 type Props = {
   Icon: IconType;

@@ -10,6 +10,9 @@ export async function GET(req: Request) {
     const genre = searchParams.get("genre");
     const period = searchParams.get("period");
 
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10;
+
     const now = new Date();
     let reviewDateFilter = {};
 
@@ -65,6 +68,8 @@ export async function GET(req: Request) {
 
     const games = await prisma.game.findMany({
       where: gameFilters,
+      skip: (page - 1) * limit,
+      take: limit,
       select: {
         id: true,
         title: true,

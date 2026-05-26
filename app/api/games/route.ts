@@ -11,6 +11,8 @@ export async function GET(req: Request) {
     const platform = searchParams.get("platform");
     const genre = searchParams.get("genre");
     const title = searchParams.get("title");
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10;
 
     const gameFilters: Prisma.GameWhereInput = {
       ...(platform && {
@@ -33,6 +35,8 @@ export async function GET(req: Request) {
 
     const games = await prisma.game.findMany({
       where: gameFilters,
+      skip: (page - 1) * limit,
+      take: limit,
       select: {
         id: true,
         title: true,

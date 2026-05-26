@@ -1,4 +1,4 @@
-import Button from "../shared/ui/Button";
+import Button from "../shared/ui/buttons/Button";
 import Section from "../shared/layout/Section";
 import Wrapper from "../shared/layout/Wrapper";
 

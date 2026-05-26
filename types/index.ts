@@ -82,6 +82,7 @@ export type UserProfileType = {
   backgroundImage: string;
   description: string;
   createdAt: string;
+  isCurrentUser: boolean;
   favoriteGame: {
     title: string;
     slug: string;

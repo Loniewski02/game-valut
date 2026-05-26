@@ -10,10 +10,10 @@ import GameDetailsScreens from "@/components/game-details/GameDetailsScreens";
 import Wrapper from "@/components/shared/layout/Wrapper";
 import NotFound from "@/app/not-found";
 
-const GameDetail = async ({ params }: { params: { slug: string } }) => {
+const GameDetail = async ({ slug }: { slug: string }) => {
   const game = await prisma.game.findUnique({
     where: {
-      slug: params.slug,
+      slug: slug,
     },
     include: {
       reviews: true,

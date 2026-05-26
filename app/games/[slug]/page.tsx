@@ -6,7 +6,7 @@ import GameDetail from "./GameDetail";
 const GameDetailPage = ({ params }: { params: { slug: string } }) => {
   return (
     <Suspense fallback={<LoadingIndicator />}>
-      <GameDetail params={params} />
+      <GameDetail slug={params.slug} />
     </Suspense>
   );
 };

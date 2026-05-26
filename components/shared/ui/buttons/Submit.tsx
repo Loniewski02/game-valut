@@ -1,7 +1,7 @@
 "use client";
 import { useFormStatus } from "react-dom";
 
-import LoadingIndicator from "../states/LoadingIndicator";
+import LoadingIndicator from "../../states/LoadingIndicator";
 
 type Props = { children: React.ReactNode };
 

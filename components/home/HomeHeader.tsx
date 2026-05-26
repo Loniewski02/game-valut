@@ -3,7 +3,7 @@ import { authOptions } from "@/lib/next-auth";
 
 import Header from "../shared/layout/Header";
 import Hero from "../shared/layout/Hero";
-import Button from "../shared/ui/Button";
+import Button from "../shared/ui/buttons/Button";
 
 const HomeHeader = async () => {
   const session = await getServerSession(authOptions);

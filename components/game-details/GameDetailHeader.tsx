@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { MessagesContext } from "../_providers/MessagesContext";
 
 import { Game } from "@/prisma/generated/client";
@@ -12,9 +14,8 @@ import Header from "../shared/layout/Header";
 import Hero from "../shared/layout/Hero";
 import RatingBadge from "../shared/ui/RatingBadge";
 import Badge from "../shared/ui/Badge";
-import Button from "../shared/ui/Button";
+import Button from "../shared/ui/buttons/Button";
 import Plus from "../shared/ui/Plus";
-import { useRouter } from "next/navigation";
 
 const GameDetailHeader = ({
   game,

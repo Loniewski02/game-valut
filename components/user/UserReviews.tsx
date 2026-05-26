@@ -1,11 +1,15 @@
-import { BiSad } from "react-icons/bi";
+import { useEffect, useState } from "react";
 
+import { useFetch } from "@/hooks/useFetch";
+
+import { formatDistanceToNow } from "date-fns";
+
+import { BiSad } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import Section from "../shared/layout/Section";
 import EmptySection from "../shared/states/EmptySection";
-import { formatDistanceToNow } from "date-fns";
-import { useFetch } from "@/hooks/useFetch";
 import FetchSection from "../shared/states/FetchSection";
+import PaginationButton from "../shared/ui/buttons/PaginationButton";
 
 type Review = {
   id: string;
@@ -16,13 +20,28 @@ type Review = {
 };
 
 const UserReviews = ({ username }: { username: string }) => {
-  const { data: reviews, isLoading, error } = useFetch<Review[]>(`/api/${username}/reviews`);
+  const [page, setPage] = useState(1);
+  const [reviews, setReviews] = useState<Review[] | []>([]);
+  const limit = 5;
+  const { data, isLoading, error } = useFetch<Review[]>(`/api/${username}/reviews?page=${page}&limit=${limit}`);
+
+  useEffect(() => {
+    if (!data) return;
+
+    if (page === 1) {
+      setReviews(data);
+    } else {
+      setReviews((prev) => [...prev, ...data]);
+    }
+  }, [data]);
+
+  const pageHandler = () => setPage((prev) => prev + 1);
 
   return (
     <FetchSection isLoading={isLoading} error={error}>
-      {reviews && (
-        <Section>
-          {reviews.length > 0 ? (
+      {reviews &&
+        (reviews.length > 0 ? (
+          <Section>
             <div className="flex flex-col rounded-2xl md:p-4 lg:gap-2 lg:bg-LightGray/40 lg:p-6">
               {reviews.map((item) => (
                 <div
@@ -45,11 +64,11 @@ const UserReviews = ({ username }: { username: string }) => {
                 </div>
               ))}
             </div>
-          ) : (
-            <EmptySection Icon={BiSad} title="No reviews found" text="This user has no reviews" />
-          )}
-        </Section>
-      )}
+            {data && data.length === limit && <PaginationButton onClick={pageHandler} />}
+          </Section>
+        ) : (
+          <EmptySection Icon={BiSad} title="No reviews found" text="This user has no reviews" />
+        ))}
     </FetchSection>
   );
 };

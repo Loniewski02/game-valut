@@ -10,7 +10,7 @@ import { BiLogIn } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 import Logo from "../ui/Logo";
 import NavLink from "./NavLink";
-import Button from "../ui/Button";
+import Button from "../ui/buttons/Button";
 import TextLink from "../ui/TextLink";
 import LoadingIndicator from "../states/LoadingIndicator";
 

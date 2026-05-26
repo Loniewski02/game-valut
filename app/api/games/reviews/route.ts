@@ -1,9 +1,16 @@
+import { authOptions } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    const { searchParams } = new URL(req.url);
     const { gameId } = await req.json();
+
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10;
 
     if (!gameId) {
       return NextResponse.json(
@@ -20,6 +27,8 @@ export async function POST(req: Request) {
       where: {
         gameId,
       },
+      skip: (page - 1) * limit,
+      take: limit,
       include: {
         user: {
           select: {

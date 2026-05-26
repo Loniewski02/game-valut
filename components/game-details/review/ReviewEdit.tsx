@@ -1,5 +1,5 @@
 import { AiFillStar } from "react-icons/ai";
-import Button from "@/components/shared/ui/Button";
+import Button from "@/components/shared/ui/buttons/Button";
 
 type Props = {
   content: string;

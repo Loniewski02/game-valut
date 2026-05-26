@@ -1,12 +1,12 @@
 "use client";
 import { useFetch } from "../../hooks/useFetch";
+import { useFilters } from "@/hooks/useFilters";
 
 import { MainStats } from "@/types";
 
 import FetchSection from "../../components/shared/states/FetchSection";
 import StatisticsCards from "../../components/statistics/StatisticsCards";
 import StatisticsControls from "@/components/statistics/StatisticsControls";
-import { useFilters } from "@/hooks/useFilters";
 
 const Statistics = () => {
   const { searchParams } = useFilters();

@@ -2,6 +2,7 @@
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
+
 import { MessagesContext } from "../../_providers/MessagesContext";
 
 import { FormRegisterAction } from "@/lib/queries/auth";
@@ -9,7 +10,7 @@ import { REGISTER_INPUTS } from "@/utils/constant";
 
 import FormBox from "../../shared/ui/FormBox";
 import TextLink from "../../shared/ui/TextLink";
-import Submit from "../../shared/ui/Submit";
+import Submit from "../../shared/ui/buttons/Submit";
 
 const initialState = {
   message: null,

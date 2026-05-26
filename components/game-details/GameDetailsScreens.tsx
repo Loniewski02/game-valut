@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 import Section from "../shared/layout/Section";

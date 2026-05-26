@@ -4,9 +4,9 @@ import { useFilters } from "@/hooks/useFilters";
 import { GENRES, PLATFORMS } from "@/utils/constant";
 
 import Wrapper from "../shared/layout/Wrapper";
-import Button from "../shared/ui/Button";
+import Button from "../shared/ui/buttons/Button";
 import Plus from "../shared/ui/Plus";
-import SelectButton from "../shared/ui/SelectButton";
+import SelectButton from "../shared/ui/buttons/SelectButton";
 
 type Props = {
   search: string;

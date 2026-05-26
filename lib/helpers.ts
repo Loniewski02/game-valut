@@ -13,7 +13,7 @@ export const getCurrentUser = async () => {
   const user = await prisma.user.findUnique({
     where: {
       id: session.user.id,
-      username: session.user.username,
+      usernameLower: session.user.username.toLowerCase(),
     },
   });
 

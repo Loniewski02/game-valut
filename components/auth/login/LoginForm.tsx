@@ -2,14 +2,15 @@
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
-import { MessagesContext } from "../../_providers/MessagesContext";
 
-import FormBox from "../../shared/ui/FormBox";
-import TextLink from "../../shared/ui/TextLink";
-import Submit from "../../shared/ui/Submit";
+import { MessagesContext } from "../../_providers/MessagesContext";
 
 import { FormLoginAction } from "@/lib/queries/auth";
 import { LOGIN_INPUTS } from "@/utils/constant";
+
+import FormBox from "../../shared/ui/FormBox";
+import TextLink from "../../shared/ui/TextLink";
+import Submit from "../../shared/ui/buttons/Submit";
 
 const initialState = {
   message: null,
@@ -39,7 +40,7 @@ const LoginForm = () => {
       {LOGIN_INPUTS.map((input) => (
         <FormBox key={input.id} input={input} />
       ))}
-      <TextLink href="/auth?mode=reset">Forgot your password?</TextLink> <Submit>Login</Submit>
+      <Submit>Login</Submit>
       <TextLink href="/auth?mode=register" text="Don't have an account?">
         Sign up.
       </TextLink>

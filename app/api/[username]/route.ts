@@ -1,8 +1,17 @@
+import { authOptions } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { username: string } }) {
   try {
+    const session = await getServerSession(authOptions);
+
+    const sessionUser = session?.user.username.toLowerCase();
+    const username = params.username.toLowerCase();
+
+    const isCurrentUser = Boolean(sessionUser === username);
+
     const user = await prisma.user.findUnique({
       where: {
         usernameLower: params.username.toLowerCase(),
@@ -22,11 +31,6 @@ export async function GET(req: Request, { params }: { params: { username: string
             image: true,
           },
         },
-        reviews: {
-          select: {
-            rating: true,
-          },
-        },
         addedGames: {
           select: {
             id: true,
@@ -37,6 +41,17 @@ export async function GET(req: Request, { params }: { params: { username: string
             id: true,
           },
         },
+      },
+    });
+
+    const reviews = await prisma.review.findMany({
+      where: {
+        user: {
+          usernameLower: params.username.toLowerCase(),
+        },
+      },
+      select: {
+        rating: true,
       },
     });
 
@@ -51,15 +66,16 @@ export async function GET(req: Request, { params }: { params: { username: string
       );
     }
 
-    const averageRating = user.reviews.length
-      ? (user.reviews.reduce((sum, review) => sum + review.rating, 0) / user.reviews.length).toFixed(2)
+    const averageRating = reviews.length
+      ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(2)
       : 0;
 
     return NextResponse.json(
       {
         ...user,
         averageRating,
-        reviewsCount: user.reviews.length,
+        isCurrentUser,
+        reviewsCount: reviews.length,
         addedGamesCount: user.addedGames.length,
         listCount: user.lists.length,
       },

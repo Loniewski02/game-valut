@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ADD_GAME_INPUT } from "@/utils/constant";
 import { GamePreview } from "@/types";
 
 import { BiSearch } from "react-icons/bi";
 import FormBox from "../shared/ui/FormBox";
-import Submit from "../shared/ui/Submit";
+import Submit from "../shared/ui/buttons/Submit";
 import AddGameItem from "./AddGameItem";
 import LoadingIndicator from "../shared/states/LoadingIndicator";
 import Modal from "../shared/ui/Modal";

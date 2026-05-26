@@ -37,8 +37,8 @@ const AddGameItem = ({ game, onLoading, onAdd, onClose }: Props) => {
       }
 
       onClose();
-      onLoading(false);
       onAdd(data.game);
+      onLoading(false);
       setNewMessage(response.status, data.message);
     } catch (error) {
       console.error(error);

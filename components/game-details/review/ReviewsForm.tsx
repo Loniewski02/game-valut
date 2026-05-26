@@ -2,12 +2,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
+
+import { MessagesContext } from "../../_providers/MessagesContext";
 import { FormAddReviewAction } from "@/lib/queries/reviews";
 
-import { AiFillStar } from "react-icons/ai";
-import Submit from "../../shared/ui/Submit";
 import { ReviewType } from "@/types";
-import { MessagesContext } from "../../_providers/MessagesContext";
+
+import { AiFillStar } from "react-icons/ai";
+import Submit from "../../shared/ui/buttons/Submit";
 
 const initialState = {
   message: "",
