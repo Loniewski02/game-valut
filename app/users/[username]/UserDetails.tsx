@@ -54,7 +54,7 @@ const UserDetails = ({ username }: { username: string }) => {
             )}
             {section === "reviews" && <UserReviews username={data.usernameLower} />}
             {section === "lists" && <UserLists username={data.usernameLower} isCurrentUser={isCurrentUser} />}
-            {isCurrentUser && section === "settings" && <UserSettings username={data.usernameLower} />}
+            {!isCurrentUser && section === "settings" && <UserSettings username={data.usernameLower} />}
           </>
         )}
       </FetchSection>
