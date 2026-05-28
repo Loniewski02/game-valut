@@ -1,38 +1,57 @@
 import Button from "../shared/ui/buttons/Button";
 import Section from "../shared/layout/Section";
 import Wrapper from "../shared/layout/Wrapper";
+import Submit from "../shared/ui/buttons/Submit";
+import { useFormState } from "react-dom";
+import { updateProfileAction } from "@/lib/actions/user";
+import { MessagesContext } from "../_providers/MessagesContext";
+import { useContext, useEffect } from "react";
+import FormBox from "../shared/ui/FormBox";
 
-const UserSettings = () => {
+export const MAIN_SETTINGS_PROFILE = [
+  {
+    id: "username",
+    name: "username",
+    placeholder: "Username",
+    type: "text",
+    label: "Username",
+  },
+  {
+    id: "email",
+    name: "email",
+    placeholder: "Email",
+    type: "email",
+    label: "Email",
+  },
+];
+
+const initialState = {
+  status: null,
+  message: null,
+};
+
+const UserSettings = ({ username }: { username: string }) => {
+  const [state, action] = useFormState(updateProfileAction.bind(null, username), initialState);
+  const { setNewMessage } = useContext(MessagesContext);
+
+  useEffect(() => {
+    if (state.status && state.message) {
+      setNewMessage(state.status, state.message);
+    }
+  }, [state]);
+
   return (
     <>
-      <Wrapper className="justify-start md:gap-4 lg:flex">
-        <Section className="w-full" title="profile">
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="mb-2 block text-13 text-GrayishBlue">Username</label>
-              <input
-                value="loniewsm"
-                className="w-full rounded-xl border border-Gray bg-white py-3 pl-5 pr-4"
-                readOnly
-              />
+      <Wrapper className="">
+        <Section title="profile">
+          <form action="" className="flex flex-col gap-4">
+            {MAIN_SETTINGS_PROFILE.map((item) => (
+              <FormBox input={item} key={item.id} />
+            ))}
+            <div className="mt-2 self-end">
+              <Submit>Save</Submit>
             </div>
-            <div>
-              <label className="mb-2 block text-13 text-GrayishBlue">Email</label>
-              <input
-                value="loniewski@gmail.com"
-                className="w-full rounded-xl border border-Gray bg-white py-3 pl-5 pr-4"
-                readOnly
-              />
-            </div>
-          </div>
-        </Section>
-        <Section className="w-full" title="account">
-          <div className="flex flex-wrap gap-4">
-            <Button>Change Password</Button>
-            <Button>Change Avatar</Button>
-            <Button>Change Background</Button>
-            <Button>Change description</Button>
-          </div>
+          </form>
         </Section>
       </Wrapper>
       <Section>

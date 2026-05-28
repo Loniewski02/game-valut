@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
   transparent?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (val?: any) => void;
   link?: boolean;
   href?: string;
 };

@@ -82,7 +82,6 @@ export type UserProfileType = {
   backgroundImage: string;
   description: string;
   createdAt: string;
-  isCurrentUser: boolean;
   favoriteGame: {
     title: string;
     slug: string;
@@ -106,3 +105,55 @@ export type UserProfileType = {
 export type ReviewType = {
   user: { username: string; image: string; usernameLower: string; id: string };
 } & Review;
+
+import { Game, GameStatus } from "@/prisma/generated/client";
+
+export type SimilarGamesType = {
+  similarGames: {
+    id: string;
+    title: string;
+    slug: string;
+    image: string;
+    platforms: string[];
+    genres: string[];
+    rating: number;
+    similarity: number;
+  }[];
+};
+
+export type GameDetailType = {
+  similarGames: SimilarGamesType[];
+  game: Game & {
+    listStatus: GameStatus | null;
+  };
+  addedBy: {
+    id: string;
+    username: string;
+    usernameLower: string;
+    favoriteGameId: string | null;
+  };
+  rating: {
+    average: number | string;
+    count: number;
+    distribution: {
+      rating: number;
+      count: number;
+    }[];
+  };
+  similarGamesType: SimilarGamesType;
+};
+
+export type ListItem = {
+  game: { id: string; title: string; slug: string; image: string };
+  createdAt: Date;
+  gameId: string;
+  id: string;
+  status: "PLAYING" | "WANT_TO_PLAY" | "PLAYED";
+  userId: string;
+};
+
+export type GameLists = {
+  wantToPlay: ListItem[] | [];
+  playing: ListItem[] | [];
+  played: ListItem[] | [];
+};

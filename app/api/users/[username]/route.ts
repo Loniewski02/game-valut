@@ -5,13 +5,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { username: string } }) {
   try {
-    const session = await getServerSession(authOptions);
-
-    const sessionUser = session?.user.username.toLowerCase();
-    const username = params.username.toLowerCase();
-
-    const isCurrentUser = Boolean(sessionUser === username);
-
     const user = await prisma.user.findUnique({
       where: {
         usernameLower: params.username.toLowerCase(),
@@ -31,14 +24,12 @@ export async function GET(req: Request, { params }: { params: { username: string
             image: true,
           },
         },
-        addedGames: {
+        _count: {
           select: {
-            id: true,
-          },
-        },
-        lists: {
-          select: {
-            id: true,
+            addedGames: true,
+            lists: {
+              where: { status: "PLAYED" },
+            },
           },
         },
       },
@@ -70,19 +61,13 @@ export async function GET(req: Request, { params }: { params: { username: string
       ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(2)
       : 0;
 
-    return NextResponse.json(
-      {
-        ...user,
-        averageRating,
-        isCurrentUser,
-        reviewsCount: reviews.length,
-        addedGamesCount: user.addedGames.length,
-        listCount: user.lists.length,
-      },
-      {
-        status: 200,
-      },
-    );
+    return NextResponse.json({
+      ...user,
+      averageRating,
+      reviewsCount: reviews.length,
+      addedGamesCount: user._count.addedGames,
+      listCount: user._count.lists,
+    });
   } catch (error) {
     console.error(error);
 

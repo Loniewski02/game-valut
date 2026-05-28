@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 
 import { MessagesContext } from "../../_providers/MessagesContext";
 
-import { FormRegisterAction } from "@/lib/queries/auth";
+import { FormRegisterAction } from "@/lib/actions/auth";
 import { REGISTER_INPUTS } from "@/utils/constant";
 
 import FormBox from "../../shared/ui/FormBox";

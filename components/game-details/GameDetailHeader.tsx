@@ -4,34 +4,47 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useGameList } from "@/hooks/useGameList";
 import { MessagesContext } from "../_providers/MessagesContext";
 
 import { Game } from "@/prisma/generated/client";
 import { PLATFORM_SHORTCUTS } from "@/utils/constant";
 
-import { BiHeart } from "react-icons/bi";
+import { BiHeart, BiTrash } from "react-icons/bi";
 import Header from "../shared/layout/Header";
 import Hero from "../shared/layout/Hero";
 import RatingBadge from "../shared/ui/RatingBadge";
 import Badge from "../shared/ui/Badge";
 import Button from "../shared/ui/buttons/Button";
 import Plus from "../shared/ui/Plus";
+import ListButton from "../shared/ui/buttons/ListButton";
+
+type Status = "PLAYING" | "WANT_TO_PLAY" | "PLAYED";
+
+const LISTS: Status[] = ["WANT_TO_PLAY", "PLAYING", "PLAYED"];
+
+const LABELS = {
+  WANT_TO_PLAY: "Want To Play",
+  PLAYING: "Playing",
+  PLAYED: "Played",
+};
 
 const GameDetailHeader = ({
   game,
   addedBy,
   rating,
-  count,
 }: {
-  game: Game;
+  game: Game & {
+    listStatus: "WANT_TO_PLAY" | "PLAYING" | "PLAYED" | null;
+  };
   addedBy: { id: string; username: string; usernameLower: string; favoriteGameId: string | null };
-  rating: number | string;
-  count: number;
+  rating: { average: number | string; count: number };
 }) => {
   const router = useRouter();
   const [favoriteGame, setFavoriteGame] = useState(addedBy.favoriteGameId);
   const { setNewMessage } = useContext(MessagesContext);
-  const addedToList = false;
+
+  const { listStatus, addToList, updateList } = useGameList(game.id, game.listStatus);
 
   const favouriteGameHandler = async () => {
     try {
@@ -79,10 +92,16 @@ const GameDetailHeader = ({
                 className={`${favoriteGame && favoriteGame === game.id ? "text-red-600 group-hover:text-red-700" : "text-GrayishBlue group-hover:text-red-300 "} text-3xl transition-colors md:text-4xl`}
               />
             </button>
-            {count > 0 && (
+            {rating.count > 0 && (
               <>
-                <RatingBadge rating={rating} textClassName="md:text-lg" iconClassName="md:text-2xl" light reversed />
-                <p className="text-13 text-Gray">{`(${count} ${count > 1 ? "ratings" : "rating"})`}</p>
+                <RatingBadge
+                  rating={rating.average}
+                  textClassName="md:text-lg"
+                  iconClassName="md:text-2xl"
+                  light
+                  reversed
+                />
+                <p className="text-13 text-Gray">{`(${rating.count > 1 ? "ratings" : "rating"})`}</p>
               </>
             )}
           </div>
@@ -107,11 +126,22 @@ const GameDetailHeader = ({
           <Button className="sm:max-w-56 lg:min-w-56" href="#reviews" link>
             View reviews
           </Button>
-          {!addedToList && (
-            <Button className="sm:max-w-56 lg:min-w-56" transparent>
+          {!listStatus ? (
+            <Button onClick={addToList} className="sm:max-w-56 lg:min-w-56" transparent>
               <Plus />
               Add To List
             </Button>
+          ) : (
+            <div className="flex w-full flex-col justify-between gap-2 self-end lg:flex-row">
+              {LISTS.filter((status) => status !== listStatus).map((status) => (
+                <ListButton key={status} status={status} onClick={() => updateList(status)}>
+                  {LABELS[status]}
+                </ListButton>
+              ))}
+              <ListButton onClick={() => updateList(null)}>
+                <BiTrash className="text-lg" />
+              </ListButton>
+            </div>
           )}
         </div>
       </div>

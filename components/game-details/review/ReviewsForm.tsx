@@ -4,7 +4,7 @@ import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 
 import { MessagesContext } from "../../_providers/MessagesContext";
-import { FormAddReviewAction } from "@/lib/queries/reviews";
+import { FormAddReviewAction } from "@/lib/actions/reviews";
 
 import { ReviewType } from "@/types";
 

@@ -1,4 +1,4 @@
-import { getHomeData } from "@/lib/queries/home";
+import { prisma } from "@/lib/prisma";
 
 import Features from "../components/home/Features";
 import HomeHeader from "../components/home/HomeHeader";
@@ -7,14 +7,66 @@ import TopGames from "../components/home/TopGames";
 import Wrapper from "../components/shared/layout/Wrapper";
 
 const HomePage = async () => {
-  const { topGames, latestReview } = await getHomeData();
+  const topGames = await prisma.game.findMany({
+    where: {
+      reviews: {
+        some: {},
+      },
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      image: true,
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
+    },
+  });
+
+  const mappedGames = topGames
+    .map(({ reviews, ...game }) => {
+      const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+
+      return {
+        ...game,
+        rating: Number((totalRating / reviews.length).toFixed(2)),
+      };
+    })
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
+
+  const latestReview = await prisma.review.findFirst({
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      content: true,
+      rating: true,
+      createdAt: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
+      game: {
+        select: {
+          title: true,
+          slug: true,
+          image: true,
+        },
+      },
+    },
+  });
 
   return (
     <>
       <HomeHeader />
       <Features />
       <Wrapper className="lg:flex lg:items-start lg:gap-4">
-        {topGames.length > 0 && <TopGames games={topGames} />}
+        {mappedGames.length > 0 && <TopGames games={mappedGames} />}
         {latestReview && <LatestReview data={latestReview} />}
       </Wrapper>
     </>

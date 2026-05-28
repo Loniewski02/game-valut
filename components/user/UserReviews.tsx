@@ -23,7 +23,7 @@ const UserReviews = ({ username }: { username: string }) => {
   const [page, setPage] = useState(1);
   const [reviews, setReviews] = useState<Review[] | []>([]);
   const limit = 5;
-  const { data, isLoading, error } = useFetch<Review[]>(`/api/${username}/reviews?page=${page}&limit=${limit}`);
+  const { data, isLoading, error } = useFetch<Review[]>(`/api/users/${username}/reviews?page=${page}&limit=${limit}`);
 
   useEffect(() => {
     if (!data) return;
@@ -41,7 +41,7 @@ const UserReviews = ({ username }: { username: string }) => {
     <FetchSection isLoading={isLoading} error={error}>
       {reviews &&
         (reviews.length > 0 ? (
-          <Section>
+          <Section className="w-full">
             <div className="flex flex-col rounded-2xl md:p-4 lg:gap-2 lg:bg-LightGray/40 lg:p-6">
               {reviews.map((item) => (
                 <div

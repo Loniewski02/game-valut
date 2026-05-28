@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 
 import { MessagesContext } from "../../_providers/MessagesContext";
 
-import { FormLoginAction } from "@/lib/queries/auth";
+import { FormLoginAction } from "@/lib/actions/auth";
 import { LOGIN_INPUTS } from "@/utils/constant";
 
 import FormBox from "../../shared/ui/FormBox";

@@ -1,6 +1,5 @@
 "use client";
 import { useContext, useEffect } from "react";
-import { useParams } from "next/navigation";
 
 import { useFilters } from "@/hooks/useFilters";
 import { useFetch } from "@/hooks/useFetch";
@@ -12,17 +11,20 @@ import UserHeader from "@/components/user/UserHeader";
 import UserControls from "@/components/user/UserControls";
 import UserReviews from "@/components/user/UserReviews";
 import UserOverview from "@/components/user/UserOverview";
-import UserLists from "@/components/user/lists/UserLists";
+import UserLists from "@/components/user/UserLists";
 import UserSettings from "@/components/user/UserSettings";
 import FetchSection from "@/components/shared/states/FetchSection";
+import { useSession } from "next-auth/react";
 
-const UserDetails = () => {
-  const { searchParams } = useFilters();
-  const params = useParams();
-  const { data, isLoading, error } = useFetch<UserProfileType>(`/api/${params.username}`);
+const UserDetails = ({ username }: { username: string }) => {
+  const { data: session } = useSession();
+  const { searchParams, update } = useFilters();
+  const { data, isLoading, error } = useFetch<UserProfileType>(`/api/users/${username}`);
   const { setNewMessage } = useContext(MessagesContext);
 
   const section = searchParams.get("section") ?? "overview";
+
+  const isCurrentUser = Boolean(session && session.user.username.toLowerCase() === username);
 
   useEffect(() => {
     if (error) {
@@ -30,17 +32,29 @@ const UserDetails = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (section === "settings" && isCurrentUser) {
+      update("section", "overview");
+    }
+  }, [section]);
+
   return (
     <>
       <FetchSection error={error} isLoading={isLoading}>
         {data && (
           <>
             <UserHeader data={data} />
-            <UserControls isCurrentUser={data.isCurrentUser} />
-            {section === "overview" && <UserOverview favGame={data.favoriteGame} averageRating={data.averageRating} />}
+            <UserControls isCurrentUser={isCurrentUser} />
+            {section === "overview" && (
+              <UserOverview
+                favGame={data.favoriteGame}
+                averageRating={data.averageRating}
+                gamesPlayed={data.listCount}
+              />
+            )}
             {section === "reviews" && <UserReviews username={data.usernameLower} />}
-            {section === "lists" && <UserLists />}
-            {data.isCurrentUser && section === "settings" && <UserSettings />}
+            {section === "lists" && <UserLists username={data.usernameLower} isCurrentUser={isCurrentUser} />}
+            {isCurrentUser && section === "settings" && <UserSettings username={data.usernameLower} />}
           </>
         )}
       </FetchSection>
