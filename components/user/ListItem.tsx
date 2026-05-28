@@ -42,7 +42,7 @@ const ListItem = ({ game, currentList, isCurrentUser, onUpdate }: Props) => {
       <Image fill src={game.image} alt={game.title} className="object-cover" />
       <div className="absolute inset-0 bg-DarkGrayishBlue/60" />
       <div className="relative z-20 flex h-full flex-col justify-between gap-2 p-4 md:flex-row md:items-center">
-        <Link href={game.slug} className="text-lg font-medium text-White transition hover:text-Primary">
+        <Link href={`/games/${game.slug}`} className="text-lg font-medium text-White transition hover:text-Primary">
           {game.title}
         </Link>
         {isCurrentUser && (
