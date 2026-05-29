@@ -107,10 +107,12 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
       count: reviews.filter((review) => review.rating === rating).length,
     }));
 
+    const listStatus = session ? rawGame.userLists[0]?.status ?? null : null;
+
     return NextResponse.json({
       game: {
         ...gameData,
-        listStatus: userLists[0]?.status ?? null,
+        listStatus,
       },
       addedBy,
       rating: {
