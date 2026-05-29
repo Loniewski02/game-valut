@@ -117,8 +117,8 @@ const GameDetailHeader = ({
           </div>
           <p className="text-13 text-Gray md:mt-4">
             Added by:{" "}
-            <Link href={`/users/${addedBy.username}`} className="text-Primary transition hover:text-PrimaryHover">
-              {addedBy.usernameLower}
+            <Link href={`/users/${addedBy.usernameLower}`} className="text-Primary transition hover:text-PrimaryHover">
+              {addedBy.username}
             </Link>
           </p>
         </div>

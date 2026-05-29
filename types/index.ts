@@ -79,6 +79,7 @@ export type UserProfileType = {
   username: string;
   usernameLower: string;
   image: string;
+  email: string;
   backgroundImage: string;
   description: string;
   createdAt: string;

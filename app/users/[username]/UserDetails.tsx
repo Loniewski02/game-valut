@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { useContext, useEffect } from "react";
 
 import { useFilters } from "@/hooks/useFilters";
@@ -14,7 +15,6 @@ import UserOverview from "@/components/user/UserOverview";
 import UserLists from "@/components/user/UserLists";
 import UserSettings from "@/components/user/UserSettings";
 import FetchSection from "@/components/shared/states/FetchSection";
-import { useSession } from "next-auth/react";
 
 const UserDetails = ({ username }: { username: string }) => {
   const { data: session } = useSession();
@@ -33,7 +33,7 @@ const UserDetails = ({ username }: { username: string }) => {
   }, [error]);
 
   useEffect(() => {
-    if (section === "settings" && isCurrentUser) {
+    if (section === "settings" && !isCurrentUser) {
       update("section", "overview");
     }
   }, [section]);
@@ -54,7 +54,7 @@ const UserDetails = ({ username }: { username: string }) => {
             )}
             {section === "reviews" && <UserReviews username={data.usernameLower} />}
             {section === "lists" && <UserLists username={data.usernameLower} isCurrentUser={isCurrentUser} />}
-            {!isCurrentUser && section === "settings" && <UserSettings username={data.usernameLower} />}
+            {isCurrentUser && section === "settings" && <UserSettings user={data} />}
           </>
         )}
       </FetchSection>

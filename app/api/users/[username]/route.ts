@@ -12,6 +12,7 @@ export async function GET(req: Request, { params }: { params: { username: string
       select: {
         id: true,
         username: true,
+        email: true,
         usernameLower: true,
         image: true,
         backgroundImage: true,

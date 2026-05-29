@@ -23,11 +23,11 @@ export async function FormLoginAction(prevState: any, formData: FormData) {
     body: formData,
   });
 
-  const response = await res.json();
+  const data = await res.json();
 
   if (!res.ok) {
     return {
-      ...response,
+      ...data,
       status: res.status,
     };
   }
@@ -46,7 +46,7 @@ export async function FormLoginAction(prevState: any, formData: FormData) {
   }
 
   return {
-    ...response,
+    ...data,
     status: res.status,
   };
 }
