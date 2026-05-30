@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!user || user.username === user.id) {
+    if (!user || user.isDeleted) {
       return NextResponse.json(
         {
           message: "No user found. Please check credentials",

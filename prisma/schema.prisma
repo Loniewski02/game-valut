@@ -23,6 +23,7 @@ model User {
   addedGames      Game[] @relation("GameCreator")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  isDeleted       Boolean @default(false)
 }
 
 model Game {

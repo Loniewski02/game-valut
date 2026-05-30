@@ -84,7 +84,8 @@ export const UserScalarFieldEnum = {
   description: 'description',
   favoriteGameId: 'favoriteGameId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

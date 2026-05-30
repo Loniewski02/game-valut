@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     if (!user) {
       return NextResponse.json(
         {
-          message: "Unauthorized",
+          message: "You must be logged in",
         },
         {
           status: 401,

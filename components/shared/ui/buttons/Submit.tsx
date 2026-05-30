@@ -3,9 +3,9 @@ import { useFormStatus } from "react-dom";
 
 import LoadingIndicator from "../../states/LoadingIndicator";
 
-type Props = { children: React.ReactNode };
+type Props = { children: React.ReactNode; isRed?: boolean };
 
-const Submit = ({ children }: Props) => {
+const Submit = ({ children, isRed }: Props) => {
   const { pending } = useFormStatus();
   return (
     <>
@@ -13,7 +13,7 @@ const Submit = ({ children }: Props) => {
         <button
           type="submit"
           aria-label="submit-form"
-          className="block rounded-xl border border-transparent bg-Primary px-6 py-3 text-15 font-medium text-White transition hover:bg-PrimaryHover active:scale-95"
+          className={`${isRed ? "border-red-400 bg-transparent text-red-500 hover:bg-red-400/20" : "border-transparent bg-Primary text-White hover:bg-PrimaryHover"} block rounded-xl border px-6 py-3 text-15 font-medium transition active:scale-95`}
           disabled={pending}
         >
           {children}

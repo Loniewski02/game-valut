@@ -11,6 +11,7 @@ export async function GET(req: Request, { params }: { params: { username: string
       },
       select: {
         id: true,
+        isDeleted: true,
         username: true,
         email: true,
         usernameLower: true,
@@ -47,7 +48,7 @@ export async function GET(req: Request, { params }: { params: { username: string
       },
     });
 
-    if (!user || user.username === user.id) {
+    if (!user || user.isDeleted) {
       return NextResponse.json(
         {
           message: "User not found",

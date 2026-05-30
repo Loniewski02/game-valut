@@ -1,3 +1,10 @@
+import { useContext, useEffect } from "react";
+import { useFormState } from "react-dom";
+import { useSession } from "next-auth/react";
+
+import { updateAccountAction } from "@/lib/actions/user";
+import { MessagesContext } from "@/components/_providers/MessagesContext";
+
 import Section from "@/components/shared/layout/Section";
 import Submit from "@/components/shared/ui/buttons/Submit";
 import FormBox from "@/components/shared/ui/FormBox";
@@ -24,10 +31,26 @@ const initialState = {
   message: null,
 };
 
-const Account = ({ desc }: { desc: string }) => {
+const Account = ({ desc, username }: { desc: string; username: string }) => {
+  const { update } = useSession();
+  const [state, action] = useFormState(updateAccountAction.bind(null, username), initialState);
+  const { setNewMessage } = useContext(MessagesContext);
+
+  useEffect(() => {
+    if (state.status && state.message) {
+      setNewMessage(state.status, state.message);
+
+      if (state.status === 200) {
+        update({
+          image: state.user.image,
+        });
+        window.location.reload();
+      }
+    }
+  }, [state]);
   return (
     <Section title="account" className="w-full">
-      <form className="flex flex-col gap-4">
+      <form action={action} className="flex flex-col gap-4">
         <div className="relative">
           <label htmlFor="description" className="sr-only">
             Your description

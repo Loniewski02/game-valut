@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useContext, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { useFilters } from "@/hooks/useFilters";
 import { useFetch } from "@/hooks/useFetch";

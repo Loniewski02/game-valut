@@ -17,7 +17,7 @@ export const getCurrentUser = async () => {
     },
   });
 
-  if (!user || user.username === user.id) {
+  if (!user || user.isDeleted) {
     return null;
   }
 

@@ -1,8 +1,5 @@
 import Wrapper from "../shared/layout/Wrapper";
 
-import { useFetch } from "@/hooks/useFetch";
-import FetchSection from "../shared/states/FetchSection";
-import { User } from "@/prisma/generated/client";
 import Profile from "./settings/Profile";
 import Account from "./settings/Account";
 import Delete from "./settings/Delete";
@@ -13,9 +10,9 @@ const UserSettings = ({ user }: { user: UserProfileType }) => {
     <>
       <Wrapper className="lg:flex lg:gap-4">
         <Profile username={user.username} email={user.email} />
-        <Account desc={user.description} />
+        <Account username={user.username} desc={user.description} />
       </Wrapper>
-      {/* <Delete /> */}
+      <Delete username={user.username} />
     </>
   );
 };

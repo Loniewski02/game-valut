@@ -36,6 +36,7 @@ export type UserMinAggregateOutputType = {
   favoriteGameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  isDeleted: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type UserMaxAggregateOutputType = {
   favoriteGameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  isDeleted: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -64,6 +66,7 @@ export type UserCountAggregateOutputType = {
   favoriteGameId: number
   createdAt: number
   updatedAt: number
+  isDeleted: number
   _all: number
 }
 
@@ -80,6 +83,7 @@ export type UserMinAggregateInputType = {
   favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
+  isDeleted?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -94,6 +98,7 @@ export type UserMaxAggregateInputType = {
   favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
+  isDeleted?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type UserCountAggregateInputType = {
   favoriteGameId?: true
   createdAt?: true
   updatedAt?: true
+  isDeleted?: true
   _all?: true
 }
 
@@ -195,6 +201,7 @@ export type UserGroupByOutputType = {
   favoriteGameId: string | null
   createdAt: Date
   updatedAt: Date
+  isDeleted: boolean
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -230,6 +237,7 @@ export type UserWhereInput = {
   favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  isDeleted?: Prisma.BoolFilter<"User"> | boolean
   favoriteGame?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
   reviews?: Prisma.ReviewListRelationFilter
   lists?: Prisma.GameListListRelationFilter
@@ -248,6 +256,7 @@ export type UserOrderByWithRelationInput = {
   favoriteGameId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   favoriteGame?: Prisma.GameOrderByWithRelationInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   lists?: Prisma.GameListOrderByRelationAggregateInput
@@ -269,6 +278,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  isDeleted?: Prisma.BoolFilter<"User"> | boolean
   favoriteGame?: Prisma.XOR<Prisma.GameNullableScalarRelationFilter, Prisma.GameWhereInput> | null
   reviews?: Prisma.ReviewListRelationFilter
   lists?: Prisma.GameListListRelationFilter
@@ -287,6 +297,7 @@ export type UserOrderByWithAggregationInput = {
   favoriteGameId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -307,6 +318,7 @@ export type UserScalarWhereWithAggregatesInput = {
   favoriteGameId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -320,6 +332,7 @@ export type UserCreateInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
@@ -338,6 +351,7 @@ export type UserUncheckedCreateInput = {
   favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameUncheckedCreateNestedManyWithoutAddedByInput
@@ -354,6 +368,7 @@ export type UserUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
@@ -372,6 +387,7 @@ export type UserUncheckedUpdateInput = {
   favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
@@ -389,6 +405,7 @@ export type UserCreateManyInput = {
   favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -402,6 +419,7 @@ export type UserUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -416,6 +434,7 @@ export type UserUncheckedUpdateManyInput = {
   favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -430,6 +449,7 @@ export type UserCountOrderByAggregateInput = {
   favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -444,6 +464,7 @@ export type UserMaxOrderByAggregateInput = {
   favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -458,6 +479,7 @@ export type UserMinOrderByAggregateInput = {
   favoriteGameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -481,6 +503,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -582,6 +608,7 @@ export type UserCreateWithoutAddedGamesInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
@@ -599,6 +626,7 @@ export type UserUncheckedCreateWithoutAddedGamesInput = {
   favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
 }
@@ -619,6 +647,7 @@ export type UserCreateWithoutFavoriteGameInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
@@ -635,6 +664,7 @@ export type UserUncheckedCreateWithoutFavoriteGameInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameUncheckedCreateNestedManyWithoutAddedByInput
@@ -672,6 +702,7 @@ export type UserUpdateWithoutAddedGamesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
@@ -689,6 +720,7 @@ export type UserUncheckedUpdateWithoutAddedGamesInput = {
   favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -724,6 +756,7 @@ export type UserScalarWhereInput = {
   favoriteGameId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  isDeleted?: Prisma.BoolFilter<"User"> | boolean
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -737,6 +770,7 @@ export type UserCreateWithoutReviewsInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   lists?: Prisma.GameListCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
@@ -754,6 +788,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   lists?: Prisma.GameListUncheckedCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameUncheckedCreateNestedManyWithoutAddedByInput
 }
@@ -785,6 +820,7 @@ export type UserUpdateWithoutReviewsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
@@ -802,6 +838,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
 }
@@ -817,6 +854,7 @@ export type UserCreateWithoutListsInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   favoriteGame?: Prisma.GameCreateNestedOneWithoutFavoritedByInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameCreateNestedManyWithoutAddedByInput
@@ -834,6 +872,7 @@ export type UserUncheckedCreateWithoutListsInput = {
   favoriteGameId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   addedGames?: Prisma.GameUncheckedCreateNestedManyWithoutAddedByInput
 }
@@ -865,6 +904,7 @@ export type UserUpdateWithoutListsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   favoriteGame?: Prisma.GameUpdateOneWithoutFavoritedByNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
@@ -882,6 +922,7 @@ export type UserUncheckedUpdateWithoutListsInput = {
   favoriteGameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
 }
@@ -897,6 +938,7 @@ export type UserCreateManyFavoriteGameInput = {
   description?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  isDeleted?: boolean
 }
 
 export type UserUpdateWithoutFavoriteGameInput = {
@@ -910,6 +952,7 @@ export type UserUpdateWithoutFavoriteGameInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUpdateManyWithoutAddedByNestedInput
@@ -926,6 +969,7 @@ export type UserUncheckedUpdateWithoutFavoriteGameInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   lists?: Prisma.GameListUncheckedUpdateManyWithoutUserNestedInput
   addedGames?: Prisma.GameUncheckedUpdateManyWithoutAddedByNestedInput
@@ -942,6 +986,7 @@ export type UserUncheckedUpdateManyWithoutFavoriteGameInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1005,6 +1050,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isDeleted?: boolean
   favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   lists?: boolean | Prisma.User$listsArgs<ExtArgs>
@@ -1024,6 +1070,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isDeleted?: boolean
   favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1039,6 +1086,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isDeleted?: boolean
   favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1054,9 +1102,10 @@ export type UserSelectScalar = {
   favoriteGameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isDeleted?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "usernameLower" | "email" | "password" | "image" | "backgroundImage" | "description" | "favoriteGameId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "usernameLower" | "email" | "password" | "image" | "backgroundImage" | "description" | "favoriteGameId" | "createdAt" | "updatedAt" | "isDeleted", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   favoriteGame?: boolean | Prisma.User$favoriteGameArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
@@ -1091,6 +1140,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     favoriteGameId: string | null
     createdAt: Date
     updatedAt: Date
+    isDeleted: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1529,6 +1579,7 @@ export interface UserFieldRefs {
   readonly favoriteGameId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
