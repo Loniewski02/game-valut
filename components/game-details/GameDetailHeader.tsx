@@ -132,15 +132,18 @@ const GameDetailHeader = ({
               Add To List
             </Button>
           ) : (
-            <div className="flex w-full flex-col justify-between gap-2 self-end lg:flex-row">
-              {LISTS.filter((status) => status !== listStatus).map((status) => (
-                <ListButton key={status} status={status} onClick={() => updateList(status)}>
-                  {LABELS[status]}
+            <div>
+              <div className="flex w-full flex-col justify-between gap-2 self-end lg:flex-row">
+                {LISTS.filter((status) => status !== listStatus).map((status) => (
+                  <ListButton key={status} status={status} onClick={() => updateList(status)}>
+                    {LABELS[status]}
+                  </ListButton>
+                ))}
+                <ListButton onClick={() => updateList(null)}>
+                  <BiTrash className="text-lg" />
                 </ListButton>
-              ))}
-              <ListButton onClick={() => updateList(null)}>
-                <BiTrash className="text-lg" />
-              </ListButton>
+              </div>
+              <p className="mt-2 text-left text-13 text-Gray md:text-right">Current status: {LABELS[listStatus]}</p>
             </div>
           )}
         </div>
