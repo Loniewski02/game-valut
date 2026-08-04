@@ -96,7 +96,13 @@ export async function GET(req: Request) {
       };
     });
 
-    const sortedGames = mappedGames.sort((a, b) => b.rating - a.rating);
+    const sortedGames = mappedGames.sort((a, b) => {
+      if (b.rating !== a.rating) {
+        return b.rating - a.rating;
+      }
+
+      return a.title.localeCompare(b.title);
+    });
 
     return NextResponse.json(sortedGames);
   } catch (error) {
